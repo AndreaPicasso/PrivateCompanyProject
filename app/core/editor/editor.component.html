@@ -1,4 +1,28 @@
-<div id="regola"></div>
-<br>Operatore Complesso:<br>
-<div id="operatore-complesso"></div>
+<div id="menu">
+
+<div class="dropdown">
+     <button data-toggle="dropdown" class="btn dropdown-toggle" >File <span class="caret"></span></button>
+
+     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+         <li><button class="btn dropdown-toggle" ng-click="$ctrl.nuovaRegola()">
+             Nuova Regola<span class="caret"></span></button></li>
+         <li><button class="btn dropdown-toggle" ng-click="$ctrl.nuovoOpComplesso()">
+             Nuovo Operatore Complesso<span class="caret"></span></button></li>
+         <li><button class="btn dropdown-toggle" ng-click="$ctrl.esportaRegola()" >
+             Esporta Regola <span class="caret"></span></button></li>
+         <li><button class="btn dropdown-toggle" ng-click="$ctrl.chiudiFoglioDiLavoro()" >
+             Chiudi foglio di lavoro<span class="caret"></span></button></li>
+     </ul>
+    <button class="btn dropdown-toggle" ng-click="$ctrl.nuovaPortaOpCompl()"
+    >Nuova Porta Operatore Complesso <span class="caret"></span></button>
+    <button class="btn dropdown-toggle" ng-click="$ctrl.verificaCorrettezza()">
+        Verifica Correttezza <span class="caret"></span></button>
+</div> 
+
+
+<div style="border:10px; width:100vw; height: 80vh;">
+    <lista-operatori></lista-operatori>
+    <foglio-di-lavoro></foglio-di-lavoro>
+</div>
+
 
