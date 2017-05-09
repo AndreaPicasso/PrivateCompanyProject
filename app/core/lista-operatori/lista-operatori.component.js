@@ -3,6 +3,8 @@
 
 function listaOperatoriController($scope, $log) {
     this.onClick()
+
+
 }
     
 
@@ -12,4 +14,5 @@ angular.
   component('listaOperatori', {
     templateUrl: 'core/lista-operatori/lista-operatori.component.html',
     controller: listaOperatoriController
+
   });
