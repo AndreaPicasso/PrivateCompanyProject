@@ -1,4 +1,5 @@
 'use strict';
+'use strict';
 
 //  NON PU0' ESSERE SCRITTA CON LA LETTERA MAIUSCOLA
 //  MA E' UNA "CLASSE"
