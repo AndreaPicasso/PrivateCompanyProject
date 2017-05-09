@@ -4,6 +4,8 @@
 
 function ListaOperatoriController($scope, $log) {
     this.onClick()
+
+
 }
     
 
@@ -12,5 +14,6 @@ angular.
   module('myApp', []).
   component('listaoperatori', {
     templateUrl: 'core/lista-operatori/lista-operatori.component.html',
-    controller: ListaOperatoriController
-    });
+    controller: listaOperatoriController
+
+  });
