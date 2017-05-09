@@ -4,35 +4,46 @@
      <button data-toggle="dropdown" class="btn dropdown-toggle" >File <span class="caret"></span></button>
 
      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-         <li><button class="btn dropdown-toggle" ng-click="$ctrl.nuovaRegola()">
-             Nuova Regola<span class="caret"></span></button></li>
-         <li><button class="btn dropdown-toggle" ng-click="$ctrl.nuovoOpComplesso()">
-             Nuovo Operatore Complesso<span class="caret"></span></button></li>
-         <li><button class="btn dropdown-toggle" ng-click="$ctrl.esportaRegola()" >
-             Esporta Regola <span class="caret"></span></button></li>
-         <li><button class="btn dropdown-toggle" ng-click="$ctrl.chiudiFoglioDiLavoro()" >
-             Chiudi foglio di lavoro<span class="caret"></span></button></li>
+         <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.nuovaRegola()">
+             Nuova Regola</button></li>
+         <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.nuovoOpComplesso()">
+             Nuovo Operatore Complesso</button></li>
+         <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.esportaRegola()" >
+             Esporta Regola </button></li>
+         <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.chiudiFoglioDiLavoro()" >
+             Chiudi foglio di lavoro</button></li>
      </ul>
     <button class="btn dropdown-toggle" ng-click="$ctrl.nuovaPortaOpCompl()"
-    >Nuova Porta Operatore Complesso <span class="caret"></span></button>
+    >Nuova Porta Operatore Complesso</button>
     <button class="btn dropdown-toggle" ng-click="$ctrl.verificaCorrettezza()">
-        Verifica Correttezza <span class="caret"></span></button>
+        Verifica Correttezza </span></button>
 </div>
 </div>
  
 
 
-<div style="width:100vw; height: 80vh;">
+<div style="width:100vw; height:90vh;">
     <!-- LISTA OPERATORI -->
     <lista-operatori></lista-operatori>
-    <div style="border-style: solid; border-width: 5px; width:20vw; height: 80vh; margin: 5px; padding:5px;">
-    <uib-accordion close-others="oneAtATime">
-    <div uib-accordion-group class="panel panel-default" heading="Dynamic Body Content">
-        <!-- <div ng-repeat="item in items">{{item}}</div> -->
-     <div ng-repeat="item in items">{{item}}</div>
+    <div style="border-style: solid; border-width: 5px; width:20vw; height: 100%; margin: 5px; padding:5px;">
+   <div class="dropdown">
+    <div ng-repeat="operatore in $ctrl.operatori">
+     <button data-toggle="dropdown" class="btn dropdown-toggle" style="width:100%">{{operatore.nome}} 
+                <span class="caret"></span></button>
+     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+         <div ng-repeat="op in operatore.operatori">
+         <li><button class="btn dropdown-toggle" style="width:100%" ng-click="$ctrl.nuovaRegola()">
+             {{op.tipo}}</button></li>
+        </div>
+     </ul>
+     </div>
+
+</div>
+</div>
     </div>
-    </uib-accordion>
-    </div>
+
+
+
     <foglio-di-lavoro></foglio-di-lavoro>
 
 

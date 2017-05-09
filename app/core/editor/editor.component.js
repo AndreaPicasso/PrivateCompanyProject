@@ -4,15 +4,17 @@
 //  MA E' UNA "CLASSE"
 function EditorController($scope, $log, ListaOperatoriService) {
      
-     ListaOperatoriService.loadJSONOperatori();
-     $scope.items = ["1","2","3"];
-
+    this.operatori = [];
 
      this.nuovaRegola = function(){
-        $log.log("nuova regola");
+        this.operatori = ListaOperatoriService.loadJSONOperatori();
+        $log.log(this.operatori);
+
+
      }
 
-     this.nuovoOpCompl = function(){
+     this.nuovoOpComplesso = function(){
+        this.operatori = ListaOperatoriService.loadJSONOperatori();
 
      }
 
@@ -21,7 +23,7 @@ function EditorController($scope, $log, ListaOperatoriService) {
      }
 
      this.chiudiFoglioDiLavoro = function(){
-       
+        this.operatori = [];
      }
 
      this.verificaCorrettezza = function(){

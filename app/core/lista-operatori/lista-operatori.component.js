@@ -2,8 +2,11 @@
 'use strict';
 
 
-function ListaOperatoriController() {
-  console.log("Dio");
+function ListaOperatoriController($scope, ListaOperatoriService) {
+  console.log("Lista Operatori ok");
+
+  this.operatori = [];
+  
 }
     
 
@@ -15,3 +18,5 @@ angular.
     controller: ListaOperatoriController
 
   });
+
+
