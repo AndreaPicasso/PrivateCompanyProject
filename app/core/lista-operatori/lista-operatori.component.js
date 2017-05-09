@@ -1,7 +1,7 @@
 'use strict';
 'use strict';
 
-function listaOperatoriController($scope, $log) {
+function ListaOperatoriController($scope, $log) {
     this.onClick()
 }
     
@@ -9,7 +9,7 @@ function listaOperatoriController($scope, $log) {
 
 angular.
   module('myApp', []).
-  component('listaOperatori', {
+  component('listaoperatori', {
     templateUrl: 'core/lista-operatori/lista-operatori.component.html',
-    controller: listaOperatoriController
+    controller: ListaOperatoriController
   });
