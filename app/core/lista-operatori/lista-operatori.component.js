@@ -2,39 +2,15 @@
 'use strict';
 
 
-function listaOperatori($scope, $log) {
-    
-    this.nuovaRegola = function(){
-      $log.log("nuova regola");
-    }
-
-    this.nuovoOpCompl = function(){
-
-    }
-
-    this.nuovaPortaOpCompl = function(){
-
-    }
-
-    this.esportaRegola = function(){
-
-    }
-
-    this.verificaCorrettezza = function(){
-
-    }
-
-    this.chiudiFoglioDiLavoro = function(){
-
-    }  
-    
+function ListaOperatoriController($scope, $log) {
+    this.onClick()
 }
     
 
 
 angular.
   module('myApp', []).
-  component('listaOperatori', {
+  component('listaoperatori', {
     templateUrl: 'core/lista-operatori/lista-operatori.component.html',
-    controller: listaOperatori
-  });
+    controller: ListaOperatoriController
+    });
