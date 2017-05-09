@@ -29,8 +29,10 @@ angular.
       WrapperJoint.connetti(op1,'out1',op2,'in2');
       WrapperJoint.connetti(op2,'in1', op1, 'out1');
       WrapperJoint.connetti(opComp, 'input1',op2,'in2');
+      console.log("JSON:")
+      this.json = op1.toJSON();
       
-      WrapperJoint.log();
+      //WrapperJoint.log();
        /**
        * Prova regola
        */
