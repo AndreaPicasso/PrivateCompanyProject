@@ -5,6 +5,7 @@
 function EditorController($scope, $log, ListaOperatoriService) {
      
      ListaOperatoriService.loadJSONOperatori();
+     $scope.items = ["1","2","3"];
 
 
      this.nuovaRegola = function(){
@@ -37,5 +38,5 @@ angular.
   module('myApp', []).
   component('editor', {
     templateUrl: 'core/editor/editor.component.html',
-    controller: EditorController
+    controller: ['$scope', "$log", "ListaOperatoriService", EditorController]
   });

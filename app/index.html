@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en" ng-app="myApp">
   <head>
+    <meta charset="utf-8">
+    <title>Diagnostica di sistemi fisici</title>
     <!--
         JOINT DEPENDENCES
     -->
@@ -15,30 +17,30 @@
 
     
     
-    <meta charset="utf-8">
-    <title>Diagnostica di sistemi fisici</title>
-       <!--
+    
+    <!--
         ANGULAR DEPENDENCES
     -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="app.css" />
     <script src="bower_components/angular/angular.js"></script>
     <script src="app.js"></script>
-    
-        <link href="\bower_components\bootstrap\dist\js\bootstrap.min.js" />
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <link href="\bower_components\bootstrap\dist\js\bootstrap.min.js" />
 
 
 
     <!--
           COMPONENTS
     -->
-    
+    <script src="core/lista-operatori/lista-operatori.component.js"></script>
     <script src="core/editor/editor.component.js"></script>
+
+
+
         <!--
-            SE LO METTO NON FUNZIONA PIU NULLA
+            L'ORDINE CONTA SE LO METTO DOPO NON FUNZIONA PIU NULLA
             <script src="core/lista-operatori/lista-operatori.component.js"></script>
-            SE METTO UN ALTRA DIRECTIVE OLTRE EDITOR MI FA VEDERE SOLO L'ULTIMA
+             L'EDITOR UNSA LA LISTA OPERATORI DEVE ESSERE MESSA PRIMA
         -->
 
     <!-- 
@@ -46,7 +48,6 @@
           SERVICES
     -->
     <script src="core/jointjs-wrapper_OLD/jointjs-wrapper.service.js"></script>
-
     <script src="core/lista-operatori/lista-operatori.service.js"></script>
 
 
@@ -55,7 +56,7 @@
 
     <!-- Use a custom component to render the editor -->
     <editor></editor>
-    {{2+2}}
+    <lista-operatori></lista-operatori>
 
   </body>
 </html>

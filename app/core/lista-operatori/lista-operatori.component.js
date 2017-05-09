@@ -2,18 +2,16 @@
 'use strict';
 
 
-function ListaOperatoriController($scope, $log) {
-    this.onClick()
-
-
+function ListaOperatoriController() {
+  console.log("Dio");
 }
     
 
 
 angular.
   module('myApp', []).
-  component('listaoperatori', {
+  component('listaOperatori', {
     templateUrl: 'core/lista-operatori/lista-operatori.component.html',
-    controller: listaOperatoriController
+    controller: ListaOperatoriController
 
   });

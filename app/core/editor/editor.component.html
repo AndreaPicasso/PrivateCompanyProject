@@ -17,12 +17,22 @@
     >Nuova Porta Operatore Complesso <span class="caret"></span></button>
     <button class="btn dropdown-toggle" ng-click="$ctrl.verificaCorrettezza()">
         Verifica Correttezza <span class="caret"></span></button>
-</div> 
-
-
-<div style="border:10px; width:100vw; height: 80vh;">
-    <listaoperatori></listaoperatori>
-    <foglio-di-lavoro></foglio-di-lavoro>
 </div>
+</div>
+ 
+
+
+<div style="width:100vw; height: 80vh;">
+    <!-- LISTA OPERATORI -->
+    <lista-operatori></lista-operatori>
+    <div style="border-style: solid; border-width: 5px; width:20vw; height: 80vh; margin: 5px; padding:5px;">
+    <uib-accordion close-others="oneAtATime">
+    <div uib-accordion-group class="panel panel-default" heading="Dynamic Body Content">
+        <!-- <div ng-repeat="item in items">{{item}}</div> -->
+     <div ng-repeat="item in items">{{item}}</div>
+    </div>
+    </uib-accordion>
+    </div>
+    <foglio-di-lavoro></foglio-di-lavoro>
 
 
