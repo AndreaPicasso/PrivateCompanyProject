@@ -33,8 +33,6 @@ function EditorController($scope, $log, ListaOperatoriService) {
 
 }
     
-
-
 angular.
   module('myApp', []).
   component('editor', {
