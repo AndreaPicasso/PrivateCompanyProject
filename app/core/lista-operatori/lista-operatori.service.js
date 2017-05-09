@@ -1,17 +1,19 @@
 'use strict';
 
 
-angular.module('myApp').service('ListaOperatoriService', function($http){
+angular.module('myApp').service('ListaOperatoriService', function($http, $q){
 
-    this.JSONOperatori = []
+    var myJSON = $q.defer();
 
     this.loadJSONOperatori = function(){
         $http.get('core/lista-operatori/JSONOperatori.json') //File json operatori
        .then(function(res){
-           console.log(res);   
-            this.JSONOperatori = res.data; 
-                        
+            myJSON.resolve(res); 
         });
-    }
+    }    
+    
+    this.JSONOperatori = myJSON.promise.$$state;
+    console.log(this.JSONOperatori);
+
 
 });
