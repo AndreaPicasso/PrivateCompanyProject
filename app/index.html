@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en" ng-app="myApp">
   <head>
+    <meta charset="utf-8">
+    <title>Diagnostica di sistemi fisici</title>
     <!--
         JOINT DEPENDENCES
     -->
@@ -15,37 +17,43 @@
 
     
     
-    <meta charset="utf-8">
-    <title>Diagnostica di sistemi fisici</title>
-       <!--
+    
+    <!--
         ANGULAR DEPENDENCES
     -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="app.css" />
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular/angular-dragdrop.min.js"></script>
+
     <script src="app.js"></script>
-    
-        <link href="\bower_components\bootstrap\dist\js\bootstrap.min.js" />
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <link href="\bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
+
+
+
+
+    <!--
+          COMPONENTS
+    -->
+
+    <script src="core/lista-operatori/lista-operatori.component.js"></script>
+    <script src="core/foglio-di-lavoro/foglio-di-lavoro.component.js"></script>
+
+
 
 
 
         <!--
-          COMPONENTS
-    -->
-    
-            <script src="core/editor/editor.component.js"></script>
+             VIENE ESEGUITA SOLO QUELLA CHE METTO PER ULTIMA -.- 
+        -->
 
-         <script src="core/foglio-di-lavoro/foglio-di-lavoro.component.js"></script>
+    <!-- 
 
-            <script src="core/lista-operatori/lista-operatori.component.js"></script>
-
-
-       <!-- 
           SERVICES
     -->
     <script src="core/jointjs-wrapper_OLD/jointjs-wrapper.service.js"></script>
-
     <script src="core/lista-operatori/lista-operatori.service.js"></script>
 
 
@@ -53,7 +61,8 @@
   <body>
 
     <!-- Use a custom component to render the editor -->
-    <editor></editor>
+    <foglio-di-lavoro></foglio-di-lavoro>
+    <lista-operatori></lista-operatori>
 
   </body>
 </html>

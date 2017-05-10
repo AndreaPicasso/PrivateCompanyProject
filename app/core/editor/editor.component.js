@@ -1,18 +1,20 @@
 'use strict';
 
-
 //  NON PU0' ESSERE SCRITTA CON LA LETTERA MAIUSCOLA
 //  MA E' UNA "CLASSE"
 function EditorController($scope, $log, ListaOperatoriService) {
      
-     ListaOperatoriService.loadJSONOperatori();
-
+    this.operatori = [];
 
      this.nuovaRegola = function(){
-        $log.log("nuova regola");
+        this.operatori = ListaOperatoriService.loadJSONOperatori();
+        $log.log(this.operatori);
+
+
      }
 
-     this.nuovoOpCompl = function(){
+     this.nuovoOpComplesso = function(){
+        this.operatori = ListaOperatoriService.loadJSONOperatori();
 
      }
 
@@ -21,7 +23,7 @@ function EditorController($scope, $log, ListaOperatoriService) {
      }
 
      this.chiudiFoglioDiLavoro = function(){
-       
+        this.operatori = [];
      }
 
      this.verificaCorrettezza = function(){
@@ -34,11 +36,9 @@ function EditorController($scope, $log, ListaOperatoriService) {
 
 }
     
-
-
 angular.
   module('myApp', []).
   component('editor', {
     templateUrl: 'core/editor/editor.component.html',
-    controller: EditorController
+    controller: ['$scope', "$log", "ListaOperatoriService", EditorController]
   });

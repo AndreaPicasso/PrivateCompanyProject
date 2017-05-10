@@ -1,15 +1,15 @@
 'use strict';
 
-function foglioDiLavoroController($scope, $log,$event) {
+function foglioDiLavoroController($scope, $log) {
  
   
   
   
   
  
-  this.onDrop=function($event){
-    var x=$event.pageX;
-    var y=$event.pageY;
+  this.onDrop=function(e){
+    var x=e.pageX;
+    var y=e.pageY;
     $log.log(x);
     $log.log(y);
 
@@ -23,5 +23,5 @@ angular.
   module('myApp', []).
   component('foglioDiLavoro', {
     templateUrl: 'core/foglio-di-lavoro/foglio-di-lavoro.component.html',
-    controller: foglioDiLavoroController
+    controller: ['$scope', "$log", foglioDiLavoroController]
   });
