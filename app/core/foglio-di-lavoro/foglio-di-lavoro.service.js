@@ -1,7 +1,13 @@
 'use strict';
 
-function foglioDiLavoroController($scope, $log,$event) {
- 
+
+    
+
+
+angular.
+  module('myApp', []).
+  service('foglioDiLavoroService', function(){
+
   this.nuovoIO=function(){
 
   }
@@ -18,13 +24,5 @@ function foglioDiLavoroController($scope, $log,$event) {
 
   }
   
-}
-    
 
-
-angular.
-  module('myApp', []).
-  service('foglioDiLavoro', {
-    templateUrl: 'core/foglio-di-lavoro/foglio-di-lavoro.component.html',
-    controller: foglioDiLavoroController
-  });
+});
