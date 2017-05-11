@@ -1,9 +1,8 @@
 'use strict';
 
-function foglioDiLavoroController($scope, $log) {
+function foglioDiLavoroController($scope, $log,$FoglioDiLavoroService) {
  
-  
-  
+    
   
   
  
@@ -23,5 +22,5 @@ angular.
   module('myApp', []).
   component('foglioDiLavoro', {
     templateUrl: 'core/foglio-di-lavoro/foglio-di-lavoro.component.html',
-    controller: ['$scope', "$log", foglioDiLavoroController]
+    controller: ['$scope', "$log","$foglioDiLavoroService", foglioDiLavoroController]
   });
