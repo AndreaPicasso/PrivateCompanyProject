@@ -2,14 +2,15 @@
 'use strict';
 
 
-function EditorController($scope, $log,$window, ListaOperatoriService/*, FoglioDiLavoroService*/) {
+function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
 
      
     this.operatori = [];
 
      this.nuovaRegola = function(){
         this.operatori = ListaOperatoriService.loadJSONOperatori();
-        $log.log(this.operatori);
+        FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
+         FoglioDiLavoroService.onDrop(10,10,['in1', 'in2'],['out1'], ['int','int'],['int'], 'Somma');
         
 
 
@@ -45,7 +46,7 @@ angular.
   module('myApp', []).
   component('editor', {
     templateUrl: 'core/editor/editor.component.html',
-    controller: ['$scope', "$log","$window", "ListaOperatoriService"/*,"FoglioDiLavoroService"*/, EditorController]
+    controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
   });
 
 })(window.angular);
