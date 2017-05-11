@@ -15,10 +15,14 @@ function EditorController($scope, $log,$window, ListaOperatoriService/*, FoglioD
 
      }
 
-    /* this.nuovoOpComplesso = function(){
+     this.nuovoOpComplesso = function(){
         this.operatori = ListaOperatoriService.loadJSONOperatori();
 
-     }*/
+     }
+
+     this.nuovaPortaOpCompl = function(){
+
+     }
 
      
 
@@ -27,7 +31,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService/*, FoglioD
      }
 
      this.verificaCorrettezza = function(){
-        $window.allert(FoglioDiLavoroService.verificaCorrettezza());
+        //$window.allert(FoglioDiLavoroService.verificaCorrettezza());
        
      }
 
