@@ -1,8 +1,7 @@
 (function(angular) {
 'use strict';
 
-//  NON PU0' ESSERE SCRITTA CON LA LETTERA MAIUSCOLA
-//  MA E' UNA "CLASSE"
+
 function EditorController($scope, $log, ListaOperatoriService) {
      
     this.operatori = [];
