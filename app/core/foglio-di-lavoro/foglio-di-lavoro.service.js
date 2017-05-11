@@ -7,9 +7,10 @@
 angular.
   module('myApp', []).
   service('FoglioDiLavoroService', function(){
-    var grafo;
-    var paper;
-  this.creaFoglioDiLavoro=function(){
+    this.grafo;
+    this.paper;
+
+    this.creaFoglioDiLavoro=function(){
         this.grafo = new joint.dia.Graph;
 
         

@@ -22,6 +22,7 @@ function foglioDiLavoroController($scope, $log,$FoglioDiLavoroService) {
             */
         }
       });
+ }
   
   
  
@@ -29,11 +30,11 @@ function foglioDiLavoroController($scope, $log,$FoglioDiLavoroService) {
     var x=e.pageX;
     var y=e.pageY;
     
-    this.aggiungiOperatore(x,y,..);
-
+    //this.aggiungiOperatore(x,y,..);
 
   }
 }
+
     
 
 

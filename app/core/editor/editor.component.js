@@ -2,7 +2,7 @@
 'use strict';
 
 
-function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
+function EditorController($scope, $log,$window, ListaOperatoriService/*, FoglioDiLavoroService*/) {
 
      
     this.operatori = [];
@@ -40,8 +40,8 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 angular.
   module('myApp', []).
   component('editor', {
-    template: '<foglio-di-lavoro></foglio-di-lavoro>',
-    controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
+    templateUrl: 'core/editor/editor.component.html',
+    controller: ['$scope', "$log","$window", "ListaOperatoriService"/*,"FoglioDiLavoroService"*/, EditorController]
   });
 
 })(window.angular);
