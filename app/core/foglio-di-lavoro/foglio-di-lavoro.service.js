@@ -48,7 +48,7 @@ angular.
               validateConnection: function(sourceView, sourceMagnet, targetView, targetMagnet) {
                 var sourcePort= sourceView.getPort(sourceMagnet.idPorta);
                   var targetPort= targetView.getPort(targetMagnet.idPorta);
-                  //verifico corrispondano i tipi e ritorno false se non corrispondo
+                  //verifico corrispondano i tipi e ritorno false se non corrispondo torno false
 
                   return sourceMagnet != targetMagnet;
               }
