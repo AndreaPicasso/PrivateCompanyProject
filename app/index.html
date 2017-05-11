@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Diagnostica di sistemi fisici</title>
+
+
     <!--
         JOINT DEPENDENCES
     -->
@@ -15,7 +17,17 @@
     <script src="jointjs\dist\joint.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet" type="text/css">
 
-    
+    <!--
+        JOINT EXTENTIONS
+    -->
+    <script src="core/jointjs_EXTENTIONS/myLink.js"></script>
+    <script src="core/jointjs_EXTENTIONS/operatore.js"></script>
+    <script src="core/jointjs_EXTENTIONS/operatoreComplesso.js"></script>
+    <script src="core/jointjs_EXTENTIONS/operatoreElementare.js"></script>
+    <script src="core/jointjs_EXTENTIONS/operatoreIORegola.js"></script>
+    <script src="core/jointjs_EXTENTIONS/myPortObject.js"></script>
+    <script src="core/jointjs_EXTENTIONS/tipiPossibili.js"></script>
+
     
     
     <!--
@@ -24,7 +36,6 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="app.css" />
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular/angular-dragdrop.min.js"></script>
 
     <script src="app.js"></script>
     <link href="\bower_components\bootstrap\dist\js\bootstrap.min.js" />
@@ -41,8 +52,9 @@
 
     <script src="core/lista-operatori/lista-operatori.component.js"></script>
     <script src="core/foglio-di-lavoro/foglio-di-lavoro.component.js"></script>
+    <script src="core/editor/editor.component.js"></script>
+
         <!--
-            editor.js ....
              VIENE ESEGUITA SOLO QUELLA CHE METTO PER ULTIMA -.- 
         -->
 
@@ -61,9 +73,9 @@
   <body>
 
     <!-- Use a custom component to render the editor -->
-   <!-- <editor></editor> -->
-    <foglio-di-lavoro></foglio-di-lavoro>
-    <lista-operatori></lista-operatori>
+  <editor></editor>
+  <foglio-di-lavoro></foglio-di-lavoro>
+  <lista-operatori></lista-operatori>
 
   </body>
 </html>
