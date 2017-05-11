@@ -2,13 +2,14 @@
 
 //  NON PU0' ESSERE SCRITTA CON LA LETTERA MAIUSCOLA
 //  MA E' UNA "CLASSE"
-function EditorController($scope, $log, ListaOperatoriService) {
+function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
      
     this.operatori = [];
 
      this.nuovaRegola = function(){
         this.operatori = ListaOperatoriService.loadJSONOperatori();
         $log.log(this.operatori);
+        
 
 
      }
@@ -19,7 +20,7 @@ function EditorController($scope, $log, ListaOperatoriService) {
      }
 
      this.nuovaPortaOpCompl = function(){
-       
+        FoglioDiLavoroService.nuovaPortaOpCompl();
      }
 
      this.chiudiFoglioDiLavoro = function(){
@@ -27,11 +28,12 @@ function EditorController($scope, $log, ListaOperatoriService) {
      }
 
      this.verificaCorrettezza = function(){
+        $windoe.allert(FoglioDiLavoroService.verificaCorrettezza());
        
      }
 
      this.esportaRegola = function(){
-       
+          FoglioDiLavoroService.esportaRegola();
      }
 
 }
@@ -39,6 +41,6 @@ function EditorController($scope, $log, ListaOperatoriService) {
 angular.
   module('myApp', []).
   component('editor', {
-    templateUrl: 'core/editor/editor.component.html',
-    controller: ['$scope', "$log", "ListaOperatoriService", EditorController]
+    template: '<foglio-di-lavoro></foglio-di-lavoro>',
+    controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
   });

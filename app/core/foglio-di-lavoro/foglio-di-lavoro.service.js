@@ -6,16 +6,16 @@
 
 angular.
   module('myApp', []).
-  service('foglioDiLavoroService', function(){
+  service('FoglioDiLavoroService', function(){
 
   this.nuovoIO=function(){
-
+          
   }
   this.isRule=function(){
     return true;
   }
   this.verificaCorrettezza=function(){
-
+        return "Tutto bene!";
   }
   this.esportaRegola=function(){
 
