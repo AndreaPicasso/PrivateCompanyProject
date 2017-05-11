@@ -1,3 +1,4 @@
+(function(angular) {
 'use strict';
 
 //  NON PU0' ESSERE SCRITTA CON LA LETTERA MAIUSCOLA
@@ -44,3 +45,5 @@ angular.
     template: '<foglio-di-lavoro></foglio-di-lavoro>',
     controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
   });
+
+})(window.angular);
