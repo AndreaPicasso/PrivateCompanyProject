@@ -3,6 +3,8 @@
 angular.module('myApp').service('FoglioDiLavoroService', function(){
     this.paper='';
     this.grafo='';
+    /* TODO: togliere se implementiamo solo regola */
+    this.operatoreComplesso='';
 
     this.creaFoglioDiLavoroRegola = function(idElement, validateConnectionFnc){
         this.grafo = new joint.dia.Graph;
@@ -104,7 +106,6 @@ this.onDrop = function($positionX, $positionY, $inPorts, $outPorts, $inPortsType
     operatore.attr('.label/text', $testoOperatore);
     if(this.grafo != ''){
         this.grafo.addCell(operatore);
-        console.log("operatore creato");
       }
     if(this.operatoreComplesso != ''){
         this.operatoreComplesso.embed(operatore);

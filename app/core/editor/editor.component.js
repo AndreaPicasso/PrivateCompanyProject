@@ -10,6 +10,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      this.nuovaRegola = function(){
         this.operatori = ListaOperatoriService.loadJSONOperatori();
         FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
+        /* NON SAREBBE ASSOLUTAMENTE DA FARE QUI: */
          FoglioDiLavoroService.onDrop(10,10,['in1', 'in2'],['out1'], ['int','int'],['int'], 'Somma');
         
 
@@ -39,6 +40,15 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      this.esportaRegola = function(){
           FoglioDiLavoroService.esportaRegola();
      }
+
+
+     /* TODO: NON VA QUI, TOGLIERE E METTERE IN FOGLIO DI LAVORO */
+    this.onDropComplete=function(data,evt){
+            var index = $scope.droppedObjects2.indexOf(data);
+            if (index == -1) {
+                $scope.droppedObjects2.push(data);
+            }
+        }
 
 }
     
