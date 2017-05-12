@@ -3,15 +3,23 @@
 angular.module('myApp').service('FoglioDiLavoroService', function(){
     this.paper='';
     this.grafo='';
+    this.nomeFoglioDiLavoro='';
     /* TODO: togliere se implementiamo solo regola */
     this.operatoreComplesso='';
 
     this.creaFoglioDiLavoroRegola = function(idElement, validateConnectionFnc){
         this.grafo = new joint.dia.Graph;
 
+        /*
+        E' necessario creare un nuovo div altrimenti
+        al momento della cancellazione il div viene rimosso
+        */
+        var divPaper = document.createElement('div');
         var element = document.getElementById(idElement);
+        element.appendChild(divPaper);
+
         this.paper = new joint.dia.Paper({  
-          el: element,
+          el: divPaper,
           width: element.clientWidth,
           height: element.clientHeight,
           gridSize: 20,

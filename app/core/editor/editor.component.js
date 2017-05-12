@@ -5,19 +5,32 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
      
     this.operatori = [];
+    this.hasPaper = false;
 
      this.nuovaRegola = function(){
-        this.operatori = ListaOperatoriService.loadJSONOperatori();
-        FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
-        /* NON SAREBBE ASSOLUTAMENTE DA FARE QUI: */
-         FoglioDiLavoroService.onDrop(10,10,['in1', 'in2'],['out1'], ['int','int'],['int'], 'Somma');
-        
+        if(!this.hasPaper){
+            this.operatori = ListaOperatoriService.loadJSONOperatori();
+            FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
+            this.hasPaper = true;
+            FoglioDiLavoroService.nomeFoglioDiLavoro = $window.prompt(
+                                                        "Inserisci il nome della regola:", "rule_n");
+
+
+            /* NON SAREBBE ASSOLUTAMENTE DA FARE QUI: */    
+            FoglioDiLavoroService.onDrop(10,10,['in1', 'in2'],['out1'], ['int','int'],['int'], 'Somma');
+        }
+        else{
+            $window.alert("Chiudere foglio di lavoro corrente prima di procedere");
+        }  
 
 
      }
 
      this.nuovoOpComplesso = function(){
         this.operatori = ListaOperatoriService.loadJSONOperatori();
+        this.hasPaper = true;
+        //...
+
 
      }
 
@@ -29,10 +42,19 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
      this.chiudiFoglioDiLavoro = function(){
         this.operatori = [];
+        this.hasPaper = false;
+        FoglioDiLavoroService.grafo.clear();
+        FoglioDiLavoroService.paper.remove();
+        FoglioDiLavoroService.paper = "";
+        FoglioDiLavoroService.grafo = "";
+        FoglioDiLavoroService.nomeFoglioDiLavoro = "";
+
+
      }
 
      this.verificaCorrettezza = function(){
-        //$window.allert(FoglioDiLavoroService.verificaCorrettezza());
+         // SI SCRIVE ALERT IGNORANTE :D
+        //$window.alert(FoglioDiLavoroService.verificaCorrettezza());
        
      }
 

@@ -6,16 +6,20 @@
      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
          <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.nuovaRegola()">
              Nuova Regola</button></li>
-         <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.nuovoOpComplesso()">
+         <li><button style="width:100%" class="btn dropdown-toggle" 
+              ng-click="$ctrl.nuovoOpComplesso()" ng-disabled="true">
              Nuovo Operatore Complesso</button></li>
-         <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.esportaRegola()" >
+         <li><button style="width:100%" class="btn dropdown-toggle"
+          ng-click="$ctrl.esportaRegola()" ng-disabled="!$ctrl.hasPaper" >
              Esporta Regola </button></li>
-         <li><button style="width:100%" class="btn dropdown-toggle" ng-click="$ctrl.chiudiFoglioDiLavoro()" >
+         <li><button style="width:100%" class="btn dropdown-toggle"
+          ng-click="$ctrl.chiudiFoglioDiLavoro()" ng-disabled="!$ctrl.hasPaper">
              Chiudi foglio di lavoro</button></li>
      </ul>
     <button class="btn dropdown-toggle" ng-click="$ctrl.nuovaPortaOpCompl()"
-    >Nuova Porta Operatore Complesso</button>
-    <button class="btn dropdown-toggle" ng-click="$ctrl.verificaCorrettezza()">
+    ng-disabled="true"> Nuova Porta Operatore Complesso</button>
+    <button class="btn dropdown-toggle" ng-click="$ctrl.verificaCorrettezza()"
+    ng-disabled="!$ctrl.hasPaper">
         Verifica Correttezza </span></button>
 </div>
 </div>
