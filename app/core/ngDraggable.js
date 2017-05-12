@@ -1,11 +1,8 @@
-/*
- *
- * https://github.com/fatlinesofcode/ngDraggable
- */
+
 angular.module("ngDraggable", [])
         .service('ngDraggable', [function() {
 
-
+            console.log("ok");
             var scope = this;
             scope.inputEvent = function(event) {
                 if (angular.isDefined(event.touches)) {

@@ -1,4 +1,3 @@
-(function(angular) {
 'use strict';
 
 
@@ -58,5 +57,3 @@ angular.
     templateUrl: 'core/editor/editor.component.html',
     controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
   });
-
-})(window.angular);
