@@ -52,8 +52,18 @@
     -->
     <div id="fogliodilavoro" style="width:77vw; height:90vh; float: right; margin: 5px;
     border-style: solid; border-width: 5px;" ng-drop="true" ng-drop-success="
-    $ctrl.onDropComplete($data,$event)"></div>
+    $ctrl.onDropComplete($data,$event)">
     </div>
+</div>
+
+<div ng-drag="true" ng-drag-data="{obj}" ng-drag-success="onDragComplete($data,$event)" ng-center-anchor="true">
+  Draggable div
+</div>
+
+<div ng-drop="true" ng-drop-success="console.log('drop');onDropComplete($data,$event)" >
+  Drop area
+</div>
+
     
 
 
