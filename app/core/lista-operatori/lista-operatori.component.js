@@ -8,7 +8,6 @@ app.directive('listaOperatori', function () {
 
 
 function ListaOperatoriController($scope, ListaOperatoriService) {
-  console.log("Lista Operatori ok");
 
   $scope.onClick=ListaOperatoriService.onClick();
   
@@ -16,5 +15,8 @@ function ListaOperatoriController($scope, ListaOperatoriService) {
     
 
 
+
+
+    
 
 
