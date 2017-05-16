@@ -2,10 +2,10 @@ app.directive('foglioDiLavoro', function () {
     return {
         restrict:'E',
     templateUrl: 'core/foglio-di-lavoro/foglio-di-lavoro.component.html',
-    controller: ['$scope', "$log" /*,"FoglioDiLavoroService"*/, FoglioDiLavoroController]
+    controller: ['$scope', "$log","ListaOperatoriService" ,"FoglioDiLavoroService", FoglioDiLavoroController]
     };
 });
-function FoglioDiLavoroController($scope, $log /*, FoglioDiLavoroService*/) {
+function FoglioDiLavoroController($scope, $log, $event, FoglioDiLavoroService) {
  
 
     this.aggiungiOperatore = function($positionX, $positionY, $inPorts, $outPorts, $inPortsTypes,
@@ -15,12 +15,10 @@ function FoglioDiLavoroController($scope, $log /*, FoglioDiLavoroService*/) {
   
   
  
-  this.onDrop=function(e){
-    var x=e.pageX;
-    var y=e.pageY;
+  $scope.onClickFoglio =function(){
+        FoglioDiLavoroService.onClickFoglio($event);
+  } 
     
-    //this.aggiungiOperatore(x,y,..);
-  }
 
 
 }

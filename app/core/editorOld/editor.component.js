@@ -10,14 +10,14 @@ app.directive('editor', function () {
 
 
 function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
-    
-    this.operatori = [];
+
+     
+   
     this.hasPaper = false;
 
-    this.nuovaRegola = function(){
+     this.nuovaRegola = function(){
         if(!this.hasPaper){
             this.operatori = ListaOperatoriService.loadJSONOperatori();
-            console.log(this.operatori);
             FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
             this.hasPaper = true;
             FoglioDiLavoroService.nomeFoglioDiLavoro = $window.prompt(
@@ -25,7 +25,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
 
             /* NON SAREBBE ASSOLUTAMENTE DA FARE QUI: */    
-            //FoglioDiLavoroService.onDrop(10,10,['in1', 'in2'],['out1'], ['int','int'],['int'], 'Somma');
+            FoglioDiLavoroService.onDrop(10,10,['in1', 'in2'],['out1'], ['int','int'],['int'], 'Somma');
         }
         else{
             $window.alert("Chiudere foglio di lavoro corrente prima di procedere");
@@ -34,7 +34,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
      }
 
-    this.nuovoOpComplesso = function(){
+     this.nuovoOpComplesso = function(){
         this.operatori = ListaOperatoriService.loadJSONOperatori();
         this.hasPaper = true;
         //...
@@ -49,8 +49,8 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      
 
      this.chiudiFoglioDiLavoro = function(){
-        this.hasPaper = false;
         this.operatori = [];
+        this.hasPaper = false;
         FoglioDiLavoroService.grafo.clear();
         FoglioDiLavoroService.paper.remove();
         FoglioDiLavoroService.paper = "";
@@ -61,6 +61,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
      this.verificaCorrettezza = function(){
+         // SI SCRIVE ALERT IGNORANTE :D
         //$window.alert(FoglioDiLavoroService.verificaCorrettezza());
        
      }
@@ -77,15 +78,6 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
                 $scope.droppedObjects2.push(data);
             }
         }
-
-    $scope.nuovaRegola = this.nuovaRegola;
-    $scope.nuovoOpComplesso = this.nuovoOpComplesso;
-    $scope.nuovaPortaOpCompl = this.nuovaPortaOpCompl
-    $scope.esportaRegola = this.esportaRegola;
-    $scope.verificaCorrettezza = this.verificaCorrettezza;
-    $scope.chiudiFoglioDiLavoro = this.chiudiFoglioDiLavoro;
-    $scope.hasPaper = this.hasPaper;
-    $scope.operatori = this.operatori;
 
 }
     

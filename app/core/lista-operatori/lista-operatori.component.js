@@ -9,9 +9,16 @@ app.directive('listaOperatori', function () {
 
 function ListaOperatoriController($scope, ListaOperatoriService) {
 
+  // PER QUALCHE MOTIVO ASTRALE COSì NON FUNZIONA  
+  //$scope.onClickLista=ListaOperatoriService.onClickLista();
 
-
+  $scope.onClickLista = function($event, operatore, tipo){
+      ListaOperatoriService.onClickLista($event, operatore, tipo);
+  }
 }
+    
+
+
     
 
 

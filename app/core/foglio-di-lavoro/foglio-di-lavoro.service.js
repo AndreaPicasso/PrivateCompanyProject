@@ -2,6 +2,7 @@
 
 angular.module('myApp').service('FoglioDiLavoroService', function(){
     this.paper='';
+    
     this.grafo='';
     this.nomeFoglioDiLavoro='';
     /* TODO: togliere se implementiamo solo regola */
@@ -15,6 +16,7 @@ angular.module('myApp').service('FoglioDiLavoroService', function(){
         al momento della cancellazione il div viene rimosso
         */
         var divPaper = document.createElement('div');
+        divPaper.setAttribute("ng-click","onClickFoglio($event)");
         var element = document.getElementById(idElement);
         element.appendChild(divPaper);
 
@@ -64,26 +66,71 @@ angular.module('myApp').service('FoglioDiLavoroService', function(){
  * TODO: cambiare paramentri, viene passato il json e io ricorstrusco l'operatore
  * 
  */
-this.onDrop = function($positionX, $positionY, $inPorts, $outPorts, $inPortsTypes,
- $outPortsTypes, $testoOperatore){
-    var operatore = new joint.shapes.devs.Atomic({
-        position: {
-            x: $positionX,
-            y: $positionY
-        },
-        inPorts: $inPorts,
-        outPorts: $outPorts,
-        attrs:{
-            '.body': {
-                'rx': 6,
-                'ry': 6
-            },
-        /*TIPO NELL'OPERATORE:
-            'tipiInput': $inPortsTypes,
-            'tipiOutput': $outPortsTypes
-            */
+
+
+/*
+PROVA DI SIMONE....
+*/
+this.onDrop = function(JSONop, tipoOp){
+        var JSONtypeOp = '';
+        for(var i = 0; i<JSONop.operatori.length; i++){
+            if(JSONop.operatori[i].tipo == tipoOp){
+                JSONtypeOp = JSONop.operatori[i].operatore
+            }
+            //Mi auguro che lo trovi sempre
         }
-      });
+        var op = '';
+        if(JSONop.categoria=="OperatoreElementare"){
+            op=new operatoreElementare();
+            op.fromJSON(JSONtypeOp);
+            console.log(op);
+            
+        }
+        else if(JSONop.categoria=="OperatoreComplesso"){
+            console.log("op comp");
+            op=new operatoreComplesso();
+            op.fromJSON(JSONtypeOp);
+        }
+        else if(JSONop.categoria=="OperatoreIOrRegola"){
+            console.log("op IO");
+            op=new operatoreIORegola();
+            op.fromJSON(JSONtypeOp);
+        }
+        if(this.grafo != ''){
+            this.grafo.addCell(op);
+        }
+}
+
+
+
+// this.onClickFoglio=function(e){
+//     /*
+//     PROBLEMA: FA CASINO CON JOINT, QUANDO C'è JOINT NON FUNZIONA PIU
+//     */
+//     if(ListaOperatoriService.isClickedOp){
+//         //posiziona operatore in punto dato da x e y con la funzione aggiungi operatore
+//         //da sistemare controllo tipo
+//         var x=e.pageX;
+//         var y=e.pageY;
+//         var jop=ListaOperatoriService.opClicked;
+//         var op='';
+//         if(jop.categoria=="OperatoreElementare"){
+//             op=new operatoreElementare();
+//             op.fromJson(ListaOperatoriService.opClickedTipo);
+//         }
+//         else if(jop.categoria=="OperatoreComplesso"){
+//             op=new operatoreComplesso();
+//             op.fromJson(ListaOperatoriService.opClickedTipo);
+//         }
+//         else if(jop.categoria=="OperatoreIOrRegola"){
+//             op=new operatoreIORegola();
+//             op.fromJson(ListaOperatoriService.opClickedTipo);
+//         }
+//         ListaOperatoriService.isClikedOp=false;
+//         ListaOperatoriService.opClicked='';
+//     }
+// };
+       
 
 /*
     MODO CORRETTO DI METTERE IL TIPO:
@@ -93,33 +140,36 @@ this.onDrop = function($positionX, $positionY, $inPorts, $outPorts, $inPortsType
         j: # porta
 */
 
-    for(var j = 0; j<operatore.attributes.ports.items.length; j++){
-        var ports, types;
-        if(operatore.attributes.ports.items[j].group == 'out'){
-            types = $outPortsTypes;
-            ports = $outPorts
-        }
-        else{
-            types = $inPortsTypes;
-            ports = $inPorts;
-        }
-        for(var i = 0; i<ports.length; i++){
-            if(ports[i]==operatore.attributes.ports.items[j].id)
-                operatore.attributes.ports.items[j].tipo = types[i];
-        }
-    }
+    // for(var j = 0; j<operatore.attributes.ports.items.length; j++){
+    //     var ports, types;
+    //     if(operatore.attributes.ports.items[j].group == 'out'){
+    //         types = $outPortsTypes;
+    //         ports = $outPorts
+    //     }
+    //     else{
+    //         types = $inPortsTypes;
+    //         ports = $inPorts;
+    //     }
+    //     for(var i = 0; i<ports.length; i++){
+    //         if(ports[i]==operatore.attributes.ports.items[j].id)
+    //             operatore.attributes.ports.items[j].tipo = types[i];
+    //     }
+    // }
 
 
-    $testoOperatore = joint.util.breakText($testoOperatore, { width: 53 });
-    operatore.attr('.label/text', $testoOperatore);
-    if(this.grafo != ''){
-        this.grafo.addCell(operatore);
-      }
-    if(this.operatoreComplesso != ''){
-        this.operatoreComplesso.embed(operatore);
-    }
-    return operatore;
-};    
+    // $testoOperatore = joint.util.breakText($testoOperatore, { width: 53 });
+    // operatore.attr('.label/text', $testoOperatore);
+    // if(this.grafo != ''){
+    //     this.grafo.addCell(operatore);
+    //   }
+    // if(this.operatoreComplesso != ''){
+    //     this.operatoreComplesso.embed(operatore);
+    // }
+      
+    //     ListaOperatoriService.isClickedOp=false;
+    //     ListaOperatoriService.opCliked='';
+    //     return operatore; 
+    // }
 
 
   this.isRule=function(){
@@ -154,7 +204,7 @@ this.log = function(){
     console.log(cells);
     console.log("Ports of 'Operatore': ")
     console.log(cells[2].getPorts());
-}
+};
 
 });
 
