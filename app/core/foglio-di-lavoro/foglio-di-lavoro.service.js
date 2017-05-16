@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('myApp').service('FoglioDiLavoroService', function(){
+angular.module('myApp').service('FoglioDiLavoroService', function(ListaOperatoriService){
     this.paper='';
+    
     this.grafo='';
     this.nomeFoglioDiLavoro='';
     /* TODO: togliere se implementiamo solo regola */
@@ -64,26 +65,31 @@ angular.module('myApp').service('FoglioDiLavoroService', function(){
  * TODO: cambiare paramentri, viene passato il json e io ricorstrusco l'operatore
  * 
  */
-this.onDrop = function($positionX, $positionY, $inPorts, $outPorts, $inPortsTypes,
- $outPortsTypes, $testoOperatore){
-    var operatore = new joint.shapes.devs.Atomic({
-        position: {
-            x: $positionX,
-            y: $positionY
-        },
-        inPorts: $inPorts,
-        outPorts: $outPorts,
-        attrs:{
-            '.body': {
-                'rx': 6,
-                'ry': 6
-            },
-        /*TIPO NELL'OPERATORE:
-            'tipiInput': $inPortsTypes,
-            'tipiOutput': $outPortsTypes
-            */
+this.onClick=function(e){
+    if(ListaOperatoriService.isClickedOp){
+        //posiziona operatore in punto dato da x e y con la funzione aggiungi operatore
+        //da sistemare controllo tipo
+        var x=e.pageX;
+        var y=e.pageY;
+        var jop=ListaOperatoriService.opClicked;
+        var op=''
+        if(jop.categoria=="OperatoreElementare"){
+            op=new operatoreElementare();
+            op.fromJson(ListaOperatoriService.opClickedTipo);
         }
-      });
+        else if(jop.categoria=="OperatoreComplesso"){
+            op=new operatoreComplesso();
+            op.fromJson(ListaOperatoriService.opClickedTipo);
+        }
+        else if(jop.categoria=="OperatoreIOrRegola"){
+            op=new operatoreIORegola();
+            op.fromJson(ListaOperatoriService.opClickedTipo);
+        }
+        ListaOperatoriService.isClikedOp=false;
+        ListaOperatoriService.opClicked='';
+    }
+} 
+       
 
 /*
     MODO CORRETTO DI METTERE IL TIPO:
@@ -93,33 +99,36 @@ this.onDrop = function($positionX, $positionY, $inPorts, $outPorts, $inPortsType
         j: # porta
 */
 
-    for(var j = 0; j<operatore.attributes.ports.items.length; j++){
-        var ports, types;
-        if(operatore.attributes.ports.items[j].group == 'out'){
-            types = $outPortsTypes;
-            ports = $outPorts
-        }
-        else{
-            types = $inPortsTypes;
-            ports = $inPorts;
-        }
-        for(var i = 0; i<ports.length; i++){
-            if(ports[i]==operatore.attributes.ports.items[j].id)
-                operatore.attributes.ports.items[j].tipo = types[i];
-        }
-    }
+    // for(var j = 0; j<operatore.attributes.ports.items.length; j++){
+    //     var ports, types;
+    //     if(operatore.attributes.ports.items[j].group == 'out'){
+    //         types = $outPortsTypes;
+    //         ports = $outPorts
+    //     }
+    //     else{
+    //         types = $inPortsTypes;
+    //         ports = $inPorts;
+    //     }
+    //     for(var i = 0; i<ports.length; i++){
+    //         if(ports[i]==operatore.attributes.ports.items[j].id)
+    //             operatore.attributes.ports.items[j].tipo = types[i];
+    //     }
+    // }
 
 
-    $testoOperatore = joint.util.breakText($testoOperatore, { width: 53 });
-    operatore.attr('.label/text', $testoOperatore);
-    if(this.grafo != ''){
-        this.grafo.addCell(operatore);
-      }
-    if(this.operatoreComplesso != ''){
-        this.operatoreComplesso.embed(operatore);
-    }
-    return operatore;
-};    
+    // $testoOperatore = joint.util.breakText($testoOperatore, { width: 53 });
+    // operatore.attr('.label/text', $testoOperatore);
+    // if(this.grafo != ''){
+    //     this.grafo.addCell(operatore);
+    //   }
+    // if(this.operatoreComplesso != ''){
+    //     this.operatoreComplesso.embed(operatore);
+    // }
+      
+    //     ListaOperatoriService.isClickedOp=false;
+    //     ListaOperatoriService.opCliked='';
+    //     return operatore; 
+    // }
 
 
   this.isRule=function(){

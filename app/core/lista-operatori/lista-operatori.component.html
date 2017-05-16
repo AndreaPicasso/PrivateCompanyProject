@@ -7,8 +7,8 @@
             <span class="caret"></span></button>
      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
          <div ng-repeat="op in operatore.operatori">
-         <li><button class="btn dropdown-toggle" style="width:100%">
-             <div ng-drag="true" ng-drag-data="op">
+         <li><button ng-click="onClick($event, operatore, op.tipo)" class="btn dropdown-toggle" style="width:100%">
+             <div ng-click=$ctrl.>
              {{op.tipo}}</div></button></li>
         </div>
      </ul>
