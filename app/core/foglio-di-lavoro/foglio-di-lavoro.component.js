@@ -1,5 +1,10 @@
-'use strict';
-
+app.directive('foglioDiLavoro', function () {
+    return {
+        restrict:'E',
+    templateUrl: 'core/foglio-di-lavoro/foglio-di-lavoro.component.html',
+    controller: ['$scope', "$log" /*,"FoglioDiLavoroService"*/, FoglioDiLavoroController]
+    };
+});
 function FoglioDiLavoroController($scope, $log /*, FoglioDiLavoroService*/) {
  
 
@@ -24,10 +29,3 @@ function FoglioDiLavoroController($scope, $log /*, FoglioDiLavoroService*/) {
     
 
 
-angular.
-  module('myApp', []).
-  component('foglioDiLavoro', {
-    //templateUrl: 'core/foglio-di-lavoro/foglio-di-lavoro.component.html',
-    template: '<b>MIAO</b>',
-    controller: ['$scope', "$log" /*,"FoglioDiLavoroService"*/, FoglioDiLavoroController]
-  });

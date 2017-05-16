@@ -1,5 +1,10 @@
-(function(angular) {
-'use strict';
+app.directive('listaOperatori', function () {
+    return {
+        restrict:'E',
+        templateUrl: 'core/lista-operatori/lista-operatori.component.html',
+    controller: ListaOperatoriController
+    };
+});
 
 
 function ListaOperatoriController($scope, ListaOperatoriService) {
@@ -11,12 +16,5 @@ function ListaOperatoriController($scope, ListaOperatoriService) {
     
 
 
-angular.
-  module('myApp', []).
-  component('listaOperatori', {
-    templateUrl: 'core/lista-operatori/lista-operatori-component.html',
-    controller: ListaOperatoriController
 
-  });
-})(window.angular);
 

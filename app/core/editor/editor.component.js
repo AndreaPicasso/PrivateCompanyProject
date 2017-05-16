@@ -1,4 +1,12 @@
-'use strict';
+app.directive('editor', function () {
+    return {
+        restrict:'E',
+        templateUrl: 'core/editor/editor.component.html',
+    controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
+    };
+});
+
+
 
 
 function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
@@ -73,9 +81,3 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
 }
     
-angular.
-  module('myApp', []).
-  component('editor', {
-    templateUrl: 'core/editor/editor.component.html',
-    controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
-  });
