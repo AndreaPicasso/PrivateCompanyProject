@@ -1,6 +1,6 @@
 myLink = joint.shapes.devs.Link.extend({
 
-    this: nome = "",
+    nome: "",
     //  es nome = r_44
 
     esportaXML: function(count){

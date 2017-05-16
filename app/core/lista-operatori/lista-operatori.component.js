@@ -9,8 +9,6 @@ app.directive('listaOperatori', function () {
 
 function ListaOperatoriController($scope, ListaOperatoriService) {
 
-  $scope.logOperatori = function(){
-  }
 
 
 }
