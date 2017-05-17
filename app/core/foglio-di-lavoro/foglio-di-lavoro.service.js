@@ -80,21 +80,22 @@ this.onDrop = function(JSONop, tipoOp){
             //Mi auguro che lo trovi sempre
         }
         var op = '';
+        var testoOperatore = joint.util.breakText(JSONop.nome, { width: 53 });
         if(JSONop.categoria=="OperatoreElementare"){
             op=new operatoreElementare();
-            op.fromJSON(JSONtypeOp);
-            console.log(op);
-            
+            op.fromJSON(JSONtypeOp, testoOperatore);
+            //console.log(op);            
         }
         else if(JSONop.categoria=="OperatoreComplesso"){
             console.log("op comp");
             op=new operatoreComplesso();
-            op.fromJSON(JSONtypeOp);
+            op.fromJSON(JSONtypeOp, testoOperatore);
         }
         else if(JSONop.categoria=="OperatoreIOrRegola"){
             console.log("op IO");
             op=new operatoreIORegola();
-            op.fromJSON(JSONtypeOp);
+            op.fromJSON(JSONtypeOp, testoOperatore);
+
         }
         if(this.grafo != ''){
             this.grafo.addCell(op);

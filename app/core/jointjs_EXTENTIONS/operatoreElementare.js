@@ -9,25 +9,32 @@ operatoreElementare = operatore.extend({
     },
 
     fromJSON: function(JSON, nome){
-       /* COSI NON FUNZIONA
-        this.size = JSON.size;
-        this.inPorts =  JSON.inPorts;
-        this.outPorts =  JSON.outPorts;
-        this.ports = JSON.ports;
-        this.position = JSON.position;
-        this.id = JSON.id;
-        this.attrs = JSON.attrs;
-        */
+    var operatore = new joint.shapes.devs.Atomic({
+        position: {
+            x: 50,
+            y: 50
+        },
+        inPorts: [],
+        outPorts:  [],
+        attrs:{
+            '.body': {
+                'rx': 6,
+                'ry': 6
+            },
+        }
+      });
+      operatore.attr('.label/text', nome);
+      //console.log(operatore);
 
-        this.attrs = {'.body': {
-                            'rx': 6,
-                            'ry': 6
-                        }
-                    };
-         this.position =  {
-                x: 50,
-                y: 50
-            };
+
+      this.attributes = operatore.attributes;
+      this.changed = operatore.changed;
+      this.cid = operatore.cid;
+      this.id = operatore.id;
+      
+
+      this.ports = operatore.ports;
+
         var ports = JSON.ports.items;
         var port = '';
         for(i = 0; i<ports.length; i++){
@@ -37,20 +44,22 @@ operatoreElementare = operatore.extend({
             port.tipo = ports[i].tipo;
             /*
                 TODO: aggiungere proprieta qta al JSON operatori
-                TODO: AGGIUSTARE id porte in modo che siano conformi a: in_1 in_2 ... out_1 out_2 ...
+                TODO: JSON OPERATORI mancano convertitori
+                TODO: Come aggiustare tipo Array?
+                TODO: provare se funzionano tutti gli operatori
             */
             //port.qta = port[i].qta;
             port.id = ports[i].id;
-            if(port.group == 'in'){
-                this.addInPort(port);
-            }
-            else{
-                this.addOutPort(port);
-            }
+            this.addPort(port);
+            // if(port.group == 'in'){
+            //     this.addInPort(port);
+            // }
+            // else{
+            //     this.addOutPort(port);
+            // }
         }
-        // TODO: vedere perche non funziona
-        //var testoOperatore = joint.util.breakText(nome, { width: 53 });
-        this.attr('.label/text', nome);
+        console.log(this.getPorts());
+
 
 
     },

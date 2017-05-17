@@ -1,6 +1,6 @@
 TipiPossibili = [
-    'int',
+    'long',
     'double',
-    'bool',
+    'boolean',
     'string',
 ];
