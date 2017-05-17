@@ -13,7 +13,7 @@ function ListaOperatoriController($scope, ListaOperatoriService) {
   //$scope.onClickLista=ListaOperatoriService.onClickLista();
 
   $scope.onClickLista = function($event, operatore, tipo){
-      ListaOperatoriService.onClickLista($event, operatore, tipo);
+      $scope.descrizione = ListaOperatoriService.onClickLista($event, operatore, tipo);
   }
 }
     

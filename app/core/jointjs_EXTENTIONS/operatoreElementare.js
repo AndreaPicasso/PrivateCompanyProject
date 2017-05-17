@@ -87,7 +87,6 @@ operatoreElementare = operatore.extend({
             //     this.addOutPort(port);
             // }
         }
-        console.log(this.getPorts());
 
 
 

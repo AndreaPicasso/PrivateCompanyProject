@@ -87,14 +87,13 @@ this.onDrop = function(JSONop, tipoOp){
             //console.log(op);            
         }
         else if(JSONop.categoria=="OperatoreComplesso"){
-            console.log("op comp");
             op=new operatoreComplesso();
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
         }
         else if(JSONop.categoria=="OperatoreIORegola"){
-            console.log("op IO");
             op=new operatoreIORegola();
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
+            console.log(op);
 
         }
         if(this.grafo != ''){

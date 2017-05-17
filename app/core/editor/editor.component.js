@@ -17,15 +17,13 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
     this.nuovaRegola = function(){
         if(!this.hasPaper){
             this.operatori = ListaOperatoriService.loadJSONOperatori();
-            console.log(this.operatori);
+            //console.log(this.operatori);
             FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
             this.hasPaper = true;
             FoglioDiLavoroService.nomeFoglioDiLavoro = $window.prompt(
                                                         "Inserisci il nome della regola:", "rule_n");
 
 
-            /* NON SAREBBE ASSOLUTAMENTE DA FARE QUI: */    
-            //FoglioDiLavoroService.onDrop(10,10,['in1', 'in2'],['out1'], ['int','int'],['int'], 'Somma');
         }
         else{
             $window.alert("Chiudere foglio di lavoro corrente prima di procedere");

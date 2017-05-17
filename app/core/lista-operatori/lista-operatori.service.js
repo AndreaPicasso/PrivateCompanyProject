@@ -20,13 +20,14 @@ var opClicked='';
     }
 
 
-    this.onClickLista=function($event,op,opT){
+    this.onClickLista=function($event,JSONop,opT){
         // this.isClicedkOp=true;
         // this.opClicked=op;
         // this.opClickedTipo=opT;
         // console.log(op);
         // console.log(this.opClickedTipo);
-        FoglioDiLavoroService.onDrop(op, opT);
+        FoglioDiLavoroService.onDrop(JSONop, opT);
+        return JSONop.descrizione;
     }
 
 
