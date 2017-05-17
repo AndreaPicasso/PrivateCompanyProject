@@ -61,7 +61,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
      this.verificaCorrettezza = function(){
-        //$window.alert(FoglioDiLavoroService.verificaCorrettezza());
+        $window.alert(FoglioDiLavoroService.verificaCorrettezza());
        
      }
 

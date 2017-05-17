@@ -1,37 +1,39 @@
-/*
-'use strict';
+
 
 
     
 
 
-angular.
-  module('myApp', []).
+angular.module('myApp').
   service('ValidityCheckerService', function(){
     this.almenoUnaSink=function(grafo){
-      var sink=grafo.getSink();
-        return sink!=[];
+      var sink=grafo.getSinks();
+        // return sink!=[];
+        return false;
     }
     this.almenoUnaSource=function(grafo){
-          var source=grafo.getSource();
-        return source!=[];
+          var source=grafo.getSources();
+        // return source!=[];
+        return false;
     }
     this.controlloMolteplicita=function(grafo){
+        return false;
         //da terminare usando il sequence diagramm rispettivo
     }
     this.tuttoCollegato=function(grafo){
-      var link=grafo.getLinks();
-      var element=grafo.getElements();
-      var i;
-      var ports= new Array();
-      for(i=0; i<link.length(); i++){
-          ports[i]=element[i].getPorts();
-      }
+    //   var link=grafo.getLinks();
+    //   var element=grafo.getElements();
+    //   var i;
+    //   var ports= new Array();
+    //   for(i=0; i<link.lenght(); i++){
+    //       ports[i]=element[i].getPorts();
+    //   }
+      return false;
       //Simo termina qui guardando il tuo sequence diagram poi fammi ritornare un bool
     }
 
     this.verificaCorrettezza=function(grafo){
-      var message=""
+      var message="";
 
         if(!this.tuttoCollegato(grafo)) {
             message="Non tutto collegato.";
@@ -53,4 +55,3 @@ angular.
     }  
 
 });
-*/

@@ -61,8 +61,9 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
      this.verificaCorrettezza = function(){
-         // SI SCRIVE ALERT IGNORANTE :D
-        //$window.alert(FoglioDiLavoroService.verificaCorrettezza());
+                 
+
+        $window.alert(FoglioDiLavoroService.verificaCorrettezza());
        
      }
 

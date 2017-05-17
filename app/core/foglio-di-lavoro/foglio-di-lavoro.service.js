@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').service('FoglioDiLavoroService', function(){
+angular.module('myApp').service('FoglioDiLavoroService', function(ValidityCheckerService){
     this.paper='';
     
     this.grafo='';
