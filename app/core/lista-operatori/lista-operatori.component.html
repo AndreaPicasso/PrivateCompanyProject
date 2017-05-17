@@ -2,7 +2,8 @@
         float: left; position:relative;">
    <div class="dropdown">
     <div ng-repeat="operatore in operatori">
-     <button data-toggle="dropdown" class="btn dropdown-toggle" style="width:100%; padding:0px; margin:0px;">
+     <button data-toggle="dropdown" class="btn dropdown-toggle" ng-click="showDescription(operatore)"
+     style="width:100%; padding:0px; margin:0px;">
             {{operatore.nome}} 
             <span class="caret"></span></button>
      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

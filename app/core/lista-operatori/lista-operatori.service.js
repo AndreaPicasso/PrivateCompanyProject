@@ -27,7 +27,6 @@ var opClicked='';
         // console.log(op);
         // console.log(this.opClickedTipo);
         FoglioDiLavoroService.onDrop(JSONop, opT);
-        return JSONop.descrizione;
     }
 
 

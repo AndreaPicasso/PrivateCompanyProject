@@ -12,8 +12,13 @@ function ListaOperatoriController($scope, ListaOperatoriService) {
   // PER QUALCHE MOTIVO ASTRALE COSì NON FUNZIONA  
   //$scope.onClickLista=ListaOperatoriService.onClickLista();
 
+
+  $scope.showDescription = function(operatore){
+      $scope.descrizione = operatore.descrizione;
+  }
+
   $scope.onClickLista = function($event, operatore, tipo){
-      $scope.descrizione = ListaOperatoriService.onClickLista($event, operatore, tipo);
+    ListaOperatoriService.onClickLista($event, operatore, tipo);
   }
 }
     
