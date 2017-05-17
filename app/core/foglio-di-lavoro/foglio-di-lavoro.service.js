@@ -83,18 +83,18 @@ this.onDrop = function(JSONop, tipoOp){
         var testoOperatore = joint.util.breakText(JSONop.nome, { width: 53 });
         if(JSONop.categoria=="OperatoreElementare"){
             op=new operatoreElementare();
-            op.fromJSON(JSONtypeOp, testoOperatore);
+            op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
             //console.log(op);            
         }
         else if(JSONop.categoria=="OperatoreComplesso"){
             console.log("op comp");
             op=new operatoreComplesso();
-            op.fromJSON(JSONtypeOp, testoOperatore);
+            op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
         }
-        else if(JSONop.categoria=="OperatoreIOrRegola"){
+        else if(JSONop.categoria=="OperatoreIORegola"){
             console.log("op IO");
             op=new operatoreIORegola();
-            op.fromJSON(JSONtypeOp, testoOperatore);
+            op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
 
         }
         if(this.grafo != ''){

@@ -3,8 +3,8 @@ myLink = joint.shapes.devs.Link.extend({
     nome: "",
     //  es nome = r_44
 
-    esportaXML: function(count){
-        var out ='<relation name="r_' + count + '" class="package.Relation"/>';
+    esportaXML: function(){
+        var out ='<relation name="' + nome + '" class="package.Relation"/>';
         var source = this.getSourceElement();
         var taget = this.getTargetElement();
         
