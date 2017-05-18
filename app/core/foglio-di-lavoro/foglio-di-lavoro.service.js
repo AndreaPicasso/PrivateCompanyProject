@@ -3,13 +3,14 @@
 angular.module('myApp').service('FoglioDiLavoroService', function(ValidityCheckerService){
     this.paper='';
     
-    this.grafo='';
+    // this.grafo='';
     this.nomeFoglioDiLavoro='';
     /* TODO: togliere se implementiamo solo regola */
     this.operatoreComplesso='';
 
     this.creaFoglioDiLavoroRegola = function(idElement, validateConnectionFnc){
-        this.grafo = new joint.dia.Graph;
+        // this.grafo = new joint.dia.Graph;
+        var grafo= new joint.dia.Graph;
 
         /*
         E' necessario creare un nuovo div altrimenti
@@ -25,7 +26,7 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
           height: element.clientHeight,
           gridSize: 20,
           drawGrid: 'fixedDot',
-          model: this.grafo,
+          model: grafo,
           snapLinks: true,
           linkPinning: false,
           embeddingMode: true,
@@ -52,7 +53,15 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
           }
           */
           validateConnection: validateConnectionFnc,
+         
         });
+        this.paper.on('link:connect', function(evt, cellView, magnet, arrowhead) {
+                      console.log(evt);
+
+
+            
+    alert('pointerdown on a blank area in the paper.')
+})
     };
 
 
@@ -93,8 +102,8 @@ this.onDrop = function(JSONop, tipoOp){
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
 
         }
-        if(this.grafo != ''){
-            this.grafo.addCell(op);
+        if(this.paper.model != ''){
+            this.paper.model.addCell(op);
         }
 }
 
@@ -175,10 +184,32 @@ this.onDrop = function(JSONop, tipoOp){
 
 
   this.verificaCorrettezza=function(){
-        return ValidityCheckerService.verificaCorrettezza(this.grafo);
+        return ValidityCheckerService.verificaCorrettezza(this.paper.model);
   };
 
   this.esportaRegola=function(){
+    var stringXML;
+    stringXML='<model="'+this.nomeFoglioDiLavoro+'" class="package.Rule">';
+    var operatori=this.paper.model.getElements();
+    var links=this.paper.model.getLinks();
+    var i;
+    var str='';
+    for(i=0; i<operatori.length;i++){
+                console.log(operatori[i]);
+
+        str=str+operatori[i].esportaXML();
+    }
+    for(i=0; i<links.length; i++){
+        console.log(links[i]);
+        console.log(links[i].name);
+        str=str+links[i].esportaXML();
+    }
+    console.log(str);
+    stringXML=stringXML+str;
+    stringXML=stringXML+'</model>';
+    console.log(stringXML);
+
+
 
   };
 
@@ -193,10 +224,10 @@ this.onDrop = function(JSONop, tipoOp){
 /*  ....ALTRO...  */ 
 this.log = function(){
     console.log("Grafo:");
-    console.log(this.grafo);
+    console.log(this.paper.model);
     console.log("FoglioLavoro: ")
     console.log(this.paper);
-    var cells = this.grafo.getCells();
+    var cells = this.paper.model.getCells();
     console.log("cells:");
     console.log(cells);
     console.log("Ports of 'Operatore': ")

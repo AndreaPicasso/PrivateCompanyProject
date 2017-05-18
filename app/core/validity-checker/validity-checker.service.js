@@ -9,8 +9,15 @@ angular.module('myApp').
     }
     this.almenoUnaSource=function(grafo){
           var sources=grafo.getSources();
-
-        return sources!=[];
+          var i;
+          var toCheck;
+          for(i=0; i<sources.length;i++){
+            if(sources[i].isOperatoreIO()){
+                toCheck.push(sources[i]);
+            }
+          }
+          console.log(toCheck);
+        return typeof(toCheck)!="undefined";
         
     }
     this.controlloMolteplicita=function(grafo){

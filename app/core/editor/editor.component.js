@@ -62,6 +62,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
      this.esportaRegola = function(){
+            console.log("Cliccao espoeta regola");
           FoglioDiLavoroService.esportaRegola();
      }
 
