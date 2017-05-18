@@ -67,8 +67,6 @@ operatoreIORegola = operatore.extend({
         for(var i = 0; i<molteplicita; i++){
             this.sensorIDs.push(prompt("Nome segnale "+i+":"));
         }
-        console.log(this.sensorIDs);
-
 
     },
 

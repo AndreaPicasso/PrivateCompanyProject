@@ -1,9 +1,4 @@
 
-
-
-    
-
-
 angular.module('myApp').
   service('ValidityCheckerService', function(){
     this.almenoUnaSink=function(grafo){
@@ -35,19 +30,65 @@ angular.module('myApp').
         }
         return true;
     }
+
+
+/*
+    Ho riscontrato un errore rispetto a quanto riportato nel modello di sequenza
+    in quanto non basta controllare che siano uguali l'id della porta e l'id della porta di un link
+    perchè l'id della porta è univoco all'interno dell'operatore non globalmente
+    L'algoritmo seguente è stato lievemente modificato al fine di tenere traccia di quale elemento appartiene
+    la porta
+*/
+
     this.tuttoCollegato=function(grafo){
-       var links=grafo.getLinks();
-      var element=grafo.getElements();
-      var i;
-      var ports= new Array();
-      for(i=0; i<links.length; i++){
-          ports[i]=element[i].getPorts();
-      }
-      return false;
-      //Simo termina qui guardando il tuo sequence diagram poi fammi ritornare un bool
+        var links=grafo.getLinks();
+        var operatori=grafo.getElements();
+        var portsOperatore = new Array();
+        var ok = true;
+        var collegamentotoTrovato = false;
+        //Per ogni operatore
+        for(var i=0; i<operatori.length; i++){
+            portsOperatore = operatori[i].getPorts();
+            //per ogni porta di ogni operatore
+            for(var j = 0; j<portsOperatore.length; j++){
+                collegamentoTrovato = false;
+                //per ogni link
+                for(var k = 0; k<links.length; k++){
+                    console.log(links[k]);
+                    console.log(operatori[i]);
+                    console.log(portsOperatore[j]);
+                    console.log("porta combacia a source: "+ portsOperatore[j].id== links[k].attributes.source.port);
+                    console.log()
+                    console.log("porta combacia a target: "+ portsOperatore[j].id== links[k].attributes.target.port);
+                    console.log("operatore combacia target: "+ operatori[i].id == links[k].attributes.target.id);
+                    console.log("operatore combacia source: "+ operatori[i].id == links[k].attributes.source.id);
+
+
+                   
+                    if((portsOperatore[j].id== links[k].attributes.source.port && 
+                    operatori[i].id == links[k].attributes.source.id) || 
+                    (portsOperatore[j].id== links[k].attributes.target.port && 
+                    operatori[i].id == links[k].attributes.target.id))
+                    {
+                            collegamentoTrovato = true;
+                            break;    
+                    }
+                    console.log("non trovato");
+                }
+                if(!collegamentoTrovato){
+                    ok = false;
+                    break;
+                }
+            }
+            }
+      return ok;
     }
 
     this.verificaCorrettezza=function(grafo){
+    /*
+        TODO: problemi se verifica correttezza di foglio vuoto
+        secondo macchina a stati non dovrebbe essere possibile -> bottone disabilitato
+    */        
       var message="";
 
         if(!this.tuttoCollegato(grafo)) {

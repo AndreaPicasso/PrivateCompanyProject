@@ -84,7 +84,6 @@ this.onDrop = function(JSONop, tipoOp){
         if(JSONop.categoria=="OperatoreElementare"){
             op=new operatoreElementare();
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
-            //console.log(op);            
         }
         else if(JSONop.categoria=="OperatoreComplesso"){
             op=new operatoreComplesso();
@@ -93,7 +92,6 @@ this.onDrop = function(JSONop, tipoOp){
         else if(JSONop.categoria=="OperatoreIORegola"){
             op=new operatoreIORegola();
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
-            console.log(op);
 
         }
         if(this.grafo != ''){
