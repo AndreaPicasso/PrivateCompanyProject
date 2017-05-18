@@ -16,7 +16,6 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
         al momento della cancellazione il div viene rimosso
         */
         var divPaper = document.createElement('div');
-        divPaper.setAttribute("ng-click","onClickFoglio($event)");
         var element = document.getElementById(idElement);
         element.appendChild(divPaper);
 

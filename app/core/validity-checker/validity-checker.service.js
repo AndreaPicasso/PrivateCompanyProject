@@ -54,17 +54,6 @@ angular.module('myApp').
                 collegamentoTrovato = false;
                 //per ogni link
                 for(var k = 0; k<links.length; k++){
-                    console.log(links[k]);
-                    console.log(operatori[i]);
-                    console.log(portsOperatore[j]);
-                    console.log("porta combacia a source: "+ portsOperatore[j].id== links[k].attributes.source.port);
-                    console.log()
-                    console.log("porta combacia a target: "+ portsOperatore[j].id== links[k].attributes.target.port);
-                    console.log("operatore combacia target: "+ operatori[i].id == links[k].attributes.target.id);
-                    console.log("operatore combacia source: "+ operatori[i].id == links[k].attributes.source.id);
-
-
-                   
                     if((portsOperatore[j].id== links[k].attributes.source.port && 
                     operatori[i].id == links[k].attributes.source.id) || 
                     (portsOperatore[j].id== links[k].attributes.target.port && 
@@ -73,7 +62,6 @@ angular.module('myApp').
                             collegamentoTrovato = true;
                             break;    
                     }
-                    console.log("non trovato");
                 }
                 if(!collegamentoTrovato){
                     ok = false;

@@ -18,6 +18,17 @@ function FoglioDiLavoroController($scope, $log, $event, FoglioDiLavoroService) {
   $scope.onClickFoglio =function(){
         FoglioDiLavoroService.onClickFoglio($event);
   } 
+
+
+    $scope.otherMenuOptions = [
+        ['Ellimina', function ($event) {
+            console.log("Ellimina");
+        }],
+        null,
+        ['Setta Parametri', function ($event) {
+            console.log("Ellimina");
+        }]
+    ];
     
 
 
