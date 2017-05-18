@@ -2,9 +2,37 @@ operatoreIORegola = operatore.extend({
     
     molteplicita: "",
     sensorIDs: new Array(),
+    printSensorIDs: function(){
+        var str="";
+        var k;
+        for(k=0; k<this.sensorIDs.length;k++){
+            str=str+'<property name="sensorId_'+(k+1)+'" value="'+this.sensorIDs[k]+'"/>';
+        }
+        return str;
+    },
 
     esportaXML: function(){
-     
+        var out ="";
+        var ports = this.getPorts();
+
+        for(var i = 0; i<ports.length; i++){
+            if(ports[i].group == 'in'){
+                if(i==0){
+                    out=out+'<entity name="'+this.nome+'_' + this.id + 'class="package.Sink"/>';
+                    out=out+this.printSensorIDs();
+                }
+                out += '<port name="'+ports[i].id+'" class="package.IPort"/>';
+            }
+            else{
+                if(i==0){
+                    out=out+'<entity name="'+this.nome+'_' + this.id + 'class="package.Source"/>';
+                    out=out+this.printSensorIDs();
+                }
+                out += '<port name="'+ports[i].id+'" class="package.OPort"/>';
+            }
+        }
+        out += ' </entity>';
+        return out;
 
     },
 

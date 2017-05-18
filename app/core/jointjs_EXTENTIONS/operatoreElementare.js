@@ -13,7 +13,7 @@ operatoreElementare = operatore.extend({
          <property name="selectedValue" value="5"/>
           <port name="out_1" class="package.OPort"/> </entity>
         */
-        var out ='<entity name="constant_' + this.id + '" class="package.'+this.nome+'"/>';
+        var out ='<entity name="'+this.nome+'_'+ this.id +'" class="package.'+this.nome+'">';
         if(this.hasParametro){
             out += '<property name="'+ this.nomeParametro + '" value="' +this.paramValue+ '"/>';
         }
@@ -23,7 +23,7 @@ operatoreElementare = operatore.extend({
                 out += '<port name="'+ports[i].id+'" class="package.IPort"/>';
             }
             else{
-                out += '<port name="'+ports[i].id+'" class="package.IPort"/>';
+                out += '<port name="'+ports[i].id+'" class="package.OPort"/>';
             }
         }
         out += ' </entity>';
