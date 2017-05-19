@@ -11,7 +11,7 @@
         {"tipo":"String",
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":[],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"string"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}} 
          ],
-    "hasParametro": "true",
+    "hasParam": "true",
     "paramValue": "1",
     "nomeParametro": "ValoreCostante",
     "descrizione": "Il moulo Costante genera una serie di dati aventi come valore il valore del paramentro impostato a priori.",

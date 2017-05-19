@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').service('FoglioDiLavoroService', function(ValidityCheckerService){
+angular.module('myApp').service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
     this.paper='';
     
     // this.grafo='';
@@ -16,10 +16,17 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
         E' necessario creare un nuovo div altrimenti
         al momento della cancellazione il div viene rimosso
         */
-        var divPaper = document.createElement('div');
-        divPaper.setAttribute("ng-click","onClickFoglio($event)");
+        // var divPaper = document.createElement('div');
+        // var element = document.getElementById(idElement);
+        // element.appendChild(divPaper);
+
+       
+
+        var element= angular.element( document.querySelector(idElement));
+        var divPaper = angular.element('<div></div>');
+        $( "#"+idElement ).append(divPaper);
         var element = document.getElementById(idElement);
-        element.appendChild(divPaper);
+        
 
         this.paper = new joint.dia.Paper({  
           el: divPaper,
@@ -76,16 +83,81 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
             console.log("e0");
             console.log(ev[0]);
             console.log(evt.paper.model.getLinks());
-            
-            
-            
-           
+        });
+        /*
+            TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
+        */
+        this.paper.on('cell:contextmenu', function(cellView,evt,x,y) { 
+            evt.stopPropagation(); // Stop bubbling so that the paper does not handle mousedown.
+            evt.preventDefault();  // Prevent displaying default browser context menu. 
+            var $contextMenu = $('<div id="context-menu"></div>');
+            var height = Math.max(
+                document.body.scrollHeight, document.documentElement.scrollHeight,
+                document.body.offsetHeight, document.documentElement.offsetHeight,
+                document.body.clientHeight, document.documentElement.clientHeight
+            );
+            $contextMenu.css({
+                width: '100%',
+                height: height + 'px',
+                position: 'absolute',
+                top: evt.clientY+'px',
+                left: evt.clientX+'px',
+                zIndex: 9999,
+                "max-height" : window.innerHeight - 3,
+            });
+            $contextMenu.addClass('angular-bootstrap-contextmenu dropdown clearfix');
+            var $ul = $('<ul>');
+                $ul.css({
+                    display: 'block',
+                    position: 'relative',
+                    left: 0,
+                    top: 0,
+                    "z-index": 10000
+                });
+            $ul.addClass('dropdown-menu');
+            var $ellimina = $('<button class="btn dropdown-toggle" style="width:100%">Ellimina</button>');
 
-
+            //ELLIMINA
+            $ellimina.on('mousedown', function (e) {
+                cellView.model.remove();
+                //L'elliminazione dei link ad esso attaccati viene fatta in automatico
+            });
+            $ul.append($ellimina);
+            var $settaparam = $('<button class="btn dropdown-toggle" style="width:100%">Setta Parametri</button>');
+            
+            //SETTA PARAMETRI
+            $settaparam.on('mousedown', function (e) {
+                console.log(cellView.model);
+                console.log(cellView.model.hasParametro);
+                if(cellView.model.hasParametro == 'true'){
+                    var corretto = false;
+                    while(!corretto){
+                        var newValue = $window.prompt("Inserisci "+cellView.model.nomeParametro+":",
+                             cellView.model.paramValue);
+                        /*
+                    TODO: gestire controllo correttezza parametri
+                    inserimento range min max in operatore?
+                    if(vale condizione){corretto = true;}
+                    */
+                        corretto = true;
+                    }
+                    cellView.model.paramValue = newValue;
+                }
+                else{
+                    $window.alert("L'operatore selezionato non ha parametri");
+                }
+            });
 
             
-   
- })
+            $ul.append($settaparam);
+            $contextMenu.append($ul);
+            $(document).find('body').append($contextMenu);
+
+            $(document.body).on('mousedown', function (e) {
+                $("#context-menu").remove();
+            });
+
+        });
     };
 
 
@@ -100,9 +172,7 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
  */
 
 
-/*
-PROVA DI SIMONE....
-*/
+
 this.onDrop = function(JSONop, tipoOp){
         var JSONtypeOp = '';
         for(var i = 0; i<JSONop.operatori.length; i++){

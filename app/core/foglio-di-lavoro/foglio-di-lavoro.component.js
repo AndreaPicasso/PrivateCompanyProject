@@ -12,17 +12,19 @@ function FoglioDiLavoroController($scope, $log, $event, FoglioDiLavoroService) {
  $outPortsTypes, $testoOperatore){
 
  }
-  
-  
- 
-  $scope.onClickFoglio =function(){
-        FoglioDiLavoroService.onClickFoglio($event);
-  } 
+
+
+
+//   $scope.onClickFoglio =function(){
+//         FoglioDiLavoroService.onClickFoglio($event);
+//   } 
 
 
     $scope.otherMenuOptions = [
         ['Ellimina', function ($event) {
-            console.log("Ellimina");
+            console.log($event.clientX);
+            console.log($event.clientY);
+
         }],
         null,
         ['Setta Parametri', function ($event) {

@@ -14,10 +14,9 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
     this.nuovaRegola = function(){
         if(!this.hasPaper){
-            this.operatori = ListaOperatoriService.loadJSONOperatori();
-            //console.log(this.operatori);
-            FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
             this.hasPaper = true;
+            this.operatori = ListaOperatoriService.loadJSONOperatori();
+            FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
             FoglioDiLavoroService.nomeFoglioDiLavoro = $window.prompt(
                                                         "Inserisci il nome della regola:", "rule_n");
 
