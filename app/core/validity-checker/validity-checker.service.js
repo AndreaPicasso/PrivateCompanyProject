@@ -1,35 +1,47 @@
 
 angular.module('myApp').
   service('ValidityCheckerService', function(){
+
+
     this.almenoUnaSink=function(grafo){
       var sinks=grafo.getSinks();
 
-        return sinks!=[];
+        return sinks.length!=0;
         
     }
+
+
     this.almenoUnaSource=function(grafo){
           var sources=grafo.getSources();
           var i;
-          var toCheck;
+          var toCheck = new Array();
           for(i=0; i<sources.length;i++){
             if(sources[i].isOperatoreIO()){
                 toCheck.push(sources[i]);
             }
           }
-          console.log(toCheck);
-        return typeof(toCheck)!="undefined";
+        return toCheck.length!=0;
         
     }
+
+/*
+ TODO: forse c'è un problema,
+ source  (molt = 1) e costante collegate a differenza NON collegato a sink (molt = 1)
+ da che molt. è errata 
+*/
     this.controlloMolteplicita=function(grafo){
         var toCheck=grafo.getSinks();
         var sources=grafo.getSources();
         var i;
-        var sampleMolt=toCheck[0].molteplicita;
         for(i=0; i<sources.length;i++ ){
             if(sources[i].isOperatoreIO()){
                 toCheck.push(sources[i]);
             }
         }
+        if(toCheck.length == 0){
+            return true;
+        }
+        var sampleMolt=toCheck[0].molteplicita;
         for(i=0; i<toCheck.length;i++){
             if(toCheck[i].molteplicita!=sampleMolt){
                 return false;
@@ -103,6 +115,44 @@ angular.module('myApp').
         }
         return message;
         
-    }  
+    }
+
+    /*
+        Rispetto a quanto riportato in fase di modellazione, siamo riusciti a farci passare 
+        anche il linkView, il che semplifica le operazioni di controllo
+    */
+    this.correttezzaLink = function(cellViewS, magnetS, cellViewT, magnetT, end, linkView){
+        /*
+        TODO:  FINIRE
+            NON FUNZIONA BENE, FORSE MEGLIO FARLO IN PAPER ON LINK::CONNECT??
+        - controllo tipo
+        - controllo collegamento in - out o vice e versa
+        - controllo porta out può essere collegata solo ad un in
+        */
+            var source = cellViewS.model;
+            var target = cellViewT.model;
+            var link = linkView.model;
+            // console.log(target);
+            // console.log(link.attributes);
+            
+            if(link.attributes.target.port == undefined){
+                //Non ancora finito di collegare
+                return true;
+            }
+            //Ottengo le porte;
+            var sourcePort = source.getPort(link.attributes.source.port);
+            var targetPort = target.getPort(link.attributes.target.port);
+            if(sourcePort.tipo != targetPort.tipo){
+                console.log("Tipi non corrispondono");
+                return false;
+            }
+            if(sourcePort.group == targetPort.group){
+                console.log("No collegamenti in-in o out-out");
+                return false;
+            }
+
+
+            return true
+            }  
 
 });

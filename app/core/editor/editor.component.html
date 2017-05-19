@@ -40,17 +40,3 @@
 <div ng-drop="true" ng-drop-success="console.log('drop');onDropComplete($data,$event)" >
   Drop area
 </div>-->
-    <div class="list-group">
-         <a href="#"
-            class="list-group-item"
-            ng-repeat="item in items"
-            context-menu="menuOptions">
-             <span class="badge">{{item.cost}}</span>
-             {{item.name}}
-        </a>
-    </div>
-  <button class="btn btn-default"
-          context-menu="otherMenuOptions"
-          model="'Red'">Right Click</button>
-
-

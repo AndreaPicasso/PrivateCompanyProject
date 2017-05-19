@@ -9,13 +9,13 @@ app.directive('editor', function () {
 
 function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
     
-    this.operatori = [];
+    //this.operatori = [];
     this.hasPaper = false;
 
     this.nuovaRegola = function(){
         if(!this.hasPaper){
             this.hasPaper = true;
-            this.operatori = ListaOperatoriService.loadJSONOperatori();
+            $scope.operatori = ListaOperatoriService.loadJSONOperatori();
             FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
             FoglioDiLavoroService.nomeFoglioDiLavoro = $window.prompt(
                                                         "Inserisci il nome della regola:", "rule_n");
@@ -29,8 +29,11 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
      }
 
+     /*
+        TODO: Si è deciso di non implementare op complesso ...
+     */
     this.nuovoOpComplesso = function(){
-        this.operatori = ListaOperatoriService.loadJSONOperatori();
+        $scope.operatori = ListaOperatoriService.loadJSONOperatori();
         this.hasPaper = true;
         //...
 
@@ -45,12 +48,12 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
      this.chiudiFoglioDiLavoro = function(){
         this.hasPaper = false;
-        this.operatori = [];
-        FoglioDiLavoroService.grafo.clear();
+        $scope.operatori = [];
+        FoglioDiLavoroService.paper.model.clear();
         FoglioDiLavoroService.paper.remove();
         FoglioDiLavoroService.paper = "";
-        FoglioDiLavoroService.grafo = "";
         FoglioDiLavoroService.nomeFoglioDiLavoro = "";
+        $scope.descrizione='';
 
 
      }
@@ -66,14 +69,6 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
 
-     /* TODO: NON VA QUI, TOGLIERE E METTERE IN FOGLIO DI LAVORO */
-    this.onDropComplete=function(data,evt){
-            var index = $scope.droppedObjects2.indexOf(data);
-            if (index == -1) {
-                $scope.droppedObjects2.push(data);
-            }
-        }
-
     $scope.nuovaRegola = this.nuovaRegola;
     $scope.nuovoOpComplesso = this.nuovoOpComplesso;
     $scope.nuovaPortaOpCompl = this.nuovaPortaOpCompl
@@ -81,44 +76,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
     $scope.verificaCorrettezza = this.verificaCorrettezza;
     $scope.chiudiFoglioDiLavoro = this.chiudiFoglioDiLavoro;
     $scope.hasPaper = this.hasPaper;
-    $scope.operatori = this.operatori;
-
-
-
-
-  $scope.player = {
-          gold: 100
-      };
-      $scope.items = [
-          { name: 'Small Health Potion', cost: 4 },
-          { name: 'Small Mana Potion', cost: 5 },
-          { name: 'Iron Short Sword', cost: 12 }
-      ];
-      $scope.menuOptions = [
-          ['Buy', function ($itemScope) {
-              $scope.player.gold -= $itemScope.item.cost;
-          }],
-          null,
-          ['Sell', function ($itemScope) {
-              $scope.player.gold += $itemScope.item.cost;
-          }, function ($itemScope) {
-              return $itemScope.item.name.match(/Iron/) == null;
-          }],
-          null,
-          ['More...', [
-              ['Alert Cost', function ($itemScope) {
-                  alert($itemScope.item.cost);
-              }],
-              ['Alert Player Gold', function ($itemScope) {
-                  alert($scope.player.gold);
-              }]
-          ]]
-      ];
-    	$scope.otherMenuOptions = [
-          ['Favorite Color', function ($itemScope, $event, color) {
-          		alert(color);
-          }]
-      ];
+    //$scope.operatori = this.operatori;
 
 
 }

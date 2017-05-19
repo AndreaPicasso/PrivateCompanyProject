@@ -39,8 +39,8 @@ operatoreIORegola = operatore.extend({
     fromJSON: function(JSONtype, JSONoperatore, nome){
        var operatore = new joint.shapes.devs.Atomic({
             position: {
-                x: 50,
-                y: 50
+                x: 50 + Math.floor(Math.random()*(51)),
+                y: 50 + Math.floor(Math.random()*(51))
             },
             inPorts: [],
             outPorts:  [],

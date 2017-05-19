@@ -61,18 +61,15 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
           }
           */
           //validateConnection: validateConnectionFnc,
-            validateConnection: function(cellViewS, magnetS, cellViewT, magnetT, end, linkView){
-               
-            return true;
-            }
+            validateConnection: ValidityCheckerService.correttezzaLink
         });        
          this.paper.on('link:connect', function(evt, cellView, magnet, arrowhead) {
             var link=new myLink();
-            console.log(evt);
-            console.log("f");
-            console.log(evt.paper.model.getLinks());
+            // console.log(evt);
+            // console.log("f");
+            // console.log(evt.paper.model.getLinks());
             var ev=evt.paper.model.getLinks();
-            //ora in ev ho i link ma se li modifico non si modificano nel grafo quindi lunica cosa che 
+            //ora in ev ho i link ma se li modifico non si modificano nel grafo quindi l'unica cosa che 
             //possiamo fare e togliere il link con la remove e poi mettere quello nuovo 
             link.attributes=ev[0].attributes;
             link.changed=ev[0].changed;
@@ -80,9 +77,9 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
             link.id=ev[0].id;
             link.cid=ev[0].cid;
             ev[0]=link;
-            console.log("e0");
-            console.log(ev[0]);
-            console.log(evt.paper.model.getLinks());
+            // console.log("e0");
+            // console.log(ev[0]);
+            // console.log(evt.paper.model.getLinks());
         });
         /*
             TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
@@ -127,8 +124,6 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
             
             //SETTA PARAMETRI
             $settaparam.on('mousedown', function (e) {
-                console.log(cellView.model);
-                console.log(cellView.model.hasParametro);
                 if(cellView.model.hasParametro == 'true'){
                     var corretto = false;
                     while(!corretto){
@@ -179,14 +174,12 @@ this.onDrop = function(JSONop, tipoOp){
             if(JSONop.operatori[i].tipo == tipoOp){
                 JSONtypeOp = JSONop.operatori[i].operatore
             }
-            //Mi auguro che lo trovi sempre
         }
         var op = '';
         var testoOperatore = joint.util.breakText(JSONop.nome, { width: 53 });
         if(JSONop.categoria=="OperatoreElementare"){
             op=new operatoreElementare();
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
-            //console.log(op);            
         }
         else if(JSONop.categoria=="OperatoreComplesso"){
             op=new operatoreComplesso();
@@ -284,6 +277,32 @@ this.onDrop = function(JSONop, tipoOp){
   };
 
   this.esportaRegola=function(){
+      /*
+      TODO: prima controllare correttezza regola 
+      */
+      var stringXML = this.generaXML();
+      /*
+      Salvare file
+      */
+      var filename = 'rule.xml'       
+      var blob = new Blob([stringXML], {type: 'text/plain'});
+       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, filename);
+        } else{
+            var e = document.createEvent('MouseEvents'),
+            a = document.createElement('a');
+            a.download = filename;
+            a.href = window.URL.createObjectURL(blob);
+            a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+            e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            a.dispatchEvent(e);
+    }
+    
+
+
+  };
+
+  this.generaXML=function(){
     var stringXML;
     stringXML='<model="'+this.nomeFoglioDiLavoro+'" class="package.Rule">';
     var operatori=this.paper.model.getElements();
@@ -303,13 +322,7 @@ this.onDrop = function(JSONop, tipoOp){
     console.log(str);
     stringXML=stringXML+str;
     stringXML=stringXML+'</model>';
-    console.log(stringXML);
-
-
-
-  };
-
-  this.generaXML=function(){
+    return stringXML;
 
   };
 

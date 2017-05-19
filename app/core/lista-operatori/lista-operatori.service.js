@@ -20,12 +20,17 @@ var opClicked='';
     }
 
 
+
+    /*
+        MODIFICA RISPETTO ALLA FASE DI MODELLING
+        In un primo momento si è scelto di fare a meno del drag&drop
+        per problemi di compatibilita tra le librerie utilizzate
+        L'inserimento di un operatore avverrà semplicemente selezionando un operatore
+        dalla lista presente
+        Si è scelto di continuare a chiamare la funzione del foglio di lavoro "onDrop"
+        per coerenza con i modelli
+    */
     this.onClickLista=function($event,JSONop,opT){
-        // this.isClicedkOp=true;
-        // this.opClicked=op;
-        // this.opClickedTipo=opT;
-        // console.log(op);
-        // console.log(this.opClickedTipo);
         FoglioDiLavoroService.onDrop(JSONop, opT);
     }
 
