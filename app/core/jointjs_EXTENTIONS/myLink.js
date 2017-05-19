@@ -11,6 +11,8 @@ myLink = joint.shapes.devs.Link.extend({
         out += '<link port="'+ source.nome +'.'+this.attributes.source.id+'" relation="'+this.nome+'"/>';
         out += '<link port="'+ target.nome +'.'+this.attributes.target.id+'" relation="'+this.nome+'"/>';
         
-        }
+    },
+    
+    
 
 });

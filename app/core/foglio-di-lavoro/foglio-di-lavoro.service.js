@@ -17,6 +17,7 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
         al momento della cancellazione il div viene rimosso
         */
         var divPaper = document.createElement('div');
+        divPaper.setAttribute("ng-click","onClickFoglio($event)");
         var element = document.getElementById(idElement);
         element.appendChild(divPaper);
 
@@ -52,16 +53,39 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
               return sourceMagnet != targetMagnet;
           }
           */
-          validateConnection: validateConnectionFnc,
-         
-        });
-        this.paper.on('link:connect', function(evt, cellView, magnet, arrowhead) {
-                      console.log(evt);
+          //validateConnection: validateConnectionFnc,
+            validateConnection: function(cellViewS, magnetS, cellViewT, magnetT, end, linkView){
+               
+            return true;
+            }
+        });        
+         this.paper.on('link:connect', function(evt, cellView, magnet, arrowhead) {
+            var link=new myLink();
+            console.log(evt);
+            console.log("f");
+            console.log(evt.paper.model.getLinks());
+            var ev=evt.paper.model.getLinks();
+            //ora in ev ho i link ma se li modifico non si modificano nel grafo quindi lunica cosa che 
+            //possiamo fare e togliere il link con la remove e poi mettere quello nuovo 
+            link.attributes=ev[0].attributes;
+            link.changed=ev[0].changed;
+            link.ports=ev[0].ports;
+            link.id=ev[0].id;
+            link.cid=ev[0].cid;
+            ev[0]=link;
+            console.log("e0");
+            console.log(ev[0]);
+            console.log(evt.paper.model.getLinks());
+            
+            
+            
+           
+
 
 
             
-    alert('pointerdown on a blank area in the paper.')
-})
+   
+ })
     };
 
 
@@ -92,6 +116,7 @@ this.onDrop = function(JSONop, tipoOp){
         if(JSONop.categoria=="OperatoreElementare"){
             op=new operatoreElementare();
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
+            //console.log(op);            
         }
         else if(JSONop.categoria=="OperatoreComplesso"){
             op=new operatoreComplesso();
@@ -100,6 +125,7 @@ this.onDrop = function(JSONop, tipoOp){
         else if(JSONop.categoria=="OperatoreIORegola"){
             op=new operatoreIORegola();
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
+            console.log(op);
 
         }
         if(this.paper.model != ''){
