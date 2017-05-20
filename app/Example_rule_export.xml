@@ -1,0 +1,14 @@
+<model="rule_n" class="package.Rule">
+	<entity name="AND Logico_915503b9-39c5-47e1-adf4-f817852df5e0" class="package.AND Logico">
+		<port name="in_1" class="package.IPort"/>
+		<port name="in_2" class="package.IPort"/>
+		<port name="out_1" class="package.OPort"/>
+	</entity>
+	<entity name="NOT Logico_44538802-216c-4c1c-bb7a-e4f23243b808" class="package.NOT Logico">
+		<port name="in_1" class="package.IPort"/>
+		<port name="out_1" class="package.OPort"/>
+	</entity>
+	<relation name="r_1" class="package.Relation"/>
+	<link port="AND Logico.915503b9-39c5-47e1-adf4-f817852df5e0" relation="r_1"/>
+	<link port="NOT Logico.44538802-216c-4c1c-bb7a-e4f23243b808" relation="r_1"/>
+</model>

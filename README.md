@@ -75,6 +75,7 @@ If JDK is not already installed, you can download it [here][jdk-download].
 app/                     --> all the source code of the app (along with unit tests)
   bower_components/...   --> 3rd party JS/CSS libraries, including Angular and jQuery
   jointjs                --> joint Library
+  jointjs                --> joint Library
   core/                  --> all the source code of the core module 
     editor/...           --> all the source code of the editor
     foglio-di-lavoro/... --> all the source code of the Foglio di lavoro

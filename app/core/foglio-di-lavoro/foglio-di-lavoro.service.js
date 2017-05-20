@@ -35,7 +35,7 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
           gridSize: 20,
           drawGrid: 'fixedDot',
           model: grafo,
-          snapLinks: true,
+          snapLinks: { radius: 75 },
           linkPinning: false,
           embeddingMode: true,
           highlighting: {
@@ -55,31 +55,45 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
           validateEmbedding: function(childView, parentView) {
               return parentView.model instanceof joint.shapes.devs.Coupled;
           },
-          /*
+          
           validateConnection: function(sourceView, sourceMagnet, targetView, targetMagnet) {
               return sourceMagnet != targetMagnet;
           }
-          */
-          //validateConnection: validateConnectionFnc,
-            validateConnection: ValidityCheckerService.correttezzaLink
+          
+            //validateConnection: ValidityCheckerService.correttezzaLink
         });        
-         this.paper.on('link:connect', function(evt, cellView, magnet, arrowhead) {
-            var link=new myLink();
-            // console.log(evt);
-            // console.log("f");
-            // console.log(evt.paper.model.getLinks());
-            var ev=evt.paper.model.getLinks();
-            //ora in ev ho i link ma se li modifico non si modificano nel grafo quindi l'unica cosa che 
-            //possiamo fare e togliere il link con la remove e poi mettere quello nuovo 
-            link.attributes=ev[0].attributes;
-            link.changed=ev[0].changed;
-            link.ports=ev[0].ports;
-            link.id=ev[0].id;
-            link.cid=ev[0].cid;
-            ev[0]=link;
-            // console.log("e0");
-            // console.log(ev[0]);
-            // console.log(evt.paper.model.getLinks());
+         this.paper.on('link:connect', function(evt, magnet, cellView, arrowhead) {
+            
+            var linkToCheck = evt.model;
+            var targetOperator = cellView.model;
+            var sourceOperator = linkToCheck.getSourceElement();
+            var targetPort = targetOperator.getPort(linkToCheck.attributes.target.port);
+            var sourcePort = sourceOperator.getPort(linkToCheck.attributes.source.port);
+            var links = targetOperator.graph.getLinks();
+            var err = ValidityCheckerService.correttezzaLink(linkToCheck, sourcePort,
+                             targetPort, targetOperator, links);
+            if(err ==""){
+                var link=new myLink();
+                //ora in ev ho i link ma se li modifico non si modificano nel grafo quindi l'unica cosa che 
+                //possiamo fare e togliere il link con la remove e poi mettere quello nuovo 
+                link.attributes=linkToCheck.attributes;
+                link.changed=linkToCheck.changed;
+                link.ports=linkToCheck.ports;
+                link.id=linkToCheck.id;
+                link.cid=linkToCheck.cid;
+                link.nome ="r_"+targetOperator.graph.getLinks().length;
+                console.log(link);
+                /*
+                    TODO: PROBLEMA: anche se metto il nome, al momento dell'esportaXML non lo trova
+                    trova la funzione ma non trova il nome
+                */
+                linkToCheck.remove();
+                targetOperator.graph.addCell(link);
+            }
+            else{
+                linkToCheck.remove();
+                $window.alert(err);
+            }
         });
         /*
             TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
@@ -197,76 +211,6 @@ this.onDrop = function(JSONop, tipoOp){
 }
 
 
-
-// this.onClickFoglio=function(e){
-//     /*
-//     PROBLEMA: FA CASINO CON JOINT, QUANDO C'è JOINT NON FUNZIONA PIU
-//     */
-//     if(ListaOperatoriService.isClickedOp){
-//         //posiziona operatore in punto dato da x e y con la funzione aggiungi operatore
-//         //da sistemare controllo tipo
-//         var x=e.pageX;
-//         var y=e.pageY;
-//         var jop=ListaOperatoriService.opClicked;
-//         var op='';
-//         if(jop.categoria=="OperatoreElementare"){
-//             op=new operatoreElementare();
-//             op.fromJson(ListaOperatoriService.opClickedTipo);
-//         }
-//         else if(jop.categoria=="OperatoreComplesso"){
-//             op=new operatoreComplesso();
-//             op.fromJson(ListaOperatoriService.opClickedTipo);
-//         }
-//         else if(jop.categoria=="OperatoreIOrRegola"){
-//             op=new operatoreIORegola();
-//             op.fromJson(ListaOperatoriService.opClickedTipo);
-//         }
-//         ListaOperatoriService.isClikedOp=false;
-//         ListaOperatoriService.opClicked='';
-//     }
-// };
-       
-
-/*
-    MODO CORRETTO DI METTERE IL TIPO:
-        CREO UN NUOVO ATTRIBUTO PER OGNI PORTA CHIAMATO TIPO
-        L'attributo si troverà in
-        operatore.attributes.ports.items[j].tipo = 'int';
-        j: # porta
-*/
-
-    // for(var j = 0; j<operatore.attributes.ports.items.length; j++){
-    //     var ports, types;
-    //     if(operatore.attributes.ports.items[j].group == 'out'){
-    //         types = $outPortsTypes;
-    //         ports = $outPorts
-    //     }
-    //     else{
-    //         types = $inPortsTypes;
-    //         ports = $inPorts;
-    //     }
-    //     for(var i = 0; i<ports.length; i++){
-    //         if(ports[i]==operatore.attributes.ports.items[j].id)
-    //             operatore.attributes.ports.items[j].tipo = types[i];
-    //     }
-    // }
-
-
-    // $testoOperatore = joint.util.breakText($testoOperatore, { width: 53 });
-    // operatore.attr('.label/text', $testoOperatore);
-    // if(this.grafo != ''){
-    //     this.grafo.addCell(operatore);
-    //   }
-    // if(this.operatoreComplesso != ''){
-    //     this.operatoreComplesso.embed(operatore);
-    // }
-      
-    //     ListaOperatoriService.isClickedOp=false;
-    //     ListaOperatoriService.opCliked='';
-    //     return operatore; 
-    // }
-
-
   this.isRule=function(){
     return true;
   };
@@ -316,7 +260,7 @@ this.onDrop = function(JSONop, tipoOp){
     }
     for(i=0; i<links.length; i++){
         console.log(links[i]);
-        console.log(links[i].name);
+        console.log(links[i].nome);
         str=str+links[i].esportaXML();
     }
     console.log(str);

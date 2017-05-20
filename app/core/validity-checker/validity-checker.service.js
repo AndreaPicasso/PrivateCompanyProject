@@ -121,38 +121,30 @@ angular.module('myApp').
         Rispetto a quanto riportato in fase di modellazione, siamo riusciti a farci passare 
         anche il linkView, il che semplifica le operazioni di controllo
     */
-    this.correttezzaLink = function(cellViewS, magnetS, cellViewT, magnetT, end, linkView){
+    this.correttezzaLink = function(linkToCheck, sourcePort, targetPort, targetOperator, links){
         /*
-        TODO:  FINIRE
-            NON FUNZIONA BENE, FORSE MEGLIO FARLO IN PAPER ON LINK::CONNECT??
+        CONTROLLI:
         - controllo tipo
         - controllo collegamento in - out o vice e versa
-        - controllo porta out può essere collegata solo ad un in
+        - controllo una porta in può avere un solo link collegato
         */
-            var source = cellViewS.model;
-            var target = cellViewT.model;
-            var link = linkView.model;
-            // console.log(target);
-            // console.log(link.attributes);
-            
-            if(link.attributes.target.port == undefined){
-                //Non ancora finito di collegare
-                return true;
-            }
-            //Ottengo le porte;
-            var sourcePort = source.getPort(link.attributes.source.port);
-            var targetPort = target.getPort(link.attributes.target.port);
-            if(sourcePort.tipo != targetPort.tipo){
-                console.log("Tipi non corrispondono");
-                return false;
-            }
-            if(sourcePort.group == targetPort.group){
-                console.log("No collegamenti in-in o out-out");
-                return false;
-            }
+        if(sourcePort.tipo != targetPort.tipo){
+            return "Tipi non corrispondono";
+       }
 
+        if(sourcePort.group == targetPort.group){
+            return "No collegamenti in-in o out-out";
+        }
+        //Se trovo un link con lo stesso target, stessa porta, che non sia quello da controllare
+        for(var i = 0; i<links.length;i++){
+            if(links[i].attributes.target.id == targetOperator.id &&
+                links[i].attributes.target.port == targetPort.id &&
+                links[i].id != linkToCheck.id){
+                    return "Port gia connessa";
+                }
+        }
 
-            return true
-            }  
+        return "";
+    }  
 
 });

@@ -14,7 +14,7 @@ operatoreElementare = operatore.extend({
           <port name="out_1" class="package.OPort"/> </entity>
         */
         var out ='<entity name="'+this.nome+'_'+ this.id +'" class="package.'+this.nome+'">';
-        if(this.hasParametro){
+        if(this.hasParametro == "true"){
             out += '<property name="'+ this.nomeParametro + '" value="' +this.paramValue+ '"/>';
         }
         var ports = this.getPorts();
