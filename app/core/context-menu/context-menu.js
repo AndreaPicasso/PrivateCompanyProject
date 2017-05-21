@@ -2,7 +2,10 @@ function ContextMenu(){
         /*
             TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
         */
+    this.operatore = "";
+
     this.createContextMenu = function(cellView,evt,x,y,$window){
+            this.operatore = cellView.model;
             evt.stopPropagation();
             evt.preventDefault(); 
             var $contextMenu = $('<div id="context-menu"></div>');
@@ -34,31 +37,14 @@ function ContextMenu(){
 
             //ELLIMINA
             $ellimina.on('mousedown', function (e) {
-                cellView.model.remove();
-                //L'elliminazione dei link ad esso attaccati viene fatta in automatico
+                ellimina(cellView);
             });
             $ul.append($ellimina);
             var $settaparam = $('<button class="btn dropdown-toggle" style="width:100%">Setta Parametri</button>');
             
             //SETTA PARAMETRI
             $settaparam.on('mousedown', function (e) {
-                if(cellView.model.hasParametro == 'true'){
-                    var corretto = false;
-                    while(!corretto){
-                        var newValue = $window.prompt("Inserisci "+cellView.model.nomeParametro+":",
-                             cellView.model.paramValue);
-                        /*
-                    TODO: gestire controllo correttezza parametri
-                    inserimento range min max in operatore?
-                    if(vale condizione){corretto = true;}
-                    */
-                        corretto = true;
-                    }
-                    cellView.model.paramValue = newValue;
-                }
-                else{
-                    $window.alert("L'operatore selezionato non ha parametri");
-                }
+                setParam(cellView, $window);
             });
 
             
@@ -69,6 +55,37 @@ function ContextMenu(){
             $(document.body).on('mousedown', function (e) {
                 $("#context-menu").remove();
             });
+    }
+
+
+
+
+    var ellimina = function(cellView){
+        cellView.model.remove();
+        //L'elliminazione dei link ad esso attaccati viene fatta in automatico
+    }
+
+
+
+    var setParam = function(cellView, $window){
+        if(cellView.model.hasParametro == 'true'){
+            var corretto = false;
+            while(!corretto){
+                var newValue = $window.prompt("Inserisci "+cellView.model.nomeParametro+":",
+                        cellView.model.paramValue);
+                /*
+            TODO: gestire controllo correttezza parametri
+            inserimento range min max in operatore?
+            if(vale condizione){corretto = true;}
+            */
+                corretto = true;
+            }
+            cellView.model.paramValue = newValue;
+        }
+        else{
+            $window.alert("L'operatore selezionato non ha parametri");
+        }
+
     }
 
 
