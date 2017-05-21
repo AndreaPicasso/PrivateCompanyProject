@@ -1,7 +1,7 @@
 operatoreIORegola = operatore.extend({
     
     molteplicita: "",
-    sensorIDs: new Array(),
+    sensorIDs: "",
     printSensorIDs: function(){
         var str="";
         var k;
@@ -92,6 +92,7 @@ operatoreIORegola = operatore.extend({
             }
         }
         this.molteplicita = molteplicita;
+        this.sensorIDs = new Array();
         for(var i = 0; i<molteplicita; i++){
             this.sensorIDs.push(prompt("Nome segnale "+i+":"));
         }

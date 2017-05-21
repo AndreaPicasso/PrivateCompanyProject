@@ -1,4 +1,8 @@
-
+/*
+    MODIFICA RISPETTO ALLA FASE DI MODELLING:
+    la rimozione del drag&drop ci ha costretto ad aggiungere una dependency alla Lista Operatori
+    del Foglio di lavoro
+*/
 app.service('ListaOperatoriService', function($http, $q, FoglioDiLavoroService){
 var opClicked='';
     var isClickedOp=false;
@@ -12,6 +16,7 @@ var opClicked='';
     .then(function(res){
         myJSON.resolve(res); 
     }); 
+    
     this.JSONOperatori = myJSON.promise.$$state;
     
     this.loadJSONOperatori = function(){
@@ -24,7 +29,6 @@ var opClicked='';
     /*
         MODIFICA RISPETTO ALLA FASE DI MODELLING
         In un primo momento si è scelto di fare a meno del drag&drop
-        per problemi di compatibilita tra le librerie utilizzate
         L'inserimento di un operatore avverrà semplicemente selezionando un operatore
         dalla lista presente
         Si è scelto di continuare a chiamare la funzione del foglio di lavoro "onDrop"

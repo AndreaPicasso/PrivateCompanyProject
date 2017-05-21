@@ -14,19 +14,6 @@ function FoglioDiLavoroController($scope, $log, $event, FoglioDiLavoroService) {
  }
 
 
-
-
-    // $scope.otherMenuOptions = [
-    //     ['Ellimina', function ($event) {
-    //         console.log($event.clientX);
-    //         console.log($event.clientY);
-
-    //     }],
-    //     null,
-    //     ['Setta Parametri', function ($event) {
-    //         console.log("Ellimina");
-    //     }]
-    // ];
     
 
 

@@ -5,37 +5,46 @@ angular.module('myApp').
 
     this.almenoUnaSink=function(grafo){
       var sinks=grafo.getSinks();
-
-        return sinks.length!=0;
-        
+      /*
+        TODO: PROBLEMA
+        La libreria joint non distingue in sinks/sources 
+        getSinks() getSources() forniscono lo stesso risultato
+      */
+      var count = 0;
+      for(var i=0; i<sinks.length;i++){
+            if(sinks[i].isOperatoreIO() && sinks[i].nome=='Sink'){
+                count++;
+            }
+        return count!=0;
+      }
     }
 
 
     this.almenoUnaSource=function(grafo){
           var sources=grafo.getSources();
           var i;
-          var toCheck = new Array();
+          var count = 0;
           for(i=0; i<sources.length;i++){
-            if(sources[i].isOperatoreIO()){
-                toCheck.push(sources[i]);
+            if(sources[i].isOperatoreIO() && sources[i].nome=='Source'){
+               count++;
             }
           }
-        return toCheck.length!=0;
+        return count!=0;
         
     }
 
 /*
- TODO: forse c'è un problema,
- source  (molt = 1) e costante collegate a differenza NON collegato a sink (molt = 1)
- da che molt. è errata 
+    Il diagramma della fase di modelling viene lievemente modificato in quanto la libreria joint
+    non distingue tra Sources e Sinks, getSources e getSinks danno lo stesso risultato
+    (qualunque operatore abbia una porta è sia sink che source)
 */
     this.controlloMolteplicita=function(grafo){
-        var toCheck=grafo.getSinks();
-        var sources=grafo.getSources();
+        var sourcesSinks=grafo.getSources();
+        var toCheck= new Array();
         var i;
-        for(i=0; i<sources.length;i++ ){
-            if(sources[i].isOperatoreIO()){
-                toCheck.push(sources[i]);
+        for(i=0; i<sourcesSinks.length;i++ ){
+            if(sourcesSinks[i].isOperatoreIO()){
+                toCheck.push(sourcesSinks[i]);
             }
         }
         if(toCheck.length == 0){
@@ -98,30 +107,32 @@ angular.module('myApp').
     */        
       var message="";
 
-        if(!this.tuttoCollegato(grafo)) {
-            message="Non tutto collegato.";
-        }
         if(!this.almenoUnaSink(grafo)) {
-            message=message+" Mancanza porta out.";
+            message=message+"Mancanza porta out. ";
         }
         if(!this.almenoUnaSource(grafo)) {
-            message=message+" Mancanza porta in.";
+            message=message+"Mancanza porta in. ";
         }
          if(!this.controlloMolteplicita(grafo)) {
-            message=message+" Molteplicita errata.";
+            message=message+"Molteplicita errata. ";
+        }
+        if(!this.tuttoCollegato(grafo)) {
+            message=message+"Non tutto collegato. ";
         }
         if(message==""){
           message="Regola corretta!";
         }
+        
         return message;
         
     }
+
 
     /*
         Rispetto a quanto riportato in fase di modellazione, siamo riusciti a farci passare 
         anche il linkView, il che semplifica le operazioni di controllo
     */
-    this.correttezzaLink = function(linkToCheck, sourcePort, targetPort, targetOperator, links){
+    this.correttezzaLink = function(linkToCheck, sourcePort, targetPort, targetOperator, sourceOperator, links){
         /*
         CONTROLLI:
         - controllo tipo
@@ -135,12 +146,28 @@ angular.module('myApp').
         if(sourcePort.group == targetPort.group){
             return "No collegamenti in-in o out-out";
         }
-        //Se trovo un link con lo stesso target, stessa porta, che non sia quello da controllare
+        //Controllo porta di in un solo link collegato:
+        //inOperator = operatore connesso tramite la porta di ingresso
+        var inOperator; 
+        var idInPort;
+        if(targetPort.group == 'in'){
+            inOperator = targetOperator;
+            idInPort = targetPort.id;
+        }
+        else{
+            inOperator = sourceOperator;
+            idInPort = sourcePort.id;
+        }
         for(var i = 0; i<links.length;i++){
-            if(links[i].attributes.target.id == targetOperator.id &&
-                links[i].attributes.target.port == targetPort.id &&
-                links[i].id != linkToCheck.id){
-                    return "Port gia connessa";
+            //Se c'è un altro link connesso come link o come source
+            if(
+                links[i].id != linkToCheck.id &&
+                (links[i].attributes.target.id == inOperator.id &&
+                    links[i].attributes.target.port == idInPort ) ||
+                    (links[i].attributes.source.id == inOperator.id &&
+                    links[i].attributes.source.port == idInPort
+                )){
+                    return "Porta gia connessa";
                 }
         }
 

@@ -1,4 +1,6 @@
 operatoreComplesso = operatore.extend({
+
+    grafoOperatoreComplesso:'',
     
 
     esportaXML: function(){
