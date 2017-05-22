@@ -91,7 +91,7 @@
 
 
 
-{   "nome":"Media Mobile",
+{   "nome":"MediaMobile",
     "operatori":
         [
         {"tipo":"double",
@@ -176,7 +176,7 @@
 
 
 
-{   "nome":"AND Logico",
+{   "nome":"ANDLogico",
     "operatori":
         [
         {"tipo":"boolean",
@@ -190,7 +190,7 @@
 },
 
 
-{   "nome":"OR Logico",
+{   "nome":"ORLogico",
     "operatori":
         [
         {"tipo":"boolean",
@@ -203,7 +203,7 @@
     "categoria": "OperatoreElementare"
 },
 
-{   "nome":"XOR Logico",
+{   "nome":"XORLogico",
     "operatori":
         [
         {"tipo":"boolean",
@@ -216,7 +216,7 @@
     "categoria": "OperatoreElementare"
 },
 
-{   "nome":"NOT Logico",
+{   "nome":"NOTLogico",
     "operatori":
         [
         {"tipo":"boolean",

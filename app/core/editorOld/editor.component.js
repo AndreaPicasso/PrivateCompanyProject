@@ -72,13 +72,6 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
 
-     /* TODO: NON VA QUI, TOGLIERE E METTERE IN FOGLIO DI LAVORO */
-    this.onDropComplete=function(data,evt){
-            var index = $scope.droppedObjects2.indexOf(data);
-            if (index == -1) {
-                $scope.droppedObjects2.push(data);
-            }
-        }
 
 }
     

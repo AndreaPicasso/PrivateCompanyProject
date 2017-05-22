@@ -157,9 +157,7 @@ for(var j = 0; j<operatore.attributes.ports.items.length; j++){
  *  group: in o out
  */
 this.aggiungiPorteOpComplesso = function(group, nome, tipo){
-    /**
-     * TODO setta tipo
-     */
+
     if(this.operatoreComplesso!=''){
         var port = { id: nome }
         if(group === 'in'){
@@ -176,7 +174,6 @@ this.aggiungiPorteOpComplesso = function(group, nome, tipo){
 
 
 this.connetti = function(source, sourcePort, target, targetPort) {
-    /* TODO:  CONTROLLO DEI TIPI */
     var link = new joint.shapes.devs.Link({
         source: {
             id: source.id,

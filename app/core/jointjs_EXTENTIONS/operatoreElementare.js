@@ -7,12 +7,6 @@ operatoreElementare = operatore.extend({
 
 
     esportaXML: function(){
-        /*
-        TODO: cosa vogliamo generare
-        <entity name="constant_1" class="package.Constant">
-         <property name="selectedValue" value="5"/>
-          <port name="out_1" class="package.OPort"/> </entity>
-        */
         var out ='<entity name="'+this.nome+'_'+ this.id +'" class="package.'+this.nome+'">';
         if(this.hasParametro == "true"){
             out += '<property name="'+ this.nomeParametro + '" value="' +this.paramValue+ '"/>';

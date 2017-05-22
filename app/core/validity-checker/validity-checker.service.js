@@ -6,7 +6,6 @@ angular.module('myApp').
     this.almenoUnaSink=function(grafo){
       var sinks=grafo.getSinks();
       /*
-        TODO: PROBLEMA
         La libreria joint non distingue in sinks/sources 
         getSinks() getSources() forniscono lo stesso risultato
       */
@@ -146,6 +145,13 @@ angular.module('myApp').
         if(sourcePort.group == targetPort.group){
             return "No collegamenti in-in o out-out";
         }
+        /*
+            TODO:
+            problema controllo porta gia connessa, non riesco a collegare due fili ad un out
+            girare i link??
+
+        */
+
         //Controllo porta di in un solo link collegato:
         //inOperator = operatore connesso tramite la porta di ingresso
         var inOperator; 
