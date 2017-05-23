@@ -3,6 +3,33 @@ angular.module('myApp').
   service('ValidityCheckerService', function(){
 
 
+    this.verificaCorrettezza=function(grafo){
+    /*
+        TODO: problemi se verifica correttezza di foglio vuoto
+        secondo macchina a stati non dovrebbe essere possibile -> bottone disabilitato
+    */        
+        var message="";
+
+        if(!this.almenoUnaSink(grafo)) {
+            message=message+"Mancanza porta out. ";
+        }
+        if(!this.almenoUnaSource(grafo)) {
+            message=message+"Mancanza porta in. ";
+        }
+         if(!this.controlloMolteplicita(grafo)) {
+            message=message+"Molteplicita errata. ";
+        }
+        if(!this.tuttoCollegato(grafo)) {
+            message=message+"Non tutto collegato. ";
+        }
+        if(message==""){
+          message="Regola corretta!";
+        }
+        
+        return message;
+        
+    }
+
     this.almenoUnaSink=function(grafo){
       var sinks=grafo.getSinks();
       /*
@@ -99,32 +126,7 @@ angular.module('myApp').
       return ok;
     }
 
-    this.verificaCorrettezza=function(grafo){
-    /*
-        TODO: problemi se verifica correttezza di foglio vuoto
-        secondo macchina a stati non dovrebbe essere possibile -> bottone disabilitato
-    */        
-      var message="";
-
-        if(!this.almenoUnaSink(grafo)) {
-            message=message+"Mancanza porta out. ";
-        }
-        if(!this.almenoUnaSource(grafo)) {
-            message=message+"Mancanza porta in. ";
-        }
-         if(!this.controlloMolteplicita(grafo)) {
-            message=message+"Molteplicita errata. ";
-        }
-        if(!this.tuttoCollegato(grafo)) {
-            message=message+"Non tutto collegato. ";
-        }
-        if(message==""){
-          message="Regola corretta!";
-        }
-        
-        return message;
-        
-    }
+ 
 
 
     /*

@@ -47,15 +47,16 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
                   }
               }
           }
-        });        
+        });      
+        //Cosa fare al momento della connessione  
          this.paper.on('link:connect', function(evt, magnet, cellView, arrowhead) {
-            
             var linkToCheck = evt.model;
             var targetOperator = cellView.model;
             var sourceOperator = linkToCheck.getSourceElement();
             var targetPort = targetOperator.getPort(linkToCheck.attributes.target.port);
             var sourcePort = sourceOperator.getPort(linkToCheck.attributes.source.port);
             var links = targetOperator.graph.getLinks();
+            //Controllo Correttezza connessione
             var err = ValidityCheckerService.correttezzaLink(linkToCheck, sourcePort,
                              targetPort, targetOperator, sourceOperator, links);
             if(err ==""){
@@ -86,7 +87,13 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
     };
 
 
-this.onDrop = function(JSONop, tipoOp){
+
+/*
+    Inserimento Operatore
+    (In realtà come specificato in altre sezioni è richiamato all'onClick, si è deciso
+    di continuarlo a chiamare onDrop per coerenza con il Modelling)
+*/
+    this.onDrop = function(JSONop, tipoOp){
         var JSONtypeOp = '';
         for(var i = 0; i<JSONop.operatori.length; i++){
             if(JSONop.operatori[i].tipo == tipoOp){
@@ -110,7 +117,8 @@ this.onDrop = function(JSONop, tipoOp){
         if(this.paper.model != ''){
             this.paper.model.addCell(op);
         }
-}
+    }
+
 
 
   this.isRule=function(){
@@ -118,9 +126,13 @@ this.onDrop = function(JSONop, tipoOp){
   };
 
 
+
+
   this.verificaCorrettezza=function(){
         return ValidityCheckerService.verificaCorrettezza(this.paper.model);
   };
+
+
 
   this.esportaRegola=function(){
       //Controlla correttezza..
@@ -132,7 +144,8 @@ this.onDrop = function(JSONop, tipoOp){
         var blob = new Blob([stringXML], {type: 'text/plain'});
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
                 window.navigator.msSaveOrOpenBlob(blob, filename);
-        } else{
+        }
+        else{
                 var e = document.createEvent('MouseEvents'),
                 a = document.createElement('a');
                 a.download = filename;
@@ -150,26 +163,25 @@ this.onDrop = function(JSONop, tipoOp){
 
 
   this.generaXML=function(){
-    var stringXML = '<?xml version="1.0" standalone="no"?> <!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML 1//EN" "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">';
-    stringXML+='<model="'+this.nomeFoglioDiLavoro+'" class="package.Rule">';
-    var operatori=this.paper.model.getElements();
-    var links=this.paper.model.getLinks();
-    var i;
-    var xmlCells='';
-    /*
-        Rispetto al modelling, abbiamo deciso di dividere in due cicli solamente allo scopo di dare un po'
-        più di ordine all' xml risultante, mettendo prima gli operatori e poi i link
-    */
-    for(i=0; i<operatori.length;i++){
-        xmlCells+=operatori[i].esportaXML();
-    }
-    for(i=0; i<links.length; i++){
-        xmlCells+=links[i].esportaXML();
-    }
-    stringXML+=xmlCells;
-    stringXML+='</model>';
-    return stringXML;
-
+        var stringXML = '<?xml version="1.0" standalone="no"?> <!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML 1//EN" "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">';
+        stringXML+='<model="'+this.nomeFoglioDiLavoro+'" class="package.Rule">';
+        var operatori=this.paper.model.getElements();
+        var links=this.paper.model.getLinks();
+        var i;
+        var xmlCells='';
+        /*
+            Rispetto al modelling, abbiamo deciso di dividere in due cicli solamente allo scopo di dare un po'
+            più di ordine all' xml risultante, mettendo prima gli operatori e poi i link
+        */
+        for(i=0; i<operatori.length;i++){
+            xmlCells+=operatori[i].esportaXML();
+        }
+        for(i=0; i<links.length; i++){
+            xmlCells+=links[i].esportaXML();
+        }
+        stringXML+=xmlCells;
+        stringXML+='</model>';
+        return stringXML;
   };
 
 
