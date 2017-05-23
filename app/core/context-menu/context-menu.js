@@ -88,6 +88,10 @@ function ContextMenu(){
                 if(cellView.model.paramType=="numeric" && !isNaN(newValue)){
                    corretto=true;
                 }
+
+                if(!corretto){
+                    $window.alert("Valore non compatibile al tipo: "+cellView.model.paramType);
+                }
             }
             cellView.model.paramValue = newValue;
         }

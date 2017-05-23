@@ -3,4 +3,5 @@ TipiPossibili = [
     'double',
     'boolean',
     'string',
+    'array'
 ];
