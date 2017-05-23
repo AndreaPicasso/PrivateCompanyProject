@@ -1,9 +1,13 @@
 operatoreElementare = operatore.extend({
-    
+   /*
+   MODIFICA RISPETTO ALLA FASE DI MODELLING,
+   per aggevolare il controllo della correttezza dei parametri inseriti, abbiamo deciso di aggiungere un 
+   tipo al parametro
+   */ 
     hasParametro: false,
     nomeParametro: "",
     paramValue: "",
-    paramOption: "",
+    paramType: "",
     descrizione: "",
 
     /*
@@ -80,7 +84,7 @@ operatoreElementare = operatore.extend({
       this.nomeParametro = JSONoperatore.nomeParametro;
       this.descrizione = JSONoperatore.descrizione;
       this.nome = JSONoperatore.nome;
-      this.paramOption=JSONoperatore.paramOption
+      this.paramType=JSONoperatore.paramType;
       
       
 

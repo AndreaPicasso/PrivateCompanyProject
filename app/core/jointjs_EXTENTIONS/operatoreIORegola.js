@@ -2,6 +2,9 @@ operatoreIORegola = operatore.extend({
     
     molteplicita: "",
     sensorIDs: "",
+
+
+
     printSensorIDs: function(){
         var str="";
         var k;

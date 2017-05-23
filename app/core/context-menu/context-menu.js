@@ -75,25 +75,19 @@ function ContextMenu(){
 */
     var setParam = function(cellView, $window){
         if(cellView.model.hasParametro == 'true'){
-            var corretto = false;
-            var i;
-            
+            var corretto = false;            
             while(!corretto){
-                
                 var newValue = $window.prompt("Inserisci "+cellView.model.nomeParametro+":",
                         cellView.model.paramValue);
-                        
-               if(cellView.model.paramOption[0]=="all" || cellView.model.paramOption[0]=="empty"){
+                if(cellView.model.paramType=="all"){
                    corretto=true;
-               }
-               
-               for(i=0; i<cellView.model.paramOption.length;i++){
-                   if(newValue==cellView.model.paramOption[i]){
-                       corretto=true;
-                       
-                   }
-               }
-               
+                }
+                if(cellView.model.paramType=="boolean" && (newValue=="false" || newValue=="true")){
+                   corretto=true;
+                }
+                if(cellView.model.paramType=="numeric" && !isNaN(newValue)){
+                   corretto=true;
+                }
             }
             cellView.model.paramValue = newValue;
         }
