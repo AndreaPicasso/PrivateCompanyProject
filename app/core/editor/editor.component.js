@@ -65,6 +65,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
         Verifica la correttezza della regola presente sul foglio di lavoro aperto
      */
      this.verificaCorrettezza = function(){
+         
         $window.alert(FoglioDiLavoroService.verificaCorrettezza());
        
      }

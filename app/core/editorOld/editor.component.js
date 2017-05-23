@@ -2,7 +2,7 @@ app.directive('editor', function () {
     return {
         restrict:'E',
         templateUrl: 'core/editor/editor.component.html',
-    controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService", EditorController]
+    controller: ['$scope', "$log","$window", "ListaOperatoriService","FoglioDiLavoroService","$modal", EditorController]
     };
 });
 
@@ -61,8 +61,6 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
      this.verificaCorrettezza = function(){
-                 
-
         $window.alert(FoglioDiLavoroService.verificaCorrettezza());
        
      }

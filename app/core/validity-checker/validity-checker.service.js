@@ -62,12 +62,18 @@ angular.module('myApp').
     (qualunque operatore abbia una porta è sia sink che source)
 */
     this.controlloMolteplicita=function(grafo){
-        var sourcesSinks=grafo.getSources();
+        var sources=grafo.getSources();
+        var sinks=grafo.getSinks();
         var toCheck= new Array();
         var i;
-        for(i=0; i<sourcesSinks.length;i++ ){
-            if(sourcesSinks[i].isOperatoreIO()){
-                toCheck.push(sourcesSinks[i]);
+        for(i=0; i<sources.length;i++ ){
+            if(sources[i].isOperatoreIO()){
+                toCheck.push(sources[i]);
+            }
+        }
+        for(i=0; i<sinks.length;i++ ){
+            if(sinks[i].isOperatoreIO()){
+                toCheck.push(sinks[i]);
             }
         }
         if(toCheck.length == 0){

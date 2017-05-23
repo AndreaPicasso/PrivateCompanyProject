@@ -1,7 +1,4 @@
-/*
-    Definisco il JSON di ogni operatore reso disponibile dal tool con all'interno tutte le 
-    caratteristiche e le informazioni necessarie per la renderizzazione
-*/
+
 
 [
 {   "nome":"Costante",
