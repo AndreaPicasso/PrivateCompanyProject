@@ -66,12 +66,11 @@ operatoreElementare = operatore.extend({
             port.attrs = ports[i].attrs;
             port.tipo = ports[i].tipo;
             /*
-                TODO: aggiungere proprieta qta al JSON operatori
                 TODO: JSON OPERATORI mancano convertitori
                 TODO: Come aggiustare tipo Array?
                 TODO: provare se funzionano tutti gli operatori
             */
-            //port.qta = port[i].qta;
+            port.qta = 1;
             port.id = ports[i].id;
             this.addPort(port);
             // if(port.group == 'in'){

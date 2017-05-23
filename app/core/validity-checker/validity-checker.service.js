@@ -145,13 +145,6 @@ angular.module('myApp').
         if(sourcePort.group == targetPort.group){
             return "No collegamenti in-in o out-out";
         }
-        /*
-            TODO:
-            problema controllo porta gia connessa, non riesco a collegare due fili ad un out
-            girare i link??
-
-        */
-
         //Controllo porta di in un solo link collegato:
         //inOperator = operatore connesso tramite la porta di ingresso
         var inOperator; 
@@ -165,16 +158,16 @@ angular.module('myApp').
             idInPort = sourcePort.id;
         }
         for(var i = 0; i<links.length;i++){
-            //Se c'è un altro link connesso come link o come source
-            if(
-                links[i].id != linkToCheck.id &&
-                (links[i].attributes.target.id == inOperator.id &&
-                    links[i].attributes.target.port == idInPort ) ||
-                    (links[i].attributes.source.id == inOperator.id &&
-                    links[i].attributes.source.port == idInPort
-                )){
-                    return "Porta gia connessa";
-                }
+            //Se c'è un altro link connesso come link o come source      
+            if(links[i].id != linkToCheck.id){
+                if((links[i].attributes.target.id == inOperator.id &&
+                        links[i].attributes.target.port == idInPort ) ||
+                        (links[i].attributes.source.id == inOperator.id &&
+                        links[i].attributes.source.port == idInPort
+                    )){
+                        return "Porta gia connessa";
+                    }
+        }
         }
 
         return "";
