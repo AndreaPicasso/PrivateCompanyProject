@@ -70,15 +70,28 @@ function ContextMenu(){
     var setParam = function(cellView, $window){
         if(cellView.model.hasParametro == 'true'){
             var corretto = false;
+            var i;
+            console.log(cellView.model.paramOption);
             while(!corretto){
+                
                 var newValue = $window.prompt("Inserisci "+cellView.model.nomeParametro+":",
                         cellView.model.paramValue);
-                /*
-            TODO: gestire controllo correttezza parametri
-            inserimento range min max in operatore?
-            if(vale condizione){corretto = true;}
-            */
-                corretto = true;
+                        
+               if(cellView.model.paramOption[0]=="all" || cellView.model.paramOption[0]=="empty"){
+                   console.log("break");
+                   corretto=true;
+               }
+               console.log(cellView.model.paramOption);
+               for(i=0; i<cellView.model.paramOption.length;i++){
+                   console.log("dentro for");
+                   if(newValue==cellView.model.paramOption[i]){
+                       corretto=true;
+                        console.log("dentro if");
+                       
+                   }
+               }
+               console.log("dentro while3");
+               
             }
             cellView.model.paramValue = newValue;
         }

@@ -12,6 +12,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":[],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"string"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}} 
          ],
     "hasParam": "true",
+    "paramOption":["all"],
     "paramValue": "1",
     "nomeParametro": "ValoreCostante",
     "descrizione": "Il moulo Costante genera una serie di dati aventi come valore il valore del paramentro impostato a priori.",
@@ -27,6 +28,7 @@
         ],
     "hasParam":"true",
     "paramValue": "false",
+     "paramOption":["true","false"],
     "nomeParametro": "Comportamento",
     "descrizione": "Questo tipo di contatore pu`o contare il numero di transizioni (da 0 a 1 e viceversa) dei dati di ingresso, oppure tenere traccia del fronte di salita dei dati (per quanto tempo `e presente una serie di 1), questi due casi sono gestiti da un parametro booleano che indicher`a l’una o l’altra opzione. ",
     "categoria": "OperatoreElementare"
@@ -46,6 +48,7 @@
          ],
     "hasParam":"false",
     "paramValue": "",
+    "paramOption":["empty"],
     "nomeParametro": "",
     "descrizione": "Quest’altro tipo di contatore accetta in ingresso una serie di dati e ne conta le occorrenze restituendone il numero totale.",
     "categoria": "OperatoreElementare"
@@ -63,7 +66,8 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":["in_1","in_2"],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"in_1","group":"in","attrs":{".port-label":{"text":"in_1"}},"tipo":"boolean"},{"id":"in_2","group":"in","attrs":{".port-label":{"text":"in_2"}},"tipo":"double"},{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"double"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}}
         ],
     "hasParam":"true",
-    "paramValue": "0",
+   
+    "paramOption":["empty"],
     "nomeParametro": "ValoreIniziale",
     "descrizione": "Il modulo Accumulatore ha due valori in ingresso: un numero in virgola mobile (o un intero) che verr`a sommato ai valori ricevuti precedentemente e un valore booleano che, se impostato a 1, indica la necessit`a di eseguire un reset. Il parametro, che pu`o essere un numero intero o in virgola mobile, indica il valore da cui far partire la somma una volta eﬀettuato un reset. L’output del modulo sar`a un numero intero o in virgola mobile corrispondente alla somma dei valori in ingresso.",
     "categoria": "OperatoreElementare"
@@ -84,6 +88,7 @@
          ],
     "hasParam":"false",
     "paramValue": "",
+    "paramOption":["empty"],
     "nomeParametro": "",
     "descrizione": "Questo modulo si occupa di eseguire un confronto del tipo x1 < x2, dove x1 e x2 sono i due valori in ingresso (i quali devono condividere il tipo). L’output `e un valore booleano che indicher`a se il confronto `e veriﬁcato o meno. Per gestire altri tipi di confronto (ad esempio ≤,>,≥,=) sar`a necessario connettere in modo opportuno questo modulo ad uno o piu` moduli logici.",
     "categoria": "OperatoreElementare"
@@ -100,6 +105,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":["in_1"],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"in_1","group":"in","attrs":{".port-label":{"text":"in_1"}},"tipo":"long"},{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"long"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}}
         ],
     "hasParam":"true",
+    "paramOption":["empty"],
     "paramValue": "0",
     "nomeParametro": "TempoIniziale",
     "descrizione": "All’interno di questo modulo viene calcolata la media mobile dai dati di input. Il parametro indica dopo quanto tempo iniziare a calcolare la media. ",
@@ -119,6 +125,7 @@
         ],
     "hasParam":"false",
     "paramValue": "",
+    "paramOption":["empty"],
     "nomeParametro": "",
     "descrizione": "Questo modulo calcola la somma tra i due dati di input, i quali devono condividere il tipo.",
     "categoria": "OperatoreElementare"
@@ -135,6 +142,7 @@
         ],
     "hasParam":"false",
     "paramValue": "",
+    "paramOption":["empty"],
     "nomeParametro": "",
     "descrizione": "Questo modulo calcola la differenza tra i due dati di input, i quali devono condividere il tipo.",
     "categoria": "OperatoreElementare"
@@ -152,6 +160,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":["in_1","in_2"],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"in_1","group":"in","attrs":{".port-label":{"text":"in_1"}},"tipo":"boolean"},{"id":"in_2","group":"in","attrs":{".port-label":{"text":"in_2"}},"tipo":"double"},{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"double"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}}
         ],
     "hasParam":"false",
+    "paramOption":["empty"],
     "paramValue": "",
     "nomeParametro": "",
     "descrizione": "Questo modulo esegue l’integrale dei dati numerici in ingresso. L’ingresso booleano ha il compito di deﬁnire l’intervallo di integrazione: l’estremo iniziale sar`a indicato dal primo fronte di salita della serie di dati in input, mentre quello ﬁnale dal successivo fronte di discesa",
@@ -168,6 +177,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":["in_1","in_2"],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"in_1","group":"in","attrs":{".port-label":{"text":"in_1"}},"tipo":"boolean"},{"id":"in_2","group":"in","attrs":{".port-label":{"text":"in_2"}},"tipo":"double"},{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"double"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}}
         ],
     "hasParam":"false",
+    "paramOption":["empty"],
     "paramValue": "",
     "nomeParametro": "",
     "descrizione": "Questo modulo si occupa di calcolare l’andamento (crescente o decrescente) della funzione rappresentata dai dati numerici di ingresso. L’ingresso booleano ha il compito di deﬁnire l’intervallo su cui calcolare l’andamento: l’estremo iniziale sar`a indicato dal primo fronte di salita della serie di dati in input, mentre quello ﬁnale dal successivo fronte di discesa.",
@@ -184,6 +194,7 @@
         ],
     "hasParam":"false",
     "paramValue": "",
+    "paramOption":["empty"],
     "nomeParametro": "",
     "descrizione": "Questo modulo esegue l’operazione di AND logico (∧) tra i due valori booleani d’ingresso.",
     "categoria": "OperatoreElementare"
@@ -197,6 +208,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":["in_1","in_2"],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"in_1","group":"in","attrs":{".port-label":{"text":"in_1"}},"tipo":"boolean"},{"id":"in_2","group":"in","attrs":{".port-label":{"text":"in_2"}},"tipo":"boolean"},{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"boolean"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}}
         ],
     "hasParam":"false",
+    "paramOption":["empty"],
     "paramValue": "",
     "nomeParametro": "",
     "descrizione": "Questo modulo esegue l’operazione di OR logico (V) tra i due valori booleani d’ingresso.",
@@ -210,6 +222,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":["in_1","in_2"],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"in_1","group":"in","attrs":{".port-label":{"text":"in_1"}},"tipo":"boolean"},{"id":"in_2","group":"in","attrs":{".port-label":{"text":"in_2"}},"tipo":"boolean"},{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"boolean"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}}
         ],
     "hasParam":"false",
+    "paramOption":["empty"],
     "paramValue": "",
     "nomeParametro": "",
     "descrizione": "Questo modulo esegue l’operazione di XOR logico tra i due valori booleani d’ingresso.",
@@ -223,6 +236,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":["in_1"],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"in_1","group":"in","attrs":{".port-label":{"text":"in_1"}},"tipo":"boolean"},{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"boolean"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}}
         ],
     "hasParam":"false",
+    "paramOption":["empty"],
     "paramValue": "",
     "nomeParametro": "",
     "descrizione": "Questo modulo esegue l’operazione di NOT logico (-) di un valore booleano d’ingresso.",
@@ -242,6 +256,7 @@
         "operatore":{"type":"devs.Atomic","size":{"width":80,"height":80},"inPorts":[],"outPorts":["out_1"],"ports":{"groups":{"in":{"position":{"name":"left"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"left","args":{"y":10}}}},"out":{"position":{"name":"right"},"attrs":{".port-label":{"fill":"#000"},".port-body":{"fill":"#fff","stroke":"#000","r":10,"magnet":true}},"label":{"position":{"name":"right","args":{"y":10}}}}},"items":[{"id":"out_1","group":"out","attrs":{".port-label":{"text":"out_1"}},"tipo":"string"}]},"position":{"x":300,"y":100},"angle":0,"id":"2dcf98a4-994b-42f0-8a2a-687ca1f18aa6","z":2,"parent":"3aa755e6-cf88-4577-b837-a63fc54aaf0f","attrs":{".label":{"text":"Som\nma"},".body":{"rx":6,"ry":6}}}} 
          ],
     "hasParam":"false",
+    "paramOption":["empty"],
     "paramValue": "",
     "nomeParametro": "",
     "descrizione": "Questo modulo rappresenta un segnale di ingresso",
@@ -263,6 +278,7 @@
     "hasParam":"false",
     "paramValue": "",
     "nomeParametro": "",
+    "paramOption":["empty"],
     "descrizione": "Questo modulo rappresenta un segnale di uscita",
     "categoria": "OperatoreIORegola"
 }

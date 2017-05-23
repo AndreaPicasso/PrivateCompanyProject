@@ -3,6 +3,7 @@ operatoreElementare = operatore.extend({
     hasParametro: false,
     nomeParametro: "",
     paramValue: "",
+    paramOption: "",
     descrizione: "",
 
 
@@ -50,12 +51,20 @@ operatoreElementare = operatore.extend({
       this.cid = operatore.cid;
       this.id = operatore.id;
       this.ports = operatore.ports;
+      
 
       this.hasParametro = JSONoperatore.hasParam;
       this.paramValue = JSONoperatore.paramValue;
       this.nomeParametro = JSONoperatore.nomeParametro;
       this.descrizione = JSONoperatore.descrizione;
       this.nome = JSONoperatore.nome;
+     
+      
+        
+        this.paramOption=JSONoperatore.paramOption
+      
+      console.log(this);
+      
 
 
         var ports = JSONtype.ports.items;
