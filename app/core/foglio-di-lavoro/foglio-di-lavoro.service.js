@@ -11,11 +11,13 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
     this.paper='';
     this.nomeFoglioDiLavoro='';
 
-
+        /*
+            Creazione del foglio di lavoro come paper fornito da joint js
+        */
     this.creaFoglioDiLavoroRegola = function(idElement, validateConnectionFnc){
         var grafo= new joint.dia.Graph;
         /*
-        E' necessario creare un nuovo div altrimenti
+        E' necessario creare un nuovo div dove inserire l'elemento joint js paper altrimenti
         al momento della cancellazione il div viene rimosso
         */
         var element= angular.element( document.querySelector(idElement));
@@ -129,7 +131,7 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
 
 
   this.verificaCorrettezza=function(){
-     
+     //Se il foglio di lavoro non ha elementi la verifica correttezza non viene eseguita
       if(this.paper.model.getCells().length==0){
         return "Foglio di lavoro vuoto!";
       }
@@ -137,9 +139,12 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
   };
 
 
-
+        
   this.esportaRegola=function(){
-      //Controlla correttezza..
+         /*
+        Come da specifiche nella fase di modelling prima di esportare una regola viene 
+        controllata la sua correttezza
+        */
       var correttezza = ValidityCheckerService.verificaCorrettezza(this.paper.model);
       if(correttezza == 'Regola corretta!'){
         var stringXML = this.generaXML();
@@ -190,20 +195,20 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
 
 
 
+// TOCHECK questa parte va eliminata giusto?
 
-
-/*  ....ALTRO...  */ 
-this.log = function(){
-    console.log("Grafo:");
-    console.log(this.paper.model);
-    console.log("FoglioLavoro: ")
-    console.log(this.paper);
-    var cells = this.paper.model.getCells();
-    console.log("cells:");
-    console.log(cells);
-    console.log("Ports of 'Operatore': ")
-    console.log(cells[2].getPorts());
-};
+// /*  ....ALTRO...  */ 
+// this.log = function(){
+//     console.log("Grafo:");
+//     console.log(this.paper.model);
+//     console.log("FoglioLavoro: ")
+//     console.log(this.paper);
+//     var cells = this.paper.model.getCells();
+//     console.log("cells:");
+//     console.log(cells);
+//     console.log("Ports of 'Operatore': ")
+//     console.log(cells[2].getPorts());
+// };
 
 });
 

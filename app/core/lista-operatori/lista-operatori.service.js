@@ -1,10 +1,17 @@
-/*
-    MODIFICA RISPETTO ALLA FASE DI MODELLING:
-    la rimozione del drag&drop ci ha costretto ad aggiungere una dependency alla Lista Operatori
-    del Foglio di lavoro
+/*  
+    TOCHECK simo ho modificato il tuo commento perche era poco chiaro guarda un po se ti piace
+            MODIFICA RISPETTO ALLA FASE DI MODELLING
+            Si è scelto di fare a meno del drag&drop
+            L'inserimento di un operatore avverrà semplicemente selezionando un operatore
+            dalla lista presente
+            Si è scelto di continuare a chiamare la funzione del foglio di lavoro "onDrop"
+            per coerenza con i modelli.
+            La rimozione del drag&drop ci ha costretto ad aggiungere la dependency del FoglioDiLavoroService
+            che non è presente all'interno del diagrama delle classi.
+   
 */
 app.service('ListaOperatoriService', function($http, $q, FoglioDiLavoroService){
-var opClicked='';
+    var opClicked='';
     var isClickedOp=false;
     var opClickedTipo='';
     this.operatori = [];
@@ -12,7 +19,7 @@ var opClicked='';
 
 
     var myJSON = $q.defer();
-    $http.get('core/lista-operatori/JSONOperatori.json') //File json operatori
+    $http.get('core/lista-operatori/JSONOperatori.json') 
     .then(function(res){
         myJSON.resolve(res); 
     }); 
@@ -26,14 +33,7 @@ var opClicked='';
 
 
 
-    /*
-        MODIFICA RISPETTO ALLA FASE DI MODELLING
-        In un primo momento si è scelto di fare a meno del drag&drop
-        L'inserimento di un operatore avverrà semplicemente selezionando un operatore
-        dalla lista presente
-        Si è scelto di continuare a chiamare la funzione del foglio di lavoro "onDrop"
-        per coerenza con i modelli
-    */
+    
     this.onClickLista=function($event,JSONop,opT){
         FoglioDiLavoroService.onDrop(JSONop, opT);
     }

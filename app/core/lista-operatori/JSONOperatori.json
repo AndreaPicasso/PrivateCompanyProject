@@ -1,3 +1,8 @@
+/*
+    Definisco il JSON di ogni operatore reso disponibile dal tool con all'interno tutte le 
+    caratteristiche e le informazioni necessarie per la renderizzazione
+*/
+
 [
 {   "nome":"Costante",
     "operatori":
@@ -242,6 +247,7 @@
     "descrizione": "Questo modulo esegue l’operazione di NOT logico (-) di un valore booleano d’ingresso.",
     "categoria": "OperatoreElementare"
 },
+
 
 {   "nome":"Source",
     "operatori":

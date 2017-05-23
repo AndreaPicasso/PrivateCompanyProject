@@ -6,7 +6,9 @@ operatoreElementare = operatore.extend({
     paramOption: "",
     descrizione: "",
 
-
+    /*
+       Funzione che si occupa di costruire la parte dell'xml relativa all'operatore Elementare in questione
+    */
     esportaXML: function(){
         var out ='<entity name="'+this.nome+'_'+ this.id +'" class="package.'+this.nome+'">';
         if(this.hasParametro == "true"){
@@ -26,7 +28,10 @@ operatoreElementare = operatore.extend({
 
 
     },
-
+    /*
+        Generiamo l'elemento operatore che verrà renderizzato sul foglio di lavoro
+        a partire dal JSON della listaOperatori
+    */
     fromJSON: function(JSONtype, JSONoperatore, nome){
     var operatore = new joint.shapes.devs.Atomic({
         position: {
@@ -43,16 +48,33 @@ operatoreElementare = operatore.extend({
         }
       });
       operatore.attr('.label/text', nome);
-      //console.log(operatore);
+      
 
-
+      // setto attributi relativi a joint js
       this.attributes = operatore.attributes;
       this.changed = operatore.changed;
       this.cid = operatore.cid;
       this.id = operatore.id;
       this.ports = operatore.ports;
+      var ports = JSONtype.ports.items;
+        var port = '';
+        for(i = 0; i<ports.length; i++){
+            port = new myPortObject();
+            port.group = ports[i].group;
+            port.attrs = ports[i].attrs;
+            port.tipo = ports[i].tipo;
+            /*
+                TODO: JSON OPERATORI mancano convertitori
+                TODO: Come aggiustare tipo Array?
+                TOCHECK direi di eliminare entrambi
+            */
+            port.qta = 1;
+            port.id = ports[i].id;
+            this.addPort(port);
+           
+        }
       
-
+      //setto attributi relativi alle nostre funzionalità
       this.hasParametro = JSONoperatore.hasParam;
       this.paramValue = JSONoperatore.paramValue;
       this.nomeParametro = JSONoperatore.nomeParametro;
@@ -63,28 +85,7 @@ operatoreElementare = operatore.extend({
       
 
 
-        var ports = JSONtype.ports.items;
-        var port = '';
-        for(i = 0; i<ports.length; i++){
-            port = new myPortObject();
-            port.group = ports[i].group;
-            port.attrs = ports[i].attrs;
-            port.tipo = ports[i].tipo;
-            /*
-                TODO: JSON OPERATORI mancano convertitori
-                TODO: Come aggiustare tipo Array?
-                TODO: provare se funzionano tutti gli operatori
-            */
-            port.qta = 1;
-            port.id = ports[i].id;
-            this.addPort(port);
-            // if(port.group == 'in'){
-            //     this.addInPort(port);
-            // }
-            // else{
-            //     this.addOutPort(port);
-            // }
-        }
+        
 
 
 

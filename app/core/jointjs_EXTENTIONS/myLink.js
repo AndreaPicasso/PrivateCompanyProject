@@ -1,7 +1,7 @@
 myLink = joint.shapes.devs.Link.extend({
 
     nome: "",
-    //  es nome = r_44
+    
 
     esportaXML: function(){
         var out ='<relation name="' + this.nome + '" class="package.Relation"/>';

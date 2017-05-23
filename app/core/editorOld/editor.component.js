@@ -46,7 +46,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
      }
 
-     
+     //TOCHECK questo foglio e la cartella sono da eliminare
 
      this.chiudiFoglioDiLavoro = function(){
         this.operatori = [];

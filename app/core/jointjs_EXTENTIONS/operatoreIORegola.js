@@ -10,7 +10,9 @@ operatoreIORegola = operatore.extend({
         }
         return str;
     },
-
+    /*
+       Funzione che si occupa di costruire la parte dell'xml relativa all'operatoreIORegola in questione
+    */
     esportaXML: function(){
         var out ="";
         var ports = this.getPorts();
@@ -36,6 +38,10 @@ operatoreIORegola = operatore.extend({
 
     },
 
+    /*
+        Generiamo l'elemento operatore che verrà renderizzato sul foglio di lavoro
+        a partire dal JSON della listaOperatori
+    */
     fromJSON: function(JSONtype, JSONoperatore, nome){
        var operatore = new joint.shapes.devs.Atomic({
             position: {
@@ -52,21 +58,12 @@ operatoreIORegola = operatore.extend({
             }
         });
         operatore.attr('.label/text', nome);
-        //console.log(operatore);
-
+        // setto attributi relativi a joint js
         this.attributes = operatore.attributes;
         this.changed = operatore.changed;
         this.cid = operatore.cid;
         this.id = operatore.id;
         this.ports = operatore.ports;
-
-        this.hasParametro = JSONoperatore.hasParam;
-        this.paramValue = JSONoperatore.paramValue;
-        this.nomeParametro = JSONoperatore.nomeParametro;
-        this.descrizione = JSONoperatore.descrizione;
-        this.nome = JSONoperatore.nome;
-
-
         var ports = JSONtype.ports.items;
         var port = '';
         for(i = 0; i<ports.length; i++){
@@ -78,6 +75,16 @@ operatoreIORegola = operatore.extend({
             port.id = ports[i].id;
             this.addPort(port);
         }
+
+        //setto attributi relativi alle nostre funzionalità
+        this.hasParametro = JSONoperatore.hasParam;
+        this.paramValue = JSONoperatore.paramValue;
+        this.nomeParametro = JSONoperatore.nomeParametro;
+        this.descrizione = JSONoperatore.descrizione;
+        this.nome = JSONoperatore.nome;
+
+
+        //richiedo il valore della molteplicità 
         var molteplicita = '';
         while(true){
             molteplicita = prompt("Molteplicita segnale:");
@@ -86,6 +93,8 @@ operatoreIORegola = operatore.extend({
             }
         }
         this.molteplicita = molteplicita;
+
+        //richiedo i nomi relativi ai sensori 
         this.sensorIDs = new Array();
         for(var i = 0; i<molteplicita; i++){
             this.sensorIDs.push(prompt("Nome segnale "+i+":"));

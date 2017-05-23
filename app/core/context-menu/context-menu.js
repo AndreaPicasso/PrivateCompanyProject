@@ -3,7 +3,10 @@ function ContextMenu(){
             TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
         */
     this.operatore = "";
-
+    /*
+          Costruttore context menu richiamato al right click su di un operatore renderizzato sul
+          foglio di lavoro  
+     */
     this.createContextMenu = function(cellView,evt,x,y,$window){
             this.operatore = cellView.model;
             evt.stopPropagation();
@@ -33,16 +36,16 @@ function ContextMenu(){
                     "z-index": 10000
                 });
             $ul.addClass('dropdown-menu');
-            var $ellimina = $('<button class="btn dropdown-toggle" style="width:100%">Ellimina</button>');
+            var $elimina = $('<button class="btn dropdown-toggle" style="width:100%">Elimina</button>');
 
-            //ELLIMINA
-            $ellimina.on('mousedown', function (e) {
-                ellimina(cellView);
+            //Elimina l'operatore selezionato dal foglio di lavoro
+            $elimina.on('mousedown', function (e) {
+                elimina(cellView);
             });
-            $ul.append($ellimina);
+            $ul.append($elimina);
             var $settaparam = $('<button class="btn dropdown-toggle" style="width:100%">Setta Parametri</button>');
             
-            //SETTA PARAMETRI
+            //Setta i parametri dell'operatore selezionato
             $settaparam.on('mousedown', function (e) {
                 setParam(cellView, $window);
             });
@@ -57,16 +60,19 @@ function ContextMenu(){
             });
     }
 
-
-
-
-    var ellimina = function(cellView){
+/*
+     L'eliminazione dei link ad esso attaccati viene fatta in automatico
+     da joint 
+*/
+    var elimina = function(cellView){
         cellView.model.remove();
-        //L'elliminazione dei link ad esso attaccati viene fatta in automatico
+        
     }
 
 
-
+/*
+     Richiede il parametro in input e verifica se il suo valore è accetabile
+*/
     var setParam = function(cellView, $window){
         if(cellView.model.hasParametro == 'true'){
             var corretto = false;

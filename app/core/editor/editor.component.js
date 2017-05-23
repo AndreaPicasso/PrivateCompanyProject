@@ -9,7 +9,6 @@ app.directive('editor', function () {
 
 function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
     
-    //this.operatori = [];
     this.hasPaper = false;
 
     this.nuovaRegola = function(){
@@ -30,7 +29,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
      }
 
      /*
-        TODO: Si è deciso di non implementare op complesso ...
+        SEMPLIFICAZIONE: Si è deciso di non implementare op complesso ...
      */
     this.nuovoOpComplesso = function(){
         $scope.operatori = ListaOperatoriService.loadJSONOperatori();
@@ -39,13 +38,18 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
 
      }
-
+     /*
+        SEMPLIFICAZIONE: Non avendo implementato l'operatore complesso anche questa funzione
+        è rimasta non implementata
+     */
      this.nuovaPortaOpCompl = function(){
 
      }
 
      
-
+    /*
+        Chiude il foglio di lavoro eliminando il grafo (model) e il paper
+     */
      this.chiudiFoglioDiLavoro = function(){
         this.hasPaper = false;
         $scope.operatori = [];
@@ -57,12 +61,16 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
 
 
      }
-
+     /*
+        Verifica la correttezza della regola presente sul foglio di lavoro aperto
+     */
      this.verificaCorrettezza = function(){
         $window.alert(FoglioDiLavoroService.verificaCorrettezza());
        
      }
-
+     /*
+        Esporta in formato XML la regola presete su foglio di lavoro
+     */
      this.esportaRegola = function(){
           FoglioDiLavoroService.esportaRegola();
      }
@@ -75,7 +83,7 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
     $scope.verificaCorrettezza = this.verificaCorrettezza;
     $scope.chiudiFoglioDiLavoro = this.chiudiFoglioDiLavoro;
     $scope.hasPaper = this.hasPaper;
-    //$scope.operatori = this.operatori;
+    
 
 
 }

@@ -15,7 +15,7 @@ angular.module('myApp').service('WrapperJoint', function(){
     this.creaFoglioDiLavoroRegola = function($width, $height, $idElement, $validateConnectionFnc){
         this.grafo = new joint.dia.Graph;
 
-    
+    //TOCHECK questo foglio e la cartella sono da eliminare
         this.foglioDiLavoro = new joint.dia.Paper({  
           el: document.getElementById($idElement),
           width: $width,
