@@ -58,12 +58,8 @@ operatoreElementare = operatore.extend({
       this.nomeParametro = JSONoperatore.nomeParametro;
       this.descrizione = JSONoperatore.descrizione;
       this.nome = JSONoperatore.nome;
-     
+      this.paramOption=JSONoperatore.paramOption
       
-        
-        this.paramOption=JSONoperatore.paramOption
-      
-      console.log(this);
       
 
 

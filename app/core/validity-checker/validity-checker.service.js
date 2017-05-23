@@ -4,10 +4,7 @@ angular.module('myApp').
 
 
     this.verificaCorrettezza=function(grafo){
-    /*
-        TODO: problemi se verifica correttezza di foglio vuoto
-        secondo macchina a stati non dovrebbe essere possibile -> bottone disabilitato
-    */        
+          
         var message="";
 
         if(!this.almenoUnaSink(grafo)) {

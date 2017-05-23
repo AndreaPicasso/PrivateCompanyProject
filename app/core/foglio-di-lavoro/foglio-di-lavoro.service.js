@@ -129,6 +129,10 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
 
 
   this.verificaCorrettezza=function(){
+     
+      if(this.paper.model.getCells().length==0){
+        return "Foglio di lavoro vuoto!";
+      }
         return ValidityCheckerService.verificaCorrettezza(this.paper.model);
   };
 
