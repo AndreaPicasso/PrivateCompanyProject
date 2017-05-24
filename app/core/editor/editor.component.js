@@ -1,3 +1,7 @@
+/**
+ *  EditorComponent
+ * 
+ */
 app.directive('editor', function () {
     return {
         restrict:'E',
@@ -10,11 +14,13 @@ app.directive('editor', function () {
 
 function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
     
-    /* Modifica rispetto alla fase di modelling: 
-        per scopi grafici, abbiamo bisogno di una variabile
-        che ci indichi la presenza o meno di un foglio di lavoro
+    
+    /*
+    per scopi grafici, abbiamo bisogno di una variabile
+    che ci indichi la presenza o meno di un foglio di lavoro
     */
     this.hasPaper = false;
+
 
 
     this.nuovaRegola = function(){

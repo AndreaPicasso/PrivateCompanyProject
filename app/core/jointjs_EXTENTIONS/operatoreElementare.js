@@ -1,6 +1,7 @@
 /**
  *  Operatore Elementare
  *  estende il nostro operatore
+ * 
  */
 operatoreElementare = operatore.extend({
   
@@ -29,15 +30,12 @@ operatoreElementare = operatore.extend({
         for(var i = 0; i<ports.length; i++){
             if(ports[i].group == 'in'){
                 out += '<port name="'+ports[i].id+'" class="package.IPort"/>';
-            }
-            else{
+            } else {
                 out += '<port name="'+ports[i].id+'" class="package.OPort"/>';
             }
         }
         out += ' </entity>';
         return out;
-
-
     },
     
     
@@ -62,7 +60,7 @@ operatoreElementare = operatore.extend({
         }
       });
       operatore.attr('.label/text', nome);
-    // setto attributi relativi a joint js
+      // setto attributi relativi a joint js
       this.attributes = operatore.attributes;
       this.changed = operatore.changed;
       this.cid = operatore.cid;

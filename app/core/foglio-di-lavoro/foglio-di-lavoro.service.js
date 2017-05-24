@@ -1,15 +1,19 @@
-'use strict';
+/**
+ *  FoglioDiLavoroRegola
+ * 
+ *  MODIFICA RISPETTO ALLA FASE DI MODELLING
+ *  Abbiamo deciso di non implementare la parte relativa all'operatore complesso,
+ *  la scelta è dovuta sia ad un fattore di tempo sia al fatto che angular non permette
+ *  di derivare i service in maniera pulita -> non sarebbe possibile rispettare il Class Diagram
+ * 
+ */
 
-/*
-    MODIFICA RISPETTO ALLA FASE DI MODELLING
-    Abbiamo deciso di non implementare la parte relativa all'operatore complesso,
-    la scelta è dovuta sia ad un fattore di tempo sia al fatto che angular non permette
-    di derivare i service in maniera pulita -> non sarebbe possibile rispettare il Class Diagram
-*/
+
 app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
     
     this.paper='';
     this.nomeFoglioDiLavoro='';
+
 
 
     /*
@@ -17,10 +21,8 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
     */
     this.creaFoglioDiLavoroRegola = function(idElement, validateConnectionFnc){
         var grafo= new joint.dia.Graph;
-        /*
-        E' necessario creare un nuovo div dove inserire l'elemento joint js paper altrimenti
-        al momento della cancellazione il div viene rimosso
-        */
+        //E' necessario creare un nuovo div dove inserire l'elemento joint js paper altrimenti
+        //al momento della cancellazione il div viene rimosso
         var element= angular.element( document.querySelector(idElement));
         var divPaper = angular.element('<div></div>');
         $( "#"+idElement ).append(divPaper);
@@ -60,14 +62,12 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
             var sourcePort = sourceOperator.getPort(linkToCheck.attributes.source.port);
             var links = targetOperator.graph.getLinks();
             //Controllo Correttezza connessione
-            var err = ValidityCheckerService.correttezzaLink(linkToCheck, sourcePort,
-                             targetPort, targetOperator, sourceOperator, links);
+            var err = ValidityCheckerService.correttezzaLink(linkToCheck, sourcePort, targetPort,
+                                                             targetOperator, sourceOperator, links);
             if(err ==""){
                 var link=new myLink();
-                /*
-                Al momento dell'inserimento i link vengono generati in automatico,
-                rimuoviamo quello inserito e inseriamo il nostro myLink
-                */
+                // Al momento dell'inserimento i link vengono generati in automatico,
+                // rimuoviamo quello inserito e inseriamo il nostro myLink
                 link.attributes=linkToCheck.attributes;
                 link.changed=linkToCheck.changed;
                 link.ports=linkToCheck.ports;
@@ -76,8 +76,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
                 link.nome ="r_"+targetOperator.graph.getLinks().length;
                 linkToCheck.remove();
                 targetOperator.graph.addCell(link);
-            }
-            else{
+            } else {
                 linkToCheck.remove();
                 $window.alert(err);
             }
@@ -134,7 +133,6 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
 
 
 
-
   this.verificaCorrettezza=function(){
      //Se il foglio di lavoro non ha elementi la verifica correttezza non viene eseguita
       if(this.paper.model.getCells().length==0){
@@ -149,27 +147,25 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
       //Controllo correttezza
       var correttezza = ValidityCheckerService.verificaCorrettezza(this.paper.model);
       if(correttezza == 'Regola corretta!'){
-        //Esportazione ricorsiva (Vedi diagramma modelling)
-        var stringXML = this.generaXML();
-        //Salva il file...
-        var filename =  this.nomeFoglioDiLavoro+'.xml'       
-        var blob = new Blob([stringXML], {type: 'text/plain'});
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                window.navigator.msSaveOrOpenBlob(blob, filename);
-        }
-        else{
-                var e = document.createEvent('MouseEvents'),
-                a = document.createElement('a');
-                a.download = filename;
-                a.href = window.URL.createObjectURL(blob);
-                a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
-                e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                a.dispatchEvent(e);
-                }
-        }
-        else{
+            //Esportazione ricorsiva (Vedi diagramma modelling)
+            var stringXML = this.generaXML();
+            //Salva il file...
+            var filename =  this.nomeFoglioDiLavoro+'.xml'       
+            var blob = new Blob([stringXML], {type: 'text/plain'});
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                    var e = document.createEvent('MouseEvents'),
+                    a = document.createElement('a');
+                    a.download = filename;
+                    a.href = window.URL.createObjectURL(blob);
+                    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
+                    e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                    a.dispatchEvent(e);
+            }
+        } else {
             $window.alert(correttezza);
-      }
+        }
   };
 
 
@@ -197,22 +193,6 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
         return stringXML;
   };
 
-
-
-// TOCHECK questa parte va eliminata giusto?
-
-// /*  ....ALTRO...  */ 
-// this.log = function(){
-//     console.log("Grafo:");
-//     console.log(this.paper.model);
-//     console.log("FoglioLavoro: ")
-//     console.log(this.paper);
-//     var cells = this.paper.model.getCells();
-//     console.log("cells:");
-//     console.log(cells);
-//     console.log("Ports of 'Operatore': ")
-//     console.log(cells[2].getPorts());
-// };
 
 });
 

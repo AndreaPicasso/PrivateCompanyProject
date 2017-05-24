@@ -1,3 +1,8 @@
+/**
+ * ContextMenu
+ *  
+ */
+
 function ContextMenu(){
         /*
             TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
@@ -8,7 +13,7 @@ function ContextMenu(){
     /*
           Costruttore context menu richiamato al right click su di un operatore renderizzato sul
           foglio di lavoro  
-     */
+    */
     this.createContextMenu = function(cellView,evt,x,y,$window){
             this.operatore = cellView.model;
             evt.stopPropagation();
@@ -51,8 +56,6 @@ function ContextMenu(){
             $settaparam.on('mousedown', function (e) {
                 setParam(cellView, $window);
             });
-
-            
             $ul.append($settaparam);
             $contextMenu.append($ul);
             $(document).find('body').append($contextMenu);
@@ -62,6 +65,8 @@ function ContextMenu(){
             });
     }
 
+
+
     var elimina = function(cellView){
         //L'eliminazione dei link ad esso attaccati viene fatta in automatico da joint 
         cellView.model.remove();
@@ -69,9 +74,10 @@ function ContextMenu(){
     }
 
 
-/*
+
+    /*
      Richiede il parametro in input e verifica se il suo valore è accetabile
-*/
+    */
     var setParam = function(cellView, $window){
         if(cellView.model.hasParametro == 'true'){
             var corretto = false;            

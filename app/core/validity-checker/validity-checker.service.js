@@ -1,4 +1,7 @@
 /**
+ * 
+ *  ValitityCheckerServiceRegola
+ * 
  *  Modifica rispetto alla fase di modelling (vedi foglio-di-lavoro.service.js)
  *  Abbiamo deciso di non implementare Operatore Complesso
  *  in Angular non è possibile derivare in maniera pulita Service e Component
@@ -36,20 +39,20 @@ app.service('ValidityCheckerService', function(){
 
 
     this.almenoUnaSink=function(grafo){
-      var sinks=grafo.getSinks();
-      /*
-        TOCHECK: provare comportamento, non so cosa scrivere, forse meglio non scrivere nulla?
-        (COSI almenoUnaSink FUNZIONA)
-        La libreria joint non distingue sempre tra sinks/sources (es. quando non ci sono link collegati) 
-        per sicurezza è ..
-      */
-      var count = 0;
-      for(var i=0; i<sinks.length;i++){
+        var sinks=grafo.getSinks();
+        /*
+            TOCHECK: provare comportamento, non so cosa scrivere, forse meglio non scrivere nulla?
+            (COSI almenoUnaSink FUNZIONA)
+            La libreria joint non distingue sempre tra sinks/sources (es. quando non ci sono link collegati) 
+            per sicurezza è ..
+        */
+        var count = 0;
+        for(var i=0; i<sinks.length;i++){
             if(sinks[i].isOperatoreIO() && sinks[i].nome=='Sink'){
                 count++;
             }
-        return count!=0;
-      }
+            return count!=0;
+        }
     }
 
 
@@ -126,9 +129,9 @@ app.service('ValidityCheckerService', function(){
                 //per ogni link
                 for(var k = 0; k<links.length; k++){
                     if((portsOperatore[j].id== links[k].attributes.source.port && 
-                    operatori[i].id == links[k].attributes.source.id) || 
-                    (portsOperatore[j].id== links[k].attributes.target.port && 
-                    operatori[i].id == links[k].attributes.target.id))
+                        operatori[i].id == links[k].attributes.source.id) || 
+                        (portsOperatore[j].id== links[k].attributes.target.port && 
+                        operatori[i].id == links[k].attributes.target.id))
                     {
                         collegamentoTrovato = true;
                         break;    

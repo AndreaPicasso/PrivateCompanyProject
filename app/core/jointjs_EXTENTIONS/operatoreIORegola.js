@@ -32,8 +32,7 @@ operatoreIORegola = operatore.extend({
                     out=out+printSensorIDs(this.sensorIDs);
                 }
                 out += '<port name="'+ports[i].id+'" class="package.IPort"/>';
-            }
-            else{
+            } else {
                 if(i==0){
                     out=out+'<entity name="'+this.nome+'_' + this.id + 'class="package.Source"/>';
                     out=out+printSensorIDs(this.sensorIDs);
@@ -43,7 +42,6 @@ operatoreIORegola = operatore.extend({
         }
         out += ' </entity>';
         return out;
-
     },
 
 
