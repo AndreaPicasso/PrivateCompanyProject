@@ -19,7 +19,11 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
     /*
         Creazione del foglio di lavoro come paper fornito da joint js
     */
-    this.creaFoglioDiLavoroRegola = function(idElement, validateConnectionFnc){
+        /*
+            TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
+            TOGLIERE showDescriptionFcn, sia qui che paper.on(contextMenu)
+        */
+    this.creaFoglioDiLavoroRegola = function(idElement, showDescriptionFnc){
         var grafo= new joint.dia.Graph;
         //E' necessario creare un nuovo div dove inserire l'elemento joint js paper altrimenti
         //al momento della cancellazione il div viene rimosso
@@ -82,7 +86,8 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
             }
         });
         //ContextMenu
-        this.paper.on('cell:contextmenu', function(cellView,evt,x,y) { 
+        this.paper.on('cell:contextmenu', function(cellView,evt,x,y) {
+             showDescriptionFnc(cellView.model);
             var contextMenu = new ContextMenu();
             contextMenu.createContextMenu(cellView,evt,x,y,$window);
         });
@@ -138,6 +143,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
       if(this.paper.model.getCells().length==0){
         return "Foglio di lavoro vuoto!";
       }
+        ValidityCheckerService.grafo = this.paper.model;
         return ValidityCheckerService.verificaCorrettezza(this.paper.model);
   };
 
@@ -145,8 +151,8 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
         
   this.esportaRegola=function(){
       //Controllo correttezza
-      var correttezza = ValidityCheckerService.verificaCorrettezza(this.paper.model);
-      if(correttezza == 'Regola corretta!'){
+      var correttezza = this.verificaCorrettezza()
+      if( correttezza == 'Regola corretta!'){
             //Esportazione ricorsiva (Vedi diagramma modelling)
             var stringXML = this.generaXML();
             //Salva il file...

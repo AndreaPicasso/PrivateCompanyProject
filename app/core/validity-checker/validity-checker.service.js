@@ -8,24 +8,24 @@
  */
 app.service('ValidityCheckerService', function(){
 
+    this.grafo="";
 
-
-    this.verificaCorrettezza=function(grafo){
+    this.verificaCorrettezza=function(){
         var message="";
 
-        if(!this.almenoUnaSink(grafo)) {
+        if(!this.almenoUnaSink()) {
             message=message+"Mancanza porta out. ";
         }
 
-        if(!this.almenoUnaSource(grafo)) {
+        if(!this.almenoUnaSource()) {
             message=message+"Mancanza porta in. ";
         }
 
-        if(!this.controlloMolteplicita(grafo)) {
+        if(!this.controlloMolteplicita()) {
             message=message+"Molteplicita errata. ";
         }
 
-        if(!this.tuttoCollegato(grafo)) {
+        if(!this.tuttoCollegato()) {
             message=message+"Non tutto collegato. ";
         }
 
@@ -38,8 +38,8 @@ app.service('ValidityCheckerService', function(){
 
 
 
-    this.almenoUnaSink=function(grafo){
-        var sinks=grafo.getSinks();
+    this.almenoUnaSink=function(){
+        var sinks=this.grafo.getSinks();
         /*
             TOCHECK: provare comportamento, non so cosa scrivere, forse meglio non scrivere nulla?
             (COSI almenoUnaSink FUNZIONA)
@@ -57,8 +57,8 @@ app.service('ValidityCheckerService', function(){
 
 
 
-    this.almenoUnaSource=function(grafo){
-        var sources=grafo.getSources();
+    this.almenoUnaSource=function(){
+        var sources=this.grafo.getSources();
         var i;
         var count = 0;
         for(i=0; i<sources.length;i++){
@@ -78,9 +78,9 @@ app.service('ValidityCheckerService', function(){
     non distingue tra Sources e Sinks, getSources e getSinks danno lo stesso risultato
     (qualunque operatore abbia una porta è sia sink che source)
 */
-    this.controlloMolteplicita=function(grafo){
-        var sources=grafo.getSources();
-        var sinks=grafo.getSinks();
+    this.controlloMolteplicita=function(){
+        var sources=this.grafo.getSources();
+        var sinks=this.grafo.getSinks();
         var toCheck= new Array();
         var i;
         for(i=0; i<sources.length;i++ ){
@@ -114,9 +114,9 @@ app.service('ValidityCheckerService', function(){
     L'algoritmo seguente è stato lievemente modificato al fine di tenere traccia di quale elemento appartiene
     la porta
 */
-    this.tuttoCollegato=function(grafo){
-        var links=grafo.getLinks();
-        var operatori=grafo.getElements();
+    this.tuttoCollegato=function(){
+        var links=this.grafo.getLinks();
+        var operatori=this.grafo.getElements();
         var portsOperatore = new Array();
         var ok = true;
         var collegamentotoTrovato = false;
@@ -128,10 +128,10 @@ app.service('ValidityCheckerService', function(){
                 collegamentoTrovato = false;
                 //per ogni link
                 for(var k = 0; k<links.length; k++){
-                    if((portsOperatore[j].id== links[k].attributes.source.port && 
-                        operatori[i].id == links[k].attributes.source.id) || 
-                        (portsOperatore[j].id== links[k].attributes.target.port && 
-                        operatori[i].id == links[k].attributes.target.id))
+                    if((portsOperatore[j].id== links[k].attributes.source.port 
+                        && operatori[i].id == links[k].attributes.source.id) 
+                        || (portsOperatore[j].id== links[k].attributes.target.port 
+                        && operatori[i].id == links[k].attributes.target.id))
                     {
                         collegamentoTrovato = true;
                         break;    
@@ -174,18 +174,18 @@ app.service('ValidityCheckerService', function(){
         if(targetPort.group == 'in'){
             inOperator = targetOperator;
             idInPort = targetPort.id;
-        }
-        else{
+        } else {
             inOperator = sourceOperator;
             idInPort = sourcePort.id;
         }
         for(var i = 0; i<links.length;i++){
             //Se c'è un altro link connesso come link o come source      
             if(links[i].id != linkToCheck.id){
-                if((links[i].attributes.target.id == inOperator.id &&
-                        links[i].attributes.target.port == idInPort ) ||
-                        (links[i].attributes.source.id == inOperator.id &&
-                        links[i].attributes.source.port == idInPort)){
+                if((links[i].attributes.target.id == inOperator.id
+                    && links[i].attributes.target.port == idInPort )
+                    || (links[i].attributes.source.id == inOperator.id 
+                    && links[i].attributes.source.port == idInPort))
+                    {
                             return "Porta gia connessa";
                     }
             }

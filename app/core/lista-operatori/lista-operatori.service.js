@@ -12,11 +12,6 @@
  */
 
 app.service('ListaOperatoriService', function($http, $q, FoglioDiLavoroService){
-    
-//    //TOCHECK vedere se servono, ho gia provato, funziona tutto senza 
-//    this.opClicked="";
-//    this.isClickedOp = false;
-//    this.opClickedTipo=""; 
 
     this.operatori = [];
 

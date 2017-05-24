@@ -4,9 +4,8 @@
  */
 
 function ContextMenu(){
-        /*
-            TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
-        */
+
+
     this.operatore = "";
 
 
