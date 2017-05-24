@@ -29,6 +29,10 @@ app.service('ValidityCheckerService', function(){
             message=message+"Non tutto collegato. ";
         }
 
+        if(!this.controlloMolteplicita(grafo)) {
+            message=message+"Molteplicita errata. ";
+        }
+
         if(message==""){
           message="Regola corretta!";
         }
@@ -40,19 +44,14 @@ app.service('ValidityCheckerService', function(){
 
     this.almenoUnaSink=function(){
         var sinks=this.grafo.getSinks();
-        /*
-            TOCHECK: provare comportamento, non so cosa scrivere, forse meglio non scrivere nulla?
-            (COSI almenoUnaSink FUNZIONA)
-            La libreria joint non distingue sempre tra sinks/sources (es. quando non ci sono link collegati) 
-            per sicurezza è ..
-        */
         var count = 0;
+        //Effettuo controlli motivo: vedi commento "controlloMolteplicita"
         for(var i=0; i<sinks.length;i++){
             if(sinks[i].isOperatoreIO() && sinks[i].nome=='Sink'){
-                count++;
+                count++;   
             }
-            return count!=0;
-        }
+      }
+       return count!=0;
     }
 
 
@@ -61,7 +60,8 @@ app.service('ValidityCheckerService', function(){
         var sources=this.grafo.getSources();
         var i;
         var count = 0;
-        for(i=0; i<sources.length;i++){
+        //Effettuo controlli motivo: vedi commento "controlloMolteplicita"
+        for(var i=0; i<sources.length;i++){
             if(sources[i].isOperatoreIO() && sources[i].nome=='Source'){
                 count++;
             }
@@ -73,10 +73,9 @@ app.service('ValidityCheckerService', function(){
 
 
 /*
-    TOCHECK: so che lo hai modificato, E' ancora valido il commento qui sotto? se no togli
     Il diagramma della fase di modelling viene lievemente modificato in quanto la libreria joint
-    non distingue tra Sources e Sinks, getSources e getSinks danno lo stesso risultato
-    (qualunque operatore abbia una porta è sia sink che source)
+    non distingue tra Sources e Sinks, getSources e getSinks danno lo stesso risultato se gli 
+    operatori non sono collegati
 */
     this.controlloMolteplicita=function(){
         var sources=this.grafo.getSources();
@@ -108,7 +107,7 @@ app.service('ValidityCheckerService', function(){
 
 
 /*
-    Ho riscontrato un errore rispetto a quanto riportato nel modello di sequenza relativo a "tuttoCollegato"
+    Ho fatto una modifica rispetto a quanto riportato nel modello di sequenza relativo a "tuttoCollegato"
     in quanto non basta controllare che siano uguali l'id della porta e l'id della porta di un link
     perchè l'id della porta è univoco all'interno dell'operatore non globalmente
     L'algoritmo seguente è stato lievemente modificato al fine di tenere traccia di quale elemento appartiene

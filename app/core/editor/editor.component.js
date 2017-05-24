@@ -21,16 +21,17 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
     */
     this.hasPaper = false;
 
-
+//TOCHECK qui ho modificato l'ordine inserendo name poiche nel diagramma prima chiediamo il nome e poi creiamo 
+//il foglio di lavoro
     this.nuovaRegola = function(){
         if(!this.hasPaper){
             this.hasPaper = true;
+            var name=$window.prompt("Inserisci il nome della regola:", "rule_n");                                           
             $scope.operatori = ListaOperatoriService.loadJSONOperatori();
             //Funzione di "callback" con lo scopo grafico di modificare la descrizione
             //Una volta cliccato su un operatore di un foglio di lavoro
             FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', $scope.showDescription);
-            FoglioDiLavoroService.nomeFoglioDiLavoro = $window.prompt(
-                                                        "Inserisci il nome della regola:", "rule_n");
+            FoglioDiLavoroService.nomeFoglioDiLavoro = name;
         }
         else{
             $window.alert("Chiudere foglio di lavoro corrente prima di procedere");

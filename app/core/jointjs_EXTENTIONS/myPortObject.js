@@ -13,7 +13,6 @@ myPortObject = function(){
     this.group = "";
     this.tipo = "";
 
-    //TOCHECK: lasciare o cambiare?? cosa scrivere?
     /*
       Modifica rispetto alla fase di modelling:
       l'attributo qta, attribuito ad una porta si è rivelato essere superfluo 

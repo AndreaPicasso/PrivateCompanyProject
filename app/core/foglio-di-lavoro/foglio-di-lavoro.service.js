@@ -139,7 +139,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
 
 
   this.verificaCorrettezza=function(){
-     //Se il foglio di lavoro non ha elementi la verifica correttezza non viene eseguita
+     //Se il foglio di lavoro non ha elementi (cell di joint js) la verifica correttezza non viene eseguita
       if(this.paper.model.getCells().length==0){
         return "Foglio di lavoro vuoto!";
       }
@@ -170,7 +170,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
                     a.dispatchEvent(e);
             }
         } else {
-            $window.alert(correttezza);
+            $window.alert("Regola non corretta! Risolvere i seguenti problemi prima di esportarla: "+correttezza);
         }
   };
 
@@ -198,7 +198,6 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
         stringXML+='</model>';
         return stringXML;
   };
-
 
 });
 

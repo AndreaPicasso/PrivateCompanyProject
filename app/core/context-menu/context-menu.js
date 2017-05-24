@@ -95,9 +95,13 @@ function ContextMenu(){
 
                 if(!corretto){
                     $window.alert("Valore non compatibile al tipo: "+cellView.model.paramType);
+                    break;
                 }
             }
-            cellView.model.paramValue = newValue;
+            if(corretto){
+                cellView.model.paramValue = newValue;
+            }
+            
         }
         else{
             $window.alert("L'operatore selezionato non ha parametri");
