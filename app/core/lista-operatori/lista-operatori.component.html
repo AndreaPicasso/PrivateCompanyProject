@@ -6,10 +6,10 @@
      style="width:100%; padding:0px; margin:0px;">
             {{operatore.nome}} 
             <span class="caret"></span></button>
-     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-         <div ng-repeat="op in operatore.operatori">
+     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style=" position:relative; top:5px">
+         <div  ng-repeat="op in operatore.operatori">
          <li><button ng-click="onClickLista($event, operatore, op.tipo)" class="btn dropdown-toggle" style="width:100%">
-             <div>
+             <div >
              {{op.tipo}}</div></button></li>
         </div>
      </ul>

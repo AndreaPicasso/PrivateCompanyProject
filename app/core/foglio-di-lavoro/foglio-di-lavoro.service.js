@@ -172,7 +172,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
                 }
         }
         else{
-            $window.alert(correttezza);
+            $window.alert("Regola non corretta! Risolvere i seguenti problemi prima di esportarla: "+correttezza);
       }
   };
 
