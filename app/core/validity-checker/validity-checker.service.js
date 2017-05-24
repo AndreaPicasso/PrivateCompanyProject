@@ -5,25 +5,28 @@
  */
 app.service('ValidityCheckerService', function(){
 
-
-
+/*
+    Nellla verifica correttezza abbiamo deciso di unificare tutti i messaggi di errore in un unica
+    stringa cosi da rendere migliore la user experience per il manutentore che potra visualizzare
+    tutti i problemi in un unico dialog.
+*/
     this.verificaCorrettezza=function(grafo){
         var message="";
-
-        if(!this.almenoUnaSink(grafo)) {
-            message=message+"Mancanza porta out. ";
-        }
 
         if(!this.almenoUnaSource(grafo)) {
             message=message+"Mancanza porta in. ";
         }
 
-        if(!this.controlloMolteplicita(grafo)) {
-            message=message+"Molteplicita errata. ";
+        if(!this.almenoUnaSink(grafo)) {
+            message=message+"Mancanza porta out. ";
         }
 
         if(!this.tuttoCollegato(grafo)) {
             message=message+"Non tutto collegato. ";
+        }
+
+        if(!this.controlloMolteplicita(grafo)) {
+            message=message+"Molteplicita errata. ";
         }
 
         if(message==""){
@@ -38,24 +41,14 @@ app.service('ValidityCheckerService', function(){
     this.almenoUnaSink=function(grafo){
       var sinks=grafo.getSinks();
       /*
-        TOCHECK: provare comportamento, non so cosa scrivere, forse meglio non scrivere nulla?
-        (COSI almenoUnaSink FUNZIONA)
-        La libreria joint non distingue sempre tra sinks/sources (es. quando non ci sono link collegati) 
-        per sicurezza è ..
+        La libreria joint non distingue sempre tra sinks/sources quando non 
+        sono presenti tutti i collegamenti quindi controlliamo sinks[i].nome 
       */
       var count = 0;
-      console.log(sinks);
-              console.log(sinks.length);
-
       for(var i=0; i<sinks.length;i++){
-          console.log(sinks[i]);
-          console.log(sinks[i].isOperatoreIO()+"  "+sinks[i].nome);
             if(sinks[i].isOperatoreIO() && sinks[i].nome=='Sink'){
-                count++;
-                console.log("sink");
+                count++;   
             }
-        
-       
       }
        return count!=0;
     }
@@ -64,13 +57,14 @@ app.service('ValidityCheckerService', function(){
 
     this.almenoUnaSource=function(grafo){
         var sources=grafo.getSources();
-        console.log(sources);
+        /*
+        La libreria joint non distingue sempre tra sinks/sources quando non 
+        sono presenti tutti i collegamenti quindi controlliamo sources[i].nome 
+      */
         var count = 0;
-        console.log(sources.length);
         for(var i=0; i<sources.length;i++){
             if(sources[i].isOperatoreIO() && sources[i].nome=='Source'){
                 count++;
-                console.log("source");
             }
         }
         return count!=0;
@@ -80,10 +74,9 @@ app.service('ValidityCheckerService', function(){
 
 
 /*
-    TOCHECK: so che lo hai modificato, E' ancora valido il commento qui sotto? se no togli
     Il diagramma della fase di modelling viene lievemente modificato in quanto la libreria joint
-    non distingue tra Sources e Sinks, getSources e getSinks danno lo stesso risultato
-    (qualunque operatore abbia una porta è sia sink che source)
+    non distingue tra Sources e Sinks, getSources e getSinks danno lo stesso risultato se gli 
+    operatori non sono collegati
 */
     this.controlloMolteplicita=function(grafo){
         var sources=grafo.getSources();
@@ -118,7 +111,7 @@ app.service('ValidityCheckerService', function(){
 
 
 /*
-    Ho riscontrato un errore rispetto a quanto riportato nel modello di sequenza relativo a "tuttoCollegato"
+    Ho fatto una modifica rispetto a quanto riportato nel modello di sequenza relativo a "tuttoCollegato"
     in quanto non basta controllare che siano uguali l'id della porta e l'id della porta di un link
     perchè l'id della porta è univoco all'interno dell'operatore non globalmente
     L'algoritmo seguente è stato lievemente modificato al fine di tenere traccia di quale elemento appartiene

@@ -65,6 +65,10 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
             if(err ==""){
                 var link=new myLink();
                 /*
+                TOCHECK simo secondo te qui ci sta mettere modifica ripetto al modeling perche nel
+                diagramma aggiungi connessione non ce la cosa di rimuovi e metti nuovo
+                pero daltra parte vedi vocale per il resto?
+                MODIFICA RISPETTO ALLA FASE DI MODELLING
                 Al momento dell'inserimento i link vengono generati in automatico,
                 rimuoviamo quello inserito e inseriamo il nostro myLink
                 */
@@ -136,7 +140,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
 
 
   this.verificaCorrettezza=function(){
-     //Se il foglio di lavoro non ha elementi la verifica correttezza non viene eseguita
+     //Se il foglio di lavoro non ha elementi (cell di joint js) la verifica correttezza non viene eseguita
       if(this.paper.model.getCells().length==0){
         return "Foglio di lavoro vuoto!";
       }
