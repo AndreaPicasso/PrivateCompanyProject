@@ -199,20 +199,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
 
 
 
-// TOCHECK questa parte va eliminata giusto?
 
-// /*  ....ALTRO...  */ 
-// this.log = function(){
-//     console.log("Grafo:");
-//     console.log(this.paper.model);
-//     console.log("FoglioLavoro: ")
-//     console.log(this.paper);
-//     var cells = this.paper.model.getCells();
-//     console.log("cells:");
-//     console.log(cells);
-//     console.log("Ports of 'Operatore': ")
-//     console.log(cells[2].getPorts());
-// };
 
 });
 

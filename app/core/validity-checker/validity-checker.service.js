@@ -44,23 +44,33 @@ app.service('ValidityCheckerService', function(){
         per sicurezza è ..
       */
       var count = 0;
+      console.log(sinks);
+              console.log(sinks.length);
+
       for(var i=0; i<sinks.length;i++){
+          console.log(sinks[i]);
+          console.log(sinks[i].isOperatoreIO()+"  "+sinks[i].nome);
             if(sinks[i].isOperatoreIO() && sinks[i].nome=='Sink'){
                 count++;
+                console.log("sink");
             }
-        return count!=0;
+        
+       
       }
+       return count!=0;
     }
 
 
 
     this.almenoUnaSource=function(grafo){
         var sources=grafo.getSources();
-        var i;
+        console.log(sources);
         var count = 0;
-        for(i=0; i<sources.length;i++){
+        console.log(sources.length);
+        for(var i=0; i<sources.length;i++){
             if(sources[i].isOperatoreIO() && sources[i].nome=='Source'){
                 count++;
+                console.log("source");
             }
         }
         return count!=0;
@@ -77,7 +87,10 @@ app.service('ValidityCheckerService', function(){
 */
     this.controlloMolteplicita=function(grafo){
         var sources=grafo.getSources();
+        
+        
         var sinks=grafo.getSinks();
+        
         var toCheck= new Array();
         var i;
         for(i=0; i<sources.length;i++ ){
