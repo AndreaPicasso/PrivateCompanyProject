@@ -9,16 +9,18 @@ app.directive('listaOperatori', function () {
 
 function ListaOperatoriController($scope, ListaOperatoriService) {
 
-  
 
-
+  /*
+    Binding di opzioni grafiche
+  */
   $scope.showDescription = function(operatore){
       $scope.descrizione = operatore.descrizione;
   }
-
   $scope.onClickLista = function($event, operatore, tipo){
     ListaOperatoriService.onClickLista($event, operatore, tipo);
   }
+
+
 }
     
 

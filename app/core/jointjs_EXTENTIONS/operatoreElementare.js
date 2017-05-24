@@ -1,4 +1,9 @@
+/**
+ *  Operatore Elementare
+ *  estende il nostro operatore
+ */
 operatoreElementare = operatore.extend({
+  
    /*
    MODIFICA RISPETTO ALLA FASE DI MODELLING,
    per aggevolare il controllo della correttezza dei parametri inseriti, abbiamo deciso di aggiungere un 
@@ -9,6 +14,8 @@ operatoreElementare = operatore.extend({
     paramValue: "",
     paramType: "",
     descrizione: "",
+
+
 
     /*
        Funzione che si occupa di costruire la parte dell'xml relativa all'operatore Elementare in questione
@@ -32,6 +39,9 @@ operatoreElementare = operatore.extend({
 
 
     },
+    
+    
+    
     /*
         Generiamo l'elemento operatore che verrà renderizzato sul foglio di lavoro
         a partire dal JSON della listaOperatori
@@ -52,9 +62,7 @@ operatoreElementare = operatore.extend({
         }
       });
       operatore.attr('.label/text', nome);
-      
-
-      // setto attributi relativi a joint js
+    // setto attributi relativi a joint js
       this.attributes = operatore.attributes;
       this.changed = operatore.changed;
       this.cid = operatore.cid;
@@ -67,17 +75,10 @@ operatoreElementare = operatore.extend({
             port.group = ports[i].group;
             port.attrs = ports[i].attrs;
             port.tipo = ports[i].tipo;
-            /*
-                TODO: JSON OPERATORI mancano convertitori
-                TODO: Come aggiustare tipo Array?
-                TOCHECK direi di eliminare entrambi
-            */
             port.qta = 1;
             port.id = ports[i].id;
             this.addPort(port);
-           
         }
-      
       //setto attributi relativi alle nostre funzionalità
       this.hasParametro = JSONoperatore.hasParam;
       this.paramValue = JSONoperatore.paramValue;
@@ -85,23 +86,21 @@ operatoreElementare = operatore.extend({
       this.descrizione = JSONoperatore.descrizione;
       this.nome = JSONoperatore.nome;
       this.paramType=JSONoperatore.paramType;
-      
-      
-
-
-        
-
-
-
     },
+
+
 
     isOperatoreElementare: function(){
         return true;
     },
 
+
+
     isOperatoreComplesso: function(){
         return false;
     },
+
+
 
     isOperatoreIO: function(){
         return false;

@@ -1,6 +1,7 @@
 /*
-    "Classe" Operatore Complesso, estende operatore
-    Come già citato in altre sezioni, abbiamo deciso
+    Operatore Complesso
+    estende operatore
+    Come già citato in altre sezioni (vedi foglio-di-lavoro.service.js), abbiamo deciso
     di non implementare la parte relativa all'operatore complesso
 */
 operatoreComplesso = operatore.extend({

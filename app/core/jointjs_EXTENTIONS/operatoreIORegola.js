@@ -1,3 +1,7 @@
+/**
+ *  Operatore IO Regola
+ *  estende il nostro operatore
+ */
 operatoreIORegola = operatore.extend({
     
     molteplicita: "",
@@ -5,18 +9,19 @@ operatoreIORegola = operatore.extend({
 
 
 
-    printSensorIDs: function(){
-        var str="";
-        var k;
-        for(k=0; k<this.sensorIDs.length;k++){
-            str=str+'<property name="sensorId_'+(k+1)+'" value="'+this.sensorIDs[k]+'"/>';
-        }
-        return str;
-    },
     /*
        Funzione che si occupa di costruire la parte dell'xml relativa all'operatoreIORegola in questione
     */
     esportaXML: function(){
+        //Funzione interna per stampare l'XML relativo ai sensori
+        var printSensorIDs = function(sensorIDs){
+            var str="";
+            var k;
+            for(k=0; k<sensorIDs.length;k++){
+                str=str+'<property name="sensorId_'+(k+1)+'" value="'+sensorIDs[k]+'"/>';
+            }
+            return str;
+        };    
         var out ="";
         var ports = this.getPorts();
 
@@ -24,14 +29,14 @@ operatoreIORegola = operatore.extend({
             if(ports[i].group == 'in'){
                 if(i==0){
                     out=out+'<entity name="'+this.nome+'_' + this.id + 'class="package.Sink"/>';
-                    out=out+this.printSensorIDs();
+                    out=out+printSensorIDs(this.sensorIDs);
                 }
                 out += '<port name="'+ports[i].id+'" class="package.IPort"/>';
             }
             else{
                 if(i==0){
                     out=out+'<entity name="'+this.nome+'_' + this.id + 'class="package.Source"/>';
-                    out=out+this.printSensorIDs();
+                    out=out+printSensorIDs(this.sensorIDs);
                 }
                 out += '<port name="'+ports[i].id+'" class="package.OPort"/>';
             }
@@ -40,6 +45,8 @@ operatoreIORegola = operatore.extend({
         return out;
 
     },
+
+
 
     /*
         Generiamo l'elemento operatore che verrà renderizzato sul foglio di lavoro
@@ -85,8 +92,6 @@ operatoreIORegola = operatore.extend({
         this.nomeParametro = JSONoperatore.nomeParametro;
         this.descrizione = JSONoperatore.descrizione;
         this.nome = JSONoperatore.nome;
-
-
         //richiedo il valore della molteplicità 
         var molteplicita = '';
         while(true){
@@ -96,7 +101,6 @@ operatoreIORegola = operatore.extend({
             }
         }
         this.molteplicita = molteplicita;
-
         //richiedo i nomi relativi ai sensori 
         this.sensorIDs = new Array();
         for(var i = 0; i<molteplicita; i++){
@@ -105,13 +109,19 @@ operatoreIORegola = operatore.extend({
 
     },
 
+
+
     isOperatoreElementare: function(){
         return false;
     },
 
+
+
     isOperatoreComplesso: function(){
         return false;
     },
+
+
 
     isOperatoreIO: function(){
         return true;

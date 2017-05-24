@@ -7,9 +7,15 @@ app.directive('editor', function () {
 });
 
 
+
 function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiLavoroService) {
     
+    /* Modifica rispetto alla fase di modelling: 
+        per scopi grafici, abbiamo bisogno di una variabile
+        che ci indichi la presenza o meno di un foglio di lavoro
+    */
     this.hasPaper = false;
+
 
     this.nuovaRegola = function(){
         if(!this.hasPaper){
@@ -18,35 +24,28 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
             FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro', function(){return true});
             FoglioDiLavoroService.nomeFoglioDiLavoro = $window.prompt(
                                                         "Inserisci il nome della regola:", "rule_n");
-
-
         }
         else{
             $window.alert("Chiudere foglio di lavoro corrente prima di procedere");
         }  
-
-
      }
 
-     /*
-        SEMPLIFICAZIONE: Si è deciso di non implementare op complesso ...
-     */
+
+
     this.nuovoOpComplesso = function(){
         $scope.operatori = ListaOperatoriService.loadJSONOperatori();
         this.hasPaper = true;
-        //...
-
-
+        //... Operatore Complesso non implementato (vedi foglio-di-lavoro.service.js)
      }
-     /*
-        SEMPLIFICAZIONE: Non avendo implementato l'operatore complesso anche questa funzione
-        è rimasta non implementata
-     */
+
+
+
      this.nuovaPortaOpCompl = function(){
-
+         //... Operatore Complesso non implementato  (vedi foglio-di-lavoro.service.js)
      }
 
-     
+
+
     /*
         Chiude il foglio di lavoro eliminando il grafo (model) e il paper
      */
@@ -58,32 +57,36 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
         FoglioDiLavoroService.paper = "";
         FoglioDiLavoroService.nomeFoglioDiLavoro = "";
         $scope.descrizione='';
-
-
      }
+
+
+
      /*
         Verifica la correttezza della regola presente sul foglio di lavoro aperto
      */
-     this.verificaCorrettezza = function(){
-         
+     this.verificaCorrettezza = function(){    
         $window.alert(FoglioDiLavoroService.verificaCorrettezza());
-       
      }
+
+
+
      /*
         Esporta in formato XML la regola presete su foglio di lavoro
      */
      this.esportaRegola = function(){
           FoglioDiLavoroService.esportaRegola();
      }
-
-
-    $scope.nuovaRegola = this.nuovaRegola;
-    $scope.nuovoOpComplesso = this.nuovoOpComplesso;
-    $scope.nuovaPortaOpCompl = this.nuovaPortaOpCompl
-    $scope.esportaRegola = this.esportaRegola;
-    $scope.verificaCorrettezza = this.verificaCorrettezza;
-    $scope.chiudiFoglioDiLavoro = this.chiudiFoglioDiLavoro;
-    $scope.hasPaper = this.hasPaper;
+     
+     
+     
+     //Binding ad elementi grafici
+     $scope.nuovaRegola = this.nuovaRegola;
+     $scope.nuovoOpComplesso = this.nuovoOpComplesso;
+     $scope.nuovaPortaOpCompl = this.nuovaPortaOpCompl
+     $scope.esportaRegola = this.esportaRegola;
+     $scope.verificaCorrettezza = this.verificaCorrettezza;
+     $scope.chiudiFoglioDiLavoro = this.chiudiFoglioDiLavoro;
+     $scope.hasPaper = this.hasPaper;
     
 
 

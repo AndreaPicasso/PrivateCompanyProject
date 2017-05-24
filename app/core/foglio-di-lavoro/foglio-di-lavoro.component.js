@@ -5,6 +5,9 @@ app.directive('foglioDiLavoro', function () {
     controller: ['$scope', "$log","ListaOperatoriService" ,"FoglioDiLavoroService", FoglioDiLavoroController]
     };
 });
+
+
+
 function FoglioDiLavoroController($scope, $log, $event, FoglioDiLavoroService) {
  
 
@@ -13,8 +16,6 @@ function FoglioDiLavoroController($scope, $log, $event, FoglioDiLavoroService) {
 
  }
 
-
-    
 
 
 }

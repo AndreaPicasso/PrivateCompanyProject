@@ -1,37 +1,47 @@
+/**
+ *  Modifica rispetto alla fase di modelling (vedi foglio-di-lavoro.service.js)
+ *  Abbiamo deciso di non implementare Operatore Complesso
+ *  in Angular non è possibile derivare in maniera pulita Service e Component
+ */
+app.service('ValidityCheckerService', function(){
 
-angular.module('myApp').
-  service('ValidityCheckerService', function(){
 
 
     this.verificaCorrettezza=function(grafo){
-          
         var message="";
 
         if(!this.almenoUnaSink(grafo)) {
             message=message+"Mancanza porta out. ";
         }
+
         if(!this.almenoUnaSource(grafo)) {
             message=message+"Mancanza porta in. ";
         }
-         if(!this.controlloMolteplicita(grafo)) {
+
+        if(!this.controlloMolteplicita(grafo)) {
             message=message+"Molteplicita errata. ";
         }
+
         if(!this.tuttoCollegato(grafo)) {
             message=message+"Non tutto collegato. ";
         }
+
         if(message==""){
           message="Regola corretta!";
         }
-        
+
         return message;
-        
     }
+
+
 
     this.almenoUnaSink=function(grafo){
       var sinks=grafo.getSinks();
       /*
-        La libreria joint non distingue in sinks/sources 
-        getSinks() getSources() forniscono lo stesso risultato
+        TOCHECK: provare comportamento, non so cosa scrivere, forse meglio non scrivere nulla?
+        (COSI almenoUnaSink FUNZIONA)
+        La libreria joint non distingue sempre tra sinks/sources (es. quando non ci sono link collegati) 
+        per sicurezza è ..
       */
       var count = 0;
       for(var i=0; i<sinks.length;i++){
@@ -43,20 +53,24 @@ angular.module('myApp').
     }
 
 
+
     this.almenoUnaSource=function(grafo){
-          var sources=grafo.getSources();
-          var i;
-          var count = 0;
-          for(i=0; i<sources.length;i++){
+        var sources=grafo.getSources();
+        var i;
+        var count = 0;
+        for(i=0; i<sources.length;i++){
             if(sources[i].isOperatoreIO() && sources[i].nome=='Source'){
-               count++;
+                count++;
             }
-          }
+        }
         return count!=0;
-        
     }
 
+
+
+
 /*
+    TOCHECK: so che lo hai modificato, E' ancora valido il commento qui sotto? se no togli
     Il diagramma della fase di modelling viene lievemente modificato in quanto la libreria joint
     non distingue tra Sources e Sinks, getSources e getSinks danno lo stesso risultato
     (qualunque operatore abbia una porta è sia sink che source)
@@ -89,14 +103,14 @@ angular.module('myApp').
     }
 
 
+
 /*
-    Ho riscontrato un errore rispetto a quanto riportato nel modello di sequenza
+    Ho riscontrato un errore rispetto a quanto riportato nel modello di sequenza relativo a "tuttoCollegato"
     in quanto non basta controllare che siano uguali l'id della porta e l'id della porta di un link
     perchè l'id della porta è univoco all'interno dell'operatore non globalmente
     L'algoritmo seguente è stato lievemente modificato al fine di tenere traccia di quale elemento appartiene
     la porta
 */
-
     this.tuttoCollegato=function(grafo){
         var links=grafo.getLinks();
         var operatori=grafo.getElements();
@@ -116,8 +130,8 @@ angular.module('myApp').
                     (portsOperatore[j].id== links[k].attributes.target.port && 
                     operatori[i].id == links[k].attributes.target.id))
                     {
-                            collegamentoTrovato = true;
-                            break;    
+                        collegamentoTrovato = true;
+                        break;    
                     }
                 }
                 if(!collegamentoTrovato){
@@ -125,8 +139,8 @@ angular.module('myApp').
                     break;
                 }
             }
-            }
-      return ok;
+        }
+        return ok;
     }
 
  
@@ -168,14 +182,13 @@ angular.module('myApp').
                 if((links[i].attributes.target.id == inOperator.id &&
                         links[i].attributes.target.port == idInPort ) ||
                         (links[i].attributes.source.id == inOperator.id &&
-                        links[i].attributes.source.port == idInPort
-                    )){
-                        return "Porta gia connessa";
+                        links[i].attributes.source.port == idInPort)){
+                            return "Porta gia connessa";
                     }
+            }
         }
-        }
-
         return "";
     }  
+
 
 });

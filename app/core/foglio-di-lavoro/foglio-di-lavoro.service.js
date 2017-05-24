@@ -1,19 +1,20 @@
 'use strict';
+
 /*
     MODIFICA RISPETTO ALLA FASE DI MODELLING
     Abbiamo deciso di non implementare la parte relativa all'operatore complesso,
     la scelta è dovuta sia ad un fattore di tempo sia al fatto che angular non permette
-    di derivare i service in maniera pulita
+    di derivare i service in maniera pulita -> non sarebbe possibile rispettare il Class Diagram
 */
-
-angular.module('myApp').service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
+app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
     
     this.paper='';
     this.nomeFoglioDiLavoro='';
 
-        /*
-            Creazione del foglio di lavoro come paper fornito da joint js
-        */
+
+    /*
+        Creazione del foglio di lavoro come paper fornito da joint js
+    */
     this.creaFoglioDiLavoroRegola = function(idElement, validateConnectionFnc){
         var grafo= new joint.dia.Graph;
         /*
@@ -50,7 +51,7 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
               }
           }
         });      
-        //Cosa fare al momento della connessione  
+        //Cosa fare al momento della connessione  di un link
          this.paper.on('link:connect', function(evt, magnet, cellView, arrowhead) {
             var linkToCheck = evt.model;
             var targetOperator = cellView.model;
@@ -90,11 +91,15 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
 
 
 
-/*
+    /*
     Inserimento Operatore
     (In realtà come specificato in altre sezioni è richiamato all'onClick, si è deciso
     di continuarlo a chiamare onDrop per coerenza con il Modelling)
-*/
+
+    MODIFICA RISPETTO ALLA FASE DI MODELLING:
+        essendo per joint Segnali ed Operatori uguali (degli "Element") si è deciso di accorpare le funzioni di
+        "aggiungiOperatore" ->(onDrop) e "nuova Sink / Source" -> (nuovoIO)
+    */
     this.onDrop = function(JSONop, tipoOp){
         var JSONtypeOp = '';
         for(var i = 0; i<JSONop.operatori.length; i++){
@@ -141,12 +146,10 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
 
         
   this.esportaRegola=function(){
-         /*
-        Come da specifiche nella fase di modelling prima di esportare una regola viene 
-        controllata la sua correttezza
-        */
+      //Controllo correttezza
       var correttezza = ValidityCheckerService.verificaCorrettezza(this.paper.model);
       if(correttezza == 'Regola corretta!'){
+        //Esportazione ricorsiva (Vedi diagramma modelling)
         var stringXML = this.generaXML();
         //Salva il file...
         var filename =  this.nomeFoglioDiLavoro+'.xml'       
@@ -172,7 +175,8 @@ angular.module('myApp').service('FoglioDiLavoroService', function(ValidityChecke
 
 
   this.generaXML=function(){
-        var stringXML = '<?xml version="1.0" standalone="no"?> <!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML 1//EN" "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">';
+        var stringXML = '<?xml version="1.0" standalone="no"?> <!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML'
+                        +' 1//EN" "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">';
         stringXML+='<model="'+this.nomeFoglioDiLavoro+'" class="package.Rule">';
         var operatori=this.paper.model.getElements();
         var links=this.paper.model.getLinks();

@@ -3,6 +3,8 @@ function ContextMenu(){
             TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
         */
     this.operatore = "";
+
+
     /*
           Costruttore context menu richiamato al right click su di un operatore renderizzato sul
           foglio di lavoro  
@@ -60,11 +62,8 @@ function ContextMenu(){
             });
     }
 
-/*
-     L'eliminazione dei link ad esso attaccati viene fatta in automatico
-     da joint 
-*/
     var elimina = function(cellView){
+        //L'eliminazione dei link ad esso attaccati viene fatta in automatico da joint 
         cellView.model.remove();
         
     }

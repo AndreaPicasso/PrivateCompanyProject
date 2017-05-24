@@ -1,3 +1,12 @@
+/**
+ *  MyLink
+ *  estente i normali link di Jointjs
+ * 
+ *  Modifica rispetto al modelling:
+ *  Per facilitare l'operazione di esportazioneXML (i Link devono essere numerati)
+ *  abbiamo inserito un attributo nome, che (secondo ciò richiesto) sarà inserito nella forma:
+ *  r_[numeroLink] -> es. r_12
+ */
 myLink = joint.shapes.devs.Link.extend({
 
     nome: "",
