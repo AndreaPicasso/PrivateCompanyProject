@@ -29,10 +29,6 @@ app.service('ValidityCheckerService', function(){
             message=message+"Non tutto collegato. ";
         }
 
-        if(!this.controlloMolteplicita(grafo)) {
-            message=message+"Molteplicita errata. ";
-        }
-
         if(message==""){
           message="Regola corretta!";
         }
