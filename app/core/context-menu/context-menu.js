@@ -1,5 +1,9 @@
 /**
  * ContextMenu
+ * 
+ * Abbiamo dovuto creare il ContextMenu al di fuori di Angular siccome, Jointjs
+ * manipola il DOM internamente e da Angular non possiamo accedere ad elementi
+ * nel "div" di un foglio di lavoro Jointjs
  *  
  */
 

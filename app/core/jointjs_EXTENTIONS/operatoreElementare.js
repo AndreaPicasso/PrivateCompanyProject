@@ -73,7 +73,6 @@ operatoreElementare = operatore.extend({
             port.group = ports[i].group;
             port.attrs = ports[i].attrs;
             port.tipo = ports[i].tipo;
-            port.qta = 1;
             port.id = ports[i].id;
             this.addPort(port);
         }

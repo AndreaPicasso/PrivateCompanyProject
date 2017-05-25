@@ -9,7 +9,7 @@
  */
 
 
-app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
+app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $compile){
     
     this.paper='';
     this.nomeFoglioDiLavoro='';
@@ -23,7 +23,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
             TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
             TOGLIERE showDescriptionFcn, sia qui che paper.on(contextMenu)
         */
-    this.creaFoglioDiLavoroRegola = function(idElement, showDescriptionFnc){
+    this.creaFoglioDiLavoroRegola = function(idElement){
         var grafo= new joint.dia.Graph;
         //E' necessario creare un nuovo div dove inserire l'elemento joint js paper altrimenti
         //al momento della cancellazione il div viene rimosso
@@ -87,7 +87,9 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window){
         });
         //ContextMenu
         this.paper.on('cell:contextmenu', function(cellView,evt,x,y) {
-             showDescriptionFnc(cellView.model);
+            //console.log($("#div-descrizione"));
+            //$("#div-descrizione").append(cellView.model.descrizione);
+            //console.log($("#div-descrizione"));
             var contextMenu = new ContextMenu();
             contextMenu.createContextMenu(cellView,evt,x,y,$window);
         });
