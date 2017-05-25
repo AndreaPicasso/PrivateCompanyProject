@@ -14,7 +14,6 @@ function ListaOperatoriController($scope, ListaOperatoriService) {
     Binding di opzioni grafiche
   */
   $scope.showDescription = function(operatore){
-    console.log(operatore.descrizione);
       $scope.descrizione = operatore.descrizione;
   }
   $scope.onClickLista = function($event, operatore, tipo){
