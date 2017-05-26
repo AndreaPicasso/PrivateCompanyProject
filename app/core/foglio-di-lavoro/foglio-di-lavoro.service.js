@@ -65,6 +65,7 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $
             var targetPort = targetOperator.getPort(linkToCheck.attributes.target.port);
             var sourcePort = sourceOperator.getPort(linkToCheck.attributes.source.port);
             var links = targetOperator.graph.getLinks();
+            
             //Controllo Correttezza connessione
             //Rispetto a quanto riportato nel diagramma delle classi ( validateConnection(..) ), 
             //siamo riusciti ad ottenere anche il link, il che semplifica le operazioni di controllo
