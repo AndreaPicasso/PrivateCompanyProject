@@ -20,11 +20,10 @@ The application relies upon various Node.js tools, such as [Bower][bower]. You c
 npm install
 ```
 
-
-- run npm install in the root directory
-- run an other time npm install in the /app/jointjs folder ( -> also JointJs need npm install)
-
-
+```
+- Run npm install in the root directory
+- Run an other time npm install in the /app/jointjs folder ( -> also JointJs need npm install)
+```
 
 This will also run Bower, which will download the Angular files needed for the current step of the
 tutorial.
