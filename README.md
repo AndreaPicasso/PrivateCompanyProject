@@ -14,8 +14,7 @@
 
 ### Installing Dependencies
 
-The application relies upon various Node.js tools, such as [Bower][bower], [Karma][karma] and
-[Protractor][protractor]. You can install these by running:
+The application relies upon various Node.js tools, such as [Bower][bower]. You can install these by running:
 
 ```
 npm install

@@ -143,12 +143,6 @@ app.service('ValidityCheckerService', function(){
     }
 
  
-
-
-    /*
-        Rispetto a quanto riportato in fase di modellazione, siamo riusciti a farci passare 
-        anche il linkView, il che semplifica le operazioni di controllo
-    */
     this.correttezzaLink = function(linkToCheck, sourcePort, targetPort, targetOperator, sourceOperator, links){
         /*
         CONTROLLI:
