@@ -19,10 +19,6 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $
     /*
         Creazione del foglio di lavoro come paper fornito da joint js
     */
-        /*
-            TODO: implementare mostra descrizione al click ed al rightclick o specificare differenze da srs
-            TOGLIERE showDescriptionFcn, sia qui che paper.on(contextMenu)
-        */
     this.creaFoglioDiLavoroRegola = function(idElement){
         var grafo= new joint.dia.Graph;
         //E' necessario creare un nuovo div dove inserire l'elemento joint js paper altrimenti
@@ -87,9 +83,6 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $
         });
         //ContextMenu
         this.paper.on('cell:contextmenu', function(cellView,evt,x,y) {
-            //console.log($("#div-descrizione"));
-            //$("#div-descrizione").append(cellView.model.descrizione);
-            //console.log($("#div-descrizione"));
             var contextMenu = new ContextMenu();
             contextMenu.createContextMenu(cellView,evt,x,y,$window);
         });
