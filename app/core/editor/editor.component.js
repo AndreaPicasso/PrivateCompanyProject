@@ -2,6 +2,7 @@
  *  EditorComponent
  * 
  */
+
 app.directive('editor', function () {
     return {
         restrict:'E',

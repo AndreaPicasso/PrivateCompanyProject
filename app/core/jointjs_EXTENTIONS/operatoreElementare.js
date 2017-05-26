@@ -3,6 +3,7 @@
  *  estende il nostro operatore
  * 
  */
+
 operatoreElementare = operatore.extend({
   
    /*
