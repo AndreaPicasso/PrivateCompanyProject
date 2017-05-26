@@ -91,9 +91,6 @@ operatoreIORegola = operatore.extend({
 
         //setto attributi relativi alle nostre funzionalità
         this.hasParametro = JSONoperatore.hasParam;
-        // TOCHECK ho gia provato un poì' secondo me non servono
-        // this.paramValue = JSONoperatore.paramValue;
-        // this.nomeParametro = JSONoperatore.nomeParametro;
         this.descrizione = JSONoperatore.descrizione;
         this.nome = JSONoperatore.nome;
         //richiedo il valore della molteplicità 

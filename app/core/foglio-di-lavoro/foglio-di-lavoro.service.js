@@ -5,6 +5,10 @@
  *  Abbiamo deciso di non implementare la parte relativa all'operatore complesso,
  *  la scelta è dovuta sia ad un fattore di tempo sia al fatto che angular non permette
  *  di derivare i service in maniera pulita -> non sarebbe possibile rispettare il Class Diagram
+ *  Abbiamo inoltre deciso di non mostrare la descrizione di un operatore già presente sul foglio
+ *  di lavoro in quanto ritenuto di scarsa utilità e macchinoso da eseguire (i Service, come questo
+ *  (che gestisce il foglio di lavoro joint), non possono modificare aspetti grafici della pagina
+ *  appartenenti a angular
  * 
  */
 
@@ -92,8 +96,9 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $
 
     /*
     Inserimento Operatore
-    (In realtà come specificato in altre sezioni è richiamato all'onClick, si è deciso
+    (In realtà come specificato in lista-operatori.service.js è richiamato all'onClick, si è deciso
     di continuarlo a chiamare onDrop per coerenza con il Modelling)
+    -> tale modifica ha evitato di effettuare la verifica: "controllo validità punto di rilascio"
 
     MODIFICA RISPETTO ALLA FASE DI MODELLING:
         essendo per joint Segnali ed Operatori uguali (degli "Element") si è deciso di accorpare le funzioni di
@@ -110,6 +115,8 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $
         var testoOperatore = joint.util.breakText(JSONop.nome, { width: 53 });
         if(JSONop.categoria=="OperatoreElementare"){
             op=new operatoreElementare();
+            //Nel modelling è stato indicato come "richiamato dal costruttore"
+            //Qui però il costruttore non c'è
             op.fromJSON(JSONtypeOp, JSONop, testoOperatore);
         }
         else if(JSONop.categoria=="OperatoreComplesso"){

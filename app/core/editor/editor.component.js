@@ -25,8 +25,6 @@ function EditorController($scope, $log,$window, ListaOperatoriService, FoglioDiL
             this.hasPaper = true;
             var name=$window.prompt("Inserisci il nome della regola:", "rule_n");                                           
             $scope.operatori = ListaOperatoriService.loadJSONOperatori();
-            //Funzione di "callback" con lo scopo grafico di modificare la descrizione
-            //Una volta cliccato su un operatore di un foglio di lavoro
             FoglioDiLavoroService.creaFoglioDiLavoroRegola('fogliodilavoro');
             FoglioDiLavoroService.nomeFoglioDiLavoro = name;
         }
