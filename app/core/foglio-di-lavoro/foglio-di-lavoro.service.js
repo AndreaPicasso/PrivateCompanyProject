@@ -79,7 +79,6 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $
                 link.ports=linkToCheck.ports;
                 link.id=linkToCheck.id;
                 link.cid=linkToCheck.cid;
-                link.nome ="r_"+targetOperator.graph.getLinks().length;
                 linkToCheck.remove();
                 targetOperator.graph.addCell(link);
             } else {
@@ -133,7 +132,6 @@ app.service('FoglioDiLavoroService', function(ValidityCheckerService, $window, $
     /*
         nuovoIO: si occupa di gestire le interazioni aggiuntive con l'utente
         rispetto ad un operatore elementare o complesso
-
         rispetto al modelling è stato rimosso il "controllo validita tipo"
         in quanto il tipo è selezionato da una lista da noi creata e dunque sicuramente corretto
     */
