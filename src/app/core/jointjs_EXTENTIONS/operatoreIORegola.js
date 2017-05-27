@@ -35,13 +35,13 @@ operatoreIORegola = operatore.extend({
         for(var i = 0; i<ports.length; i++){
             if(ports[i].group == 'in'){
                 if(i==0){
-                    out=out+'<entity name="'+this.nome+'_' + this.id + 'class="package.Sink"/>';
+                    out=out+'<entity name="'+this.nome+'_' + this.id + '" class="package.Sink"/>';
                     out=out+printSensorIDs(this.sensorIDs);
                 }
                 out += '<port name="'+ports[i].id+'" class="package.IPort"/>';
             } else {
                 if(i==0){
-                    out=out+'<entity name="'+this.nome+'_' + this.id + 'class="package.Source"/>';
+                    out=out+'<entity name="'+this.nome+'_' + this.id + '" class="package.Source"/>';
                     out=out+printSensorIDs(this.sensorIDs);
                 }
                 out += '<port name="'+ports[i].id+'" class="package.OPort"/>';
