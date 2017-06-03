@@ -1,4 +1,4 @@
-##Note generali sulla fase di testing
+# Note generali sulla fase di testing
 
 Il testing è stato effettuato come concordato elencando i passi da fare manualmente sul tool all’interno di fogli di testo. La Test Suite è strutturata in diversi Test Case, divisa in un foglio di testo diverso per ogni Use Case.
 
