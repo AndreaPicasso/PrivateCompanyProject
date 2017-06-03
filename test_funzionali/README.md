@@ -7,6 +7,7 @@ Il testing è stato effettuato come concordato elencando i passi da fare manualm
 
 Per quanto riguarda la struttura di ciascun file di testo relativo ad uno Use Case, esso è stato diviso in differenti test in modo che ciascuno Scenario implementato sia simulato almeno una volta secondo partizionamenti dei dati di input ritenuti più significativi.
 Molti Test Case hanno anche una parte finale intitolata “Note” nella quale per maggiore dettaglio ho voluto elencare le differenze che si possono riscontrare rispetto agli Use Case del SRS che sono state introdotte nella fase di Develop e SDD anche se esse sono gia state descritte nei commenti del codice e nel file di SDD. 
-Ogni test a sua volta è costituito da: una serie di passi per effettuare l’input (ho considerato di partire sempre dal editor nel suo stato iniziale cioè appena aperto) e uno o più output risultanti che possono anche fare riferimento a passi intermedi. 
+
+Ogni test a sua volta è costituito da: una serie di passi per effettuare l’input (ho considerato di partire sempre dal editor nel suo stato iniziale cioè appena aperto) e uno o più output attesi.
 
 Ho segnalato i BUG riscontrati dopo la parte relativa agli output di ogni test.
